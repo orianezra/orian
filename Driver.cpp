@@ -30,7 +30,14 @@ int Driver::getAge() {
 int Driver::getId() {
     return this->id;
 }
-
+//this is a setter method for the driver's GPS
+void Driver::setGps(Gps* g) {
+    this->waze = g;
+}
+//this is a getter method for the driver's GPS
+Gps* Driver::getGps(){
+    return this->waze;
+}
 //this is a getter method for the driver's status
 MaterialStatus Driver::getStatus() {
     return this->status;
@@ -97,6 +104,12 @@ void Driver::drive(queue<CheckPoint *> q) {
 bool Driver::getExist(){
     return this->existCar;
 }
-int Driver::getCabId() {
+int Driver::getIdCab() {
     return this->cabId;
+}
+unsigned long Driver::disCalculation(Point other){
+    this->waze->setStart(&this->location);
+    this->waze->setEnd(&other);
+    queue <CheckPoint*> q = this->waze->start(this->map->getGrid());
+    return q.size();
 }
