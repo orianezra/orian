@@ -70,3 +70,6 @@ bool LuxuryCab::hasADriver(){
 void LuxuryCab::setADriver(bool b){
     this->hasDriver = b;
 }
+bool LuxuryCab::isStandart() {
+    return false;
+}
