@@ -77,3 +77,11 @@ bool TripInfo::operator !=(const TripInfo &other) const{
     }
     return false;
 }
+void TripInfo::setTripInfo(TripInfo t) {
+    this->endP = t.endP;
+    this->mettersPass = t.mettersPass;
+    this->numOfPassengers = t.numOfPassengers;
+    this->rideId = t.rideId;
+    this->tariff = t.tariff;
+    this->startP = t.startP;
+}

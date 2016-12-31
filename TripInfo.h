@@ -74,6 +74,7 @@ public:
     Point* getStartPoint();
     bool operator !=(const TripInfo &other) const;
     std::string serial_str;
+    void setTripInfo(TripInfo);
     void save() {
 
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
