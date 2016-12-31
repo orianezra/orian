@@ -4,7 +4,7 @@ TripInfo::TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP) {
     this->mettersPass = mP;
     this->numOfPassengers = nP;
     this->rideId = rID;
-    this->tarif = t;
+    this->tariff = t;
     this->endP = eP;
     this->startP = sP;
 }
@@ -31,7 +31,7 @@ void TripInfo::setNumOfPassangers(int nOP){
 }
 //this is a method for setting the tarrif
 void TripInfo::setTarif(double t){
-    this->tarif = t;
+    this->tariff = t;
 }
 //this is a method for setting the end point of the trip
 void TripInfo::setEndPoint(Point* e){
@@ -58,7 +58,7 @@ int TripInfo::getNumOfPassangers(){
 
 //this is a method for getting the tariff
 double TripInfo::getTarif(){
-    return this->tarif;
+    return this->tariff;
 }
 
 //this is a method for getting the end point

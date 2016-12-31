@@ -1,14 +1,44 @@
-
 #ifndef EX3_DRIVER_H
 #define EX3_DRIVER_H
 
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/detail/archive_serializer_map.hpp>
+#include <boost/archive/detail/basic_iarchive.hpp>
+#include <boost/archive/detail/basic_oarchive.hpp>
+#include <boost/archive/detail/basic_iserializer.hpp>
+#include <boost/archive/detail/basic_serializer.hpp>
+#include <boost/archive/detail/polymorphic_iarchive_route.hpp>
+#include <boost/archive/detail/polymorphic_oarchive_route.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/throw_exception.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
 #include "Person.h"
 #include "Cab.h"
-//#include "Vehicles.h"
 #include "LuxuryCab.h"
 #include "Gps.h"
 #include "MaterialStatus.h"
 #include "Map.h"
+using namespace std;
+using namespace boost;
+using namespace boost::archive;
+using namespace serialization;
+//using namespace detail;
 //this class's purpose is to manage a driver object.
 //it inherits from person, and has the functionality of having a car.
 class Driver : public Person {
@@ -19,12 +49,31 @@ private:
     MaterialStatus status;
     int yearsOfEp;
     int avgSatisfaction;
+    int cabId;
     Vehicles* texiInfo;
-    Gps* waze;
     Point location;
     Map* map;
     bool existCar;
     TripInfo* trip;
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& archive, const unsigned int version)
+    {
+
+        archive & boost::serialization::base_object<Person>(*this);
+        archive & this->id;
+        archive & this->age;
+        archive & this->status;
+        archive & this->yearsOfEp;
+        archive & this->avgSatisfaction;
+        archive & this->texiInfo;
+        archive & this->location;
+        archive & this->map;
+        archive & this->existCar;
+        archive & this->trip;
+        archive & this->cabId;
+
+    }
     //public members section
 public:
     void setLocation(Point);
@@ -39,11 +88,10 @@ public:
     Vehicles* getTexiOfDriver();
     void setMap(Map*);
     Map* getMap();
+    int getCabId();
     void drive(queue <CheckPoint*>);
     int getAge();
     int getId();
-    void setGps(Gps* g);
-    Gps* getGps();
     bool getExist();
     int getSatisfaction();
     MaterialStatus getStatus();
@@ -52,6 +100,28 @@ public:
 
     void setSatisfaction(int st);
     bool operator !=(const Driver &other) const;
+    std::string serial_str;
+
+    void save() {
+        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+        boost::archive::binary_oarchive oa(s);
+        oa << *this;
+
+        s.flush();
+    }
+
+    Driver load(){
+
+        boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
+        boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
+        boost::archive::binary_iarchive ia(s2);
+        Driver d;
+        ia >> d;
+
+        return d;
+    }
+
 };
 
 #endif //EX3_DRIVER_H

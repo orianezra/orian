@@ -1,10 +1,10 @@
 #include "Driver.h"
 
 //this is the constructor of the driver class
-Driver::Driver(int id, int age , int i, MaterialStatus status, int satisfaction) {
+Driver::Driver(int id, int age , int i, MaterialStatus status, int cabId) {
     this->id = id;
     this->age = age;
-    this->avgSatisfaction = satisfaction;
+    this->cabId = cabId;
     this->yearsOfEp = i;
     this->status = status;
     this->location = Point(0,0);
@@ -30,14 +30,7 @@ int Driver::getAge() {
 int Driver::getId() {
     return this->id;
 }
-//this is a setter method for the driver's GPS
-void Driver::setGps(Gps* g) {
-    this->waze = g;
-}
-//this is a getter method for the driver's GPS
-Gps* Driver::getGps(){
-    return this->waze;
-}
+
 //this is a getter method for the driver's status
 MaterialStatus Driver::getStatus() {
     return this->status;
@@ -103,4 +96,7 @@ void Driver::drive(queue<CheckPoint *> q) {
 //this is a boolean method for car's exsistance
 bool Driver::getExist(){
     return this->existCar;
+}
+int Driver::getCabId() {
+    return this->cabId;
 }
