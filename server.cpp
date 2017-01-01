@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
                 cin >> numOfDrivers;
 
                 Driver dDummy;
-                char buffer[80000];
+                char buffer[50000];
                 udp.reciveData(buffer, sizeof(buffer));
 
                 string str(buffer, sizeof(buffer));
@@ -83,6 +83,11 @@ int main(int argc, char *argv[]) {
                 texiC->getListTrips().pop_front();
                 t->save();
                 udp.sendData(t->serial_str);
+                char buffer3[1024];
+                udp.reciveData(buffer3, sizeof(buffer3));
+                string stMess(buffer3, sizeof(buffer3));
+                cout << stMess <<endl;
+                break;
 
             }
             case 2:{

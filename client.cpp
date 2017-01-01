@@ -41,14 +41,16 @@ int main(int argc, char *argv[]) {
 
         driver->save();
         udpClient.sendData(driver->serial_str);
-        char buffer[99999];
+        char buffer[2000];
 
         udpClient.reciveData(buffer, sizeof(buffer));
         string stMess(buffer, sizeof(buffer));
         //cout << stMess <<endl;//we know that shimi is here :)
-        udpClient.reciveData(buffer, sizeof(buffer));//this is for getting the cars type
-        string stCarType(buffer, sizeof(buffer));
-        if(stCarType == "1") {
+        char buffer2[1];
+        udpClient.reciveData(buffer2, sizeof(buffer));//this is for getting the cars type
+        string stCarType(buffer2, sizeof(buffer));
+        boost::iostreams::basic_array_source<char> device(stCarType.c_str(), stCarType.size());
+        if(stCarType.at(0) == '1') {
                 udpClient.reciveData(buffer, sizeof(buffer));
                 string stMessCab(buffer, sizeof(buffer));
                 Cab cabDummy;
@@ -68,13 +70,14 @@ int main(int argc, char *argv[]) {
                 udpClient.sendData("we got the luxurycab!");
         }
 
-        char buffer1[99999];
+        char buffer1[40000];
         udpClient.reciveData(buffer1, sizeof(buffer1));
         string stMessTrip(buffer1, sizeof(buffer1));
         TripInfo tDummy;
         tDummy.setString(stMessTrip);
         TripInfo* t= new TripInfo();
         t->setTripInfo(tDummy.load());
+        driver->setTripInfo(t);
         udpClient.sendData("we got the shimi job!! :)");
 
 }
