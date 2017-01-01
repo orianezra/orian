@@ -1,6 +1,3 @@
-//
-// Created by orian on 12/30/16.
-//
 #include "Udp.h"
 #include <unistd.h>
 #include <string.h>
@@ -12,15 +9,7 @@
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-    /*
-    std::cout << "Hello, from server" << std::endl;
-    Udp udp(1, 8000);
-    udp.initialize();
-    char buffer[1024];
-    udp.reciveData(buffer, sizeof(buffer));
-    cout << buffer << endl;
-    udp.sendData("sup?");
-    */
+
     Udp udp(1, atoi(argv[1]));
     udp.initialize();
     int i,j, pOfAbs;
@@ -57,28 +46,44 @@ int main(int argc, char *argv[]) {
             case 1:{
                 int numOfDrivers;
                 cin >> numOfDrivers;
-                /*
-                char buffer[1024];
+
+                Driver dDummy;
+                char buffer[80000];
                 udp.reciveData(buffer, sizeof(buffer));
-                cout << buffer << endl;
-                 */
 
-                Vehicles* cabToSend = texiC->getListVehicles().front();
-                //might get the cab according to id from driver
-                //might send the driver to the texiC and get from it the cab id
-                string cabSerialized;
-                if (cabToSend->isStandart()){
-                    Cab* cab = boost::polymorphic_downcast<Cab*>(cabToSend);
+                string str(buffer, sizeof(buffer));
+                dDummy.setString(str);
+                Driver* d = new Driver();
+                d->setDriver(dDummy.load());
+                cout<<d->getId();
+                texiC->setDrivers(d);
+
+                udp.sendData("thanks for sending shimi :)");
+
+                if(texiC->getVehicle(d->getCabId())->isStandart()){
+                    udp.sendData("1");
+                    Cab* cab = boost::polymorphic_downcast<Cab*>(texiC->getVehicle(d->getCabId()));
                     cab->save();
-                    cabSerialized = cab->serial_str;
-                } else {
-                    LuxuryCab* cab = boost::polymorphic_downcast<LuxuryCab*>(cabToSend);
+                    udp.sendData(cab->serial_str);
+                    char buffer1[40000];
+                    udp.reciveData(buffer1, sizeof(buffer1));
+                    string stMess(buffer1, sizeof(buffer1));
+                    cout << stMess <<endl;
+                }else{
+                    udp.sendData("0");
+                    LuxuryCab* cab = boost::polymorphic_downcast<LuxuryCab*>(texiC->getVehicle(d->getCabId()));
                     cab->save();
-                    cabSerialized = cab->serial_str;
+                    udp.sendData(cab->serial_str);
+                    char buffer1[40000];
+                    udp.reciveData(buffer1, sizeof(buffer1));
+                    string stMess(buffer1, sizeof(buffer1));
+                    cout << stMess <<endl;
                 }
-                udp.sendData(cabSerialized);
+                TripInfo* t = texiC->getListTrips().front();
+                texiC->getListTrips().pop_front();
+                t->save();
+                udp.sendData(t->serial_str);
 
-                break;
             }
             case 2:{
                 cin >> id >> damy >> startX >> damy >> startY >> damy
