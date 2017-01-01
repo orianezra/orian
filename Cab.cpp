@@ -71,15 +71,17 @@ void Cab::setADriver(bool b){
     this->hasDriver = b;
 }
 
-/*
-void Cab::save()
-{
-    std::ofstream file("archive.xml");
-    boost::archive::xml_oarchive oa(file);
-
-    oa & BOOST_SERIALIZATION_NVP(*this);
-}*/
-//BOOST_CLASS_EXPORT(Vehicles)
+void Cab::setString(string s) {
+    this->serial_str = s;
+}
 bool Cab::isStandart() {
     return true;
+}
+void Cab::setCab(Cab c) {
+    this->id = c.id;
+    this->numOfKM = c.numOfKM;
+    this->tariff = c.tariff;
+    this->color = c.color;
+    this->type = c.type;
+    this->hasDriver = c.hasDriver;
 }

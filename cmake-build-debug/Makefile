@@ -155,17 +155,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ex3
+# Target rules for targets named server
 
 # Build rule for target.
-ex3: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ex3
-.PHONY : ex3
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-ex3/fast:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/build
-.PHONY : ex3/fast
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named client
+
+# Build rule for target.
+client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 client
+.PHONY : client
+
+# fast build rule for target.
+client/fast:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -225,7 +238,8 @@ Cab.o: Cab.cpp.o
 
 # target to build an object file
 Cab.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Cab.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Cab.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Cab.cpp.o
 .PHONY : Cab.cpp.o
 
 Cab.i: Cab.cpp.i
@@ -234,7 +248,8 @@ Cab.i: Cab.cpp.i
 
 # target to preprocess a source file
 Cab.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Cab.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Cab.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Cab.cpp.i
 .PHONY : Cab.cpp.i
 
 Cab.s: Cab.cpp.s
@@ -243,7 +258,8 @@ Cab.s: Cab.cpp.s
 
 # target to generate assembly for a file
 Cab.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Cab.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Cab.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Cab.cpp.s
 .PHONY : Cab.cpp.s
 
 CheckPoint.o: CheckPoint.cpp.o
@@ -252,7 +268,8 @@ CheckPoint.o: CheckPoint.cpp.o
 
 # target to build an object file
 CheckPoint.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/CheckPoint.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/CheckPoint.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/CheckPoint.cpp.o
 .PHONY : CheckPoint.cpp.o
 
 CheckPoint.i: CheckPoint.cpp.i
@@ -261,7 +278,8 @@ CheckPoint.i: CheckPoint.cpp.i
 
 # target to preprocess a source file
 CheckPoint.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/CheckPoint.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/CheckPoint.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/CheckPoint.cpp.i
 .PHONY : CheckPoint.cpp.i
 
 CheckPoint.s: CheckPoint.cpp.s
@@ -270,7 +288,8 @@ CheckPoint.s: CheckPoint.cpp.s
 
 # target to generate assembly for a file
 CheckPoint.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/CheckPoint.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/CheckPoint.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/CheckPoint.cpp.s
 .PHONY : CheckPoint.cpp.s
 
 Driver.o: Driver.cpp.o
@@ -279,7 +298,8 @@ Driver.o: Driver.cpp.o
 
 # target to build an object file
 Driver.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Driver.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Driver.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Driver.cpp.o
 .PHONY : Driver.cpp.o
 
 Driver.i: Driver.cpp.i
@@ -288,7 +308,8 @@ Driver.i: Driver.cpp.i
 
 # target to preprocess a source file
 Driver.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Driver.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Driver.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Driver.cpp.i
 .PHONY : Driver.cpp.i
 
 Driver.s: Driver.cpp.s
@@ -297,35 +318,9 @@ Driver.s: Driver.cpp.s
 
 # target to generate assembly for a file
 Driver.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Driver.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Driver.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Driver.cpp.s
 .PHONY : Driver.cpp.s
-
-DriverCreator.o: DriverCreator.cpp.o
-
-.PHONY : DriverCreator.o
-
-# target to build an object file
-DriverCreator.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/DriverCreator.cpp.o
-.PHONY : DriverCreator.cpp.o
-
-DriverCreator.i: DriverCreator.cpp.i
-
-.PHONY : DriverCreator.i
-
-# target to preprocess a source file
-DriverCreator.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/DriverCreator.cpp.i
-.PHONY : DriverCreator.cpp.i
-
-DriverCreator.s: DriverCreator.cpp.s
-
-.PHONY : DriverCreator.s
-
-# target to generate assembly for a file
-DriverCreator.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/DriverCreator.cpp.s
-.PHONY : DriverCreator.cpp.s
 
 Gps.o: Gps.cpp.o
 
@@ -333,7 +328,8 @@ Gps.o: Gps.cpp.o
 
 # target to build an object file
 Gps.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Gps.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Gps.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Gps.cpp.o
 .PHONY : Gps.cpp.o
 
 Gps.i: Gps.cpp.i
@@ -342,7 +338,8 @@ Gps.i: Gps.cpp.i
 
 # target to preprocess a source file
 Gps.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Gps.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Gps.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Gps.cpp.i
 .PHONY : Gps.cpp.i
 
 Gps.s: Gps.cpp.s
@@ -351,7 +348,8 @@ Gps.s: Gps.cpp.s
 
 # target to generate assembly for a file
 Gps.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Gps.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Gps.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Gps.cpp.s
 .PHONY : Gps.cpp.s
 
 Grid.o: Grid.cpp.o
@@ -360,7 +358,8 @@ Grid.o: Grid.cpp.o
 
 # target to build an object file
 Grid.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Grid.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Grid.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Grid.cpp.o
 .PHONY : Grid.cpp.o
 
 Grid.i: Grid.cpp.i
@@ -369,7 +368,8 @@ Grid.i: Grid.cpp.i
 
 # target to preprocess a source file
 Grid.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Grid.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Grid.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Grid.cpp.i
 .PHONY : Grid.cpp.i
 
 Grid.s: Grid.cpp.s
@@ -378,35 +378,9 @@ Grid.s: Grid.cpp.s
 
 # target to generate assembly for a file
 Grid.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Grid.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Grid.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Grid.cpp.s
 .PHONY : Grid.cpp.s
-
-ListenerCab.o: ListenerCab.cpp.o
-
-.PHONY : ListenerCab.o
-
-# target to build an object file
-ListenerCab.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/ListenerCab.cpp.o
-.PHONY : ListenerCab.cpp.o
-
-ListenerCab.i: ListenerCab.cpp.i
-
-.PHONY : ListenerCab.i
-
-# target to preprocess a source file
-ListenerCab.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/ListenerCab.cpp.i
-.PHONY : ListenerCab.cpp.i
-
-ListenerCab.s: ListenerCab.cpp.s
-
-.PHONY : ListenerCab.s
-
-# target to generate assembly for a file
-ListenerCab.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/ListenerCab.cpp.s
-.PHONY : ListenerCab.cpp.s
 
 LuxuryCab.o: LuxuryCab.cpp.o
 
@@ -414,7 +388,8 @@ LuxuryCab.o: LuxuryCab.cpp.o
 
 # target to build an object file
 LuxuryCab.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/LuxuryCab.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/LuxuryCab.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/LuxuryCab.cpp.o
 .PHONY : LuxuryCab.cpp.o
 
 LuxuryCab.i: LuxuryCab.cpp.i
@@ -423,7 +398,8 @@ LuxuryCab.i: LuxuryCab.cpp.i
 
 # target to preprocess a source file
 LuxuryCab.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/LuxuryCab.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/LuxuryCab.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/LuxuryCab.cpp.i
 .PHONY : LuxuryCab.cpp.i
 
 LuxuryCab.s: LuxuryCab.cpp.s
@@ -432,7 +408,8 @@ LuxuryCab.s: LuxuryCab.cpp.s
 
 # target to generate assembly for a file
 LuxuryCab.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/LuxuryCab.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/LuxuryCab.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/LuxuryCab.cpp.s
 .PHONY : LuxuryCab.cpp.s
 
 Map.o: Map.cpp.o
@@ -441,7 +418,8 @@ Map.o: Map.cpp.o
 
 # target to build an object file
 Map.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Map.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Map.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Map.cpp.o
 .PHONY : Map.cpp.o
 
 Map.i: Map.cpp.i
@@ -450,7 +428,8 @@ Map.i: Map.cpp.i
 
 # target to preprocess a source file
 Map.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Map.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Map.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Map.cpp.i
 .PHONY : Map.cpp.i
 
 Map.s: Map.cpp.s
@@ -459,7 +438,8 @@ Map.s: Map.cpp.s
 
 # target to generate assembly for a file
 Map.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Map.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Map.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Map.cpp.s
 .PHONY : Map.cpp.s
 
 Passenger.o: Passenger.cpp.o
@@ -468,7 +448,8 @@ Passenger.o: Passenger.cpp.o
 
 # target to build an object file
 Passenger.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Passenger.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Passenger.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Passenger.cpp.o
 .PHONY : Passenger.cpp.o
 
 Passenger.i: Passenger.cpp.i
@@ -477,7 +458,8 @@ Passenger.i: Passenger.cpp.i
 
 # target to preprocess a source file
 Passenger.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Passenger.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Passenger.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Passenger.cpp.i
 .PHONY : Passenger.cpp.i
 
 Passenger.s: Passenger.cpp.s
@@ -486,7 +468,8 @@ Passenger.s: Passenger.cpp.s
 
 # target to generate assembly for a file
 Passenger.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Passenger.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Passenger.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Passenger.cpp.s
 .PHONY : Passenger.cpp.s
 
 Point.o: Point.cpp.o
@@ -495,7 +478,8 @@ Point.o: Point.cpp.o
 
 # target to build an object file
 Point.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Point.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Point.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Point.cpp.o
 .PHONY : Point.cpp.o
 
 Point.i: Point.cpp.i
@@ -504,7 +488,8 @@ Point.i: Point.cpp.i
 
 # target to preprocess a source file
 Point.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Point.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Point.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Point.cpp.i
 .PHONY : Point.cpp.i
 
 Point.s: Point.cpp.s
@@ -513,8 +498,39 @@ Point.s: Point.cpp.s
 
 # target to generate assembly for a file
 Point.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Point.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Point.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Point.cpp.s
 .PHONY : Point.cpp.s
+
+Socket.o: Socket.cpp.o
+
+.PHONY : Socket.o
+
+# target to build an object file
+Socket.cpp.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Socket.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Socket.cpp.o
+.PHONY : Socket.cpp.o
+
+Socket.i: Socket.cpp.i
+
+.PHONY : Socket.i
+
+# target to preprocess a source file
+Socket.cpp.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Socket.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Socket.cpp.i
+.PHONY : Socket.cpp.i
+
+Socket.s: Socket.cpp.s
+
+.PHONY : Socket.s
+
+# target to generate assembly for a file
+Socket.cpp.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Socket.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Socket.cpp.s
+.PHONY : Socket.cpp.s
 
 TexiCenter.o: TexiCenter.cpp.o
 
@@ -522,7 +538,8 @@ TexiCenter.o: TexiCenter.cpp.o
 
 # target to build an object file
 TexiCenter.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TexiCenter.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TexiCenter.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TexiCenter.cpp.o
 .PHONY : TexiCenter.cpp.o
 
 TexiCenter.i: TexiCenter.cpp.i
@@ -531,7 +548,8 @@ TexiCenter.i: TexiCenter.cpp.i
 
 # target to preprocess a source file
 TexiCenter.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TexiCenter.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TexiCenter.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TexiCenter.cpp.i
 .PHONY : TexiCenter.cpp.i
 
 TexiCenter.s: TexiCenter.cpp.s
@@ -540,7 +558,8 @@ TexiCenter.s: TexiCenter.cpp.s
 
 # target to generate assembly for a file
 TexiCenter.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TexiCenter.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TexiCenter.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TexiCenter.cpp.s
 .PHONY : TexiCenter.cpp.s
 
 TripInfo.o: TripInfo.cpp.o
@@ -549,7 +568,8 @@ TripInfo.o: TripInfo.cpp.o
 
 # target to build an object file
 TripInfo.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TripInfo.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TripInfo.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TripInfo.cpp.o
 .PHONY : TripInfo.cpp.o
 
 TripInfo.i: TripInfo.cpp.i
@@ -558,7 +578,8 @@ TripInfo.i: TripInfo.cpp.i
 
 # target to preprocess a source file
 TripInfo.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TripInfo.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TripInfo.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TripInfo.cpp.i
 .PHONY : TripInfo.cpp.i
 
 TripInfo.s: TripInfo.cpp.s
@@ -567,332 +588,93 @@ TripInfo.s: TripInfo.cpp.s
 
 # target to generate assembly for a file
 TripInfo.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/TripInfo.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/TripInfo.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/TripInfo.cpp.s
 .PHONY : TripInfo.cpp.s
 
-Vehicles.o: Vehicles.cpp.o
+Udp.o: Udp.cpp.o
 
-.PHONY : Vehicles.o
-
-# target to build an object file
-Vehicles.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Vehicles.cpp.o
-.PHONY : Vehicles.cpp.o
-
-Vehicles.i: Vehicles.cpp.i
-
-.PHONY : Vehicles.i
-
-# target to preprocess a source file
-Vehicles.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Vehicles.cpp.i
-.PHONY : Vehicles.cpp.i
-
-Vehicles.s: Vehicles.cpp.s
-
-.PHONY : Vehicles.s
-
-# target to generate assembly for a file
-Vehicles.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Vehicles.cpp.s
-.PHONY : Vehicles.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
+.PHONY : Udp.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/main.cpp.o
-.PHONY : main.cpp.o
+Udp.cpp.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Udp.cpp.o
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Udp.cpp.o
+.PHONY : Udp.cpp.o
 
-main.i: main.cpp.i
+Udp.i: Udp.cpp.i
 
-.PHONY : main.i
+.PHONY : Udp.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/main.cpp.i
-.PHONY : main.cpp.i
+Udp.cpp.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Udp.cpp.i
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Udp.cpp.i
+.PHONY : Udp.cpp.i
 
-main.s: main.cpp.s
+Udp.s: Udp.cpp.s
 
-.PHONY : main.s
+.PHONY : Udp.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/main.cpp.s
-.PHONY : main.cpp.s
+Udp.cpp.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Udp.cpp.s
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Udp.cpp.s
+.PHONY : Udp.cpp.s
 
-tests/CabTest.o: tests/CabTest.cpp.o
+client.o: client.cpp.o
 
-.PHONY : tests/CabTest.o
+.PHONY : client.o
 
 # target to build an object file
-tests/CabTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CabTest.cpp.o
-.PHONY : tests/CabTest.cpp.o
+client.cpp.o:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.o
+.PHONY : client.cpp.o
 
-tests/CabTest.i: tests/CabTest.cpp.i
+client.i: client.cpp.i
 
-.PHONY : tests/CabTest.i
+.PHONY : client.i
 
 # target to preprocess a source file
-tests/CabTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CabTest.cpp.i
-.PHONY : tests/CabTest.cpp.i
+client.cpp.i:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.i
+.PHONY : client.cpp.i
 
-tests/CabTest.s: tests/CabTest.cpp.s
+client.s: client.cpp.s
 
-.PHONY : tests/CabTest.s
+.PHONY : client.s
 
 # target to generate assembly for a file
-tests/CabTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CabTest.cpp.s
-.PHONY : tests/CabTest.cpp.s
+client.cpp.s:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
+.PHONY : client.cpp.s
 
-tests/CheckPointTest.o: tests/CheckPointTest.cpp.o
+server.o: server.cpp.o
 
-.PHONY : tests/CheckPointTest.o
+.PHONY : server.o
 
 # target to build an object file
-tests/CheckPointTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.o
-.PHONY : tests/CheckPointTest.cpp.o
+server.cpp.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.o
+.PHONY : server.cpp.o
 
-tests/CheckPointTest.i: tests/CheckPointTest.cpp.i
+server.i: server.cpp.i
 
-.PHONY : tests/CheckPointTest.i
-
-# target to preprocess a source file
-tests/CheckPointTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.i
-.PHONY : tests/CheckPointTest.cpp.i
-
-tests/CheckPointTest.s: tests/CheckPointTest.cpp.s
-
-.PHONY : tests/CheckPointTest.s
-
-# target to generate assembly for a file
-tests/CheckPointTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.s
-.PHONY : tests/CheckPointTest.cpp.s
-
-tests/DriverTest.o: tests/DriverTest.cpp.o
-
-.PHONY : tests/DriverTest.o
-
-# target to build an object file
-tests/DriverTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/DriverTest.cpp.o
-.PHONY : tests/DriverTest.cpp.o
-
-tests/DriverTest.i: tests/DriverTest.cpp.i
-
-.PHONY : tests/DriverTest.i
+.PHONY : server.i
 
 # target to preprocess a source file
-tests/DriverTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/DriverTest.cpp.i
-.PHONY : tests/DriverTest.cpp.i
+server.cpp.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.i
+.PHONY : server.cpp.i
 
-tests/DriverTest.s: tests/DriverTest.cpp.s
+server.s: server.cpp.s
 
-.PHONY : tests/DriverTest.s
-
-# target to generate assembly for a file
-tests/DriverTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/DriverTest.cpp.s
-.PHONY : tests/DriverTest.cpp.s
-
-tests/GpsTest.o: tests/GpsTest.cpp.o
-
-.PHONY : tests/GpsTest.o
-
-# target to build an object file
-tests/GpsTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GpsTest.cpp.o
-.PHONY : tests/GpsTest.cpp.o
-
-tests/GpsTest.i: tests/GpsTest.cpp.i
-
-.PHONY : tests/GpsTest.i
-
-# target to preprocess a source file
-tests/GpsTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GpsTest.cpp.i
-.PHONY : tests/GpsTest.cpp.i
-
-tests/GpsTest.s: tests/GpsTest.cpp.s
-
-.PHONY : tests/GpsTest.s
+.PHONY : server.s
 
 # target to generate assembly for a file
-tests/GpsTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GpsTest.cpp.s
-.PHONY : tests/GpsTest.cpp.s
-
-tests/GridTest.o: tests/GridTest.cpp.o
-
-.PHONY : tests/GridTest.o
-
-# target to build an object file
-tests/GridTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GridTest.cpp.o
-.PHONY : tests/GridTest.cpp.o
-
-tests/GridTest.i: tests/GridTest.cpp.i
-
-.PHONY : tests/GridTest.i
-
-# target to preprocess a source file
-tests/GridTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GridTest.cpp.i
-.PHONY : tests/GridTest.cpp.i
-
-tests/GridTest.s: tests/GridTest.cpp.s
-
-.PHONY : tests/GridTest.s
-
-# target to generate assembly for a file
-tests/GridTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/GridTest.cpp.s
-.PHONY : tests/GridTest.cpp.s
-
-tests/LuxuryCabTest.o: tests/LuxuryCabTest.cpp.o
-
-.PHONY : tests/LuxuryCabTest.o
-
-# target to build an object file
-tests/LuxuryCabTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/LuxuryCabTest.cpp.o
-.PHONY : tests/LuxuryCabTest.cpp.o
-
-tests/LuxuryCabTest.i: tests/LuxuryCabTest.cpp.i
-
-.PHONY : tests/LuxuryCabTest.i
-
-# target to preprocess a source file
-tests/LuxuryCabTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/LuxuryCabTest.cpp.i
-.PHONY : tests/LuxuryCabTest.cpp.i
-
-tests/LuxuryCabTest.s: tests/LuxuryCabTest.cpp.s
-
-.PHONY : tests/LuxuryCabTest.s
-
-# target to generate assembly for a file
-tests/LuxuryCabTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/LuxuryCabTest.cpp.s
-.PHONY : tests/LuxuryCabTest.cpp.s
-
-tests/MapTest.o: tests/MapTest.cpp.o
-
-.PHONY : tests/MapTest.o
-
-# target to build an object file
-tests/MapTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/MapTest.cpp.o
-.PHONY : tests/MapTest.cpp.o
-
-tests/MapTest.i: tests/MapTest.cpp.i
-
-.PHONY : tests/MapTest.i
-
-# target to preprocess a source file
-tests/MapTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/MapTest.cpp.i
-.PHONY : tests/MapTest.cpp.i
-
-tests/MapTest.s: tests/MapTest.cpp.s
-
-.PHONY : tests/MapTest.s
-
-# target to generate assembly for a file
-tests/MapTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/MapTest.cpp.s
-.PHONY : tests/MapTest.cpp.s
-
-tests/PassengerTest.o: tests/PassengerTest.cpp.o
-
-.PHONY : tests/PassengerTest.o
-
-# target to build an object file
-tests/PassengerTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/PassengerTest.cpp.o
-.PHONY : tests/PassengerTest.cpp.o
-
-tests/PassengerTest.i: tests/PassengerTest.cpp.i
-
-.PHONY : tests/PassengerTest.i
-
-# target to preprocess a source file
-tests/PassengerTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/PassengerTest.cpp.i
-.PHONY : tests/PassengerTest.cpp.i
-
-tests/PassengerTest.s: tests/PassengerTest.cpp.s
-
-.PHONY : tests/PassengerTest.s
-
-# target to generate assembly for a file
-tests/PassengerTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/PassengerTest.cpp.s
-.PHONY : tests/PassengerTest.cpp.s
-
-tests/TexiCenterTest.o: tests/TexiCenterTest.cpp.o
-
-.PHONY : tests/TexiCenterTest.o
-
-# target to build an object file
-tests/TexiCenterTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TexiCenterTest.cpp.o
-.PHONY : tests/TexiCenterTest.cpp.o
-
-tests/TexiCenterTest.i: tests/TexiCenterTest.cpp.i
-
-.PHONY : tests/TexiCenterTest.i
-
-# target to preprocess a source file
-tests/TexiCenterTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TexiCenterTest.cpp.i
-.PHONY : tests/TexiCenterTest.cpp.i
-
-tests/TexiCenterTest.s: tests/TexiCenterTest.cpp.s
-
-.PHONY : tests/TexiCenterTest.s
-
-# target to generate assembly for a file
-tests/TexiCenterTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TexiCenterTest.cpp.s
-.PHONY : tests/TexiCenterTest.cpp.s
-
-tests/TripInfoTest.o: tests/TripInfoTest.cpp.o
-
-.PHONY : tests/TripInfoTest.o
-
-# target to build an object file
-tests/TripInfoTest.cpp.o:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TripInfoTest.cpp.o
-.PHONY : tests/TripInfoTest.cpp.o
-
-tests/TripInfoTest.i: tests/TripInfoTest.cpp.i
-
-.PHONY : tests/TripInfoTest.i
-
-# target to preprocess a source file
-tests/TripInfoTest.cpp.i:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TripInfoTest.cpp.i
-.PHONY : tests/TripInfoTest.cpp.i
-
-tests/TripInfoTest.s: tests/TripInfoTest.cpp.s
-
-.PHONY : tests/TripInfoTest.s
-
-# target to generate assembly for a file
-tests/TripInfoTest.cpp.s:
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/tests/TripInfoTest.cpp.s
-.PHONY : tests/TripInfoTest.cpp.s
+server.cpp.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.s
+.PHONY : server.cpp.s
 
 # Help Target
 help:
@@ -906,7 +688,8 @@ help:
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... ex3"
+	@echo "... server"
+	@echo "... client"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"
@@ -920,18 +703,12 @@ help:
 	@echo "... Driver.o"
 	@echo "... Driver.i"
 	@echo "... Driver.s"
-	@echo "... DriverCreator.o"
-	@echo "... DriverCreator.i"
-	@echo "... DriverCreator.s"
 	@echo "... Gps.o"
 	@echo "... Gps.i"
 	@echo "... Gps.s"
 	@echo "... Grid.o"
 	@echo "... Grid.i"
 	@echo "... Grid.s"
-	@echo "... ListenerCab.o"
-	@echo "... ListenerCab.i"
-	@echo "... ListenerCab.s"
 	@echo "... LuxuryCab.o"
 	@echo "... LuxuryCab.i"
 	@echo "... LuxuryCab.s"
@@ -944,48 +721,24 @@ help:
 	@echo "... Point.o"
 	@echo "... Point.i"
 	@echo "... Point.s"
+	@echo "... Socket.o"
+	@echo "... Socket.i"
+	@echo "... Socket.s"
 	@echo "... TexiCenter.o"
 	@echo "... TexiCenter.i"
 	@echo "... TexiCenter.s"
 	@echo "... TripInfo.o"
 	@echo "... TripInfo.i"
 	@echo "... TripInfo.s"
-	@echo "... Vehicles.o"
-	@echo "... Vehicles.i"
-	@echo "... Vehicles.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... tests/CabTest.o"
-	@echo "... tests/CabTest.i"
-	@echo "... tests/CabTest.s"
-	@echo "... tests/CheckPointTest.o"
-	@echo "... tests/CheckPointTest.i"
-	@echo "... tests/CheckPointTest.s"
-	@echo "... tests/DriverTest.o"
-	@echo "... tests/DriverTest.i"
-	@echo "... tests/DriverTest.s"
-	@echo "... tests/GpsTest.o"
-	@echo "... tests/GpsTest.i"
-	@echo "... tests/GpsTest.s"
-	@echo "... tests/GridTest.o"
-	@echo "... tests/GridTest.i"
-	@echo "... tests/GridTest.s"
-	@echo "... tests/LuxuryCabTest.o"
-	@echo "... tests/LuxuryCabTest.i"
-	@echo "... tests/LuxuryCabTest.s"
-	@echo "... tests/MapTest.o"
-	@echo "... tests/MapTest.i"
-	@echo "... tests/MapTest.s"
-	@echo "... tests/PassengerTest.o"
-	@echo "... tests/PassengerTest.i"
-	@echo "... tests/PassengerTest.s"
-	@echo "... tests/TexiCenterTest.o"
-	@echo "... tests/TexiCenterTest.i"
-	@echo "... tests/TexiCenterTest.s"
-	@echo "... tests/TripInfoTest.o"
-	@echo "... tests/TripInfoTest.i"
-	@echo "... tests/TripInfoTest.s"
+	@echo "... Udp.o"
+	@echo "... Udp.i"
+	@echo "... Udp.s"
+	@echo "... client.o"
+	@echo "... client.i"
+	@echo "... client.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 

@@ -77,8 +77,8 @@
 					<DistClean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="ex3">
-				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/ex3" prefix_auto="0" extension_auto="0"/>
+			<Target title="server">
+				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/orian/ClionProjects/ex3/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -96,14 +96,14 @@
 					<Add directory="/usr/include/c++/4.8/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 ex3"/>
+					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
 					<CompileFile command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="ex3/fast">
-				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/ex3" prefix_auto="0" extension_auto="0"/>
+			<Target title="server/fast">
+				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/orian/ClionProjects/ex3/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -121,7 +121,57 @@
 					<Add directory="/usr/include/c++/4.8/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 ex3/fast"/>
+					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client">
+				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/orian/ClionProjects/ex3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/orian/ClionProjects/ex3/lib/googletest/googletest/include"/>
+					<Add directory="/home/orian/ClionProjects/ex3/lib/googletest/googlemock/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client/fast">
+				<Option output="/home/orian/ClionProjects/ex3/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/orian/ClionProjects/ex3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/orian/ClionProjects/ex3/lib/googletest/googletest/include"/>
+					<Add directory="/home/orian/ClionProjects/ex3/lib/googletest/googlemock/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
 					<CompileFile command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/home/orian/ClionProjects/ex3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -337,100 +387,131 @@
 			</Target>
 		</Build>
 		<Unit filename="/home/orian/ClionProjects/ex3/Cab.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Cab.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/CarColors.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/CarsManufactor.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/CheckPoint.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/CheckPoint.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Driver.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Driver.h">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/DriverCreator.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/DriverCreator.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Gps.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Gps.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Grid.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Grid.h">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/ListenerCab.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/ListenerCab.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/LuxuryCab.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/LuxuryCab.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Map.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Map.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/MaterialStatus.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Passenger.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Passenger.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Person.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Point.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Point.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/home/orian/ClionProjects/ex3/Socket.cpp">
+			<Option target="server"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/home/orian/ClionProjects/ex3/Socket.h">
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/TexiCenter.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/TexiCenter.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/TripInfo.cpp">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/TripInfo.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/Vehicles.cpp">
-			<Option target="ex3"/>
+		<Unit filename="/home/orian/ClionProjects/ex3/Udp.cpp">
+			<Option target="server"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/home/orian/ClionProjects/ex3/Udp.h">
+			<Option target="server"/>
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/Vehicles.h">
-			<Option target="ex3"/>
+			<Option target="server"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/home/orian/ClionProjects/ex3/client.cpp">
+			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/lib/googletest/googlemock/src/gmock-all.cc">
 			<Option target="gmock_main"/>
@@ -447,38 +528,8 @@
 		<Unit filename="/home/orian/ClionProjects/ex3/lib/googletest/googletest/src/gtest_main.cc">
 			<Option target="gtest_main"/>
 		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/main.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/CabTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/CheckPointTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/DriverTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/GpsTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/GridTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/LuxuryCabTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/MapTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/PassengerTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/TexiCenterTest.cpp">
-			<Option target="ex3"/>
-		</Unit>
-		<Unit filename="/home/orian/ClionProjects/ex3/tests/TripInfoTest.cpp">
-			<Option target="ex3"/>
+		<Unit filename="/home/orian/ClionProjects/ex3/server.cpp">
+			<Option target="server"/>
 		</Unit>
 		<Unit filename="/home/orian/ClionProjects/ex3/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

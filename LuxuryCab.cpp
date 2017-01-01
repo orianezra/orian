@@ -73,3 +73,14 @@ void LuxuryCab::setADriver(bool b){
 bool LuxuryCab::isStandart() {
     return false;
 }
+void LuxuryCab::setString(string s) {
+    this->serial_str = s;
+}
+void LuxuryCab::setLuxuryCab(LuxuryCab c) {
+    this->id = c.id;
+    this->numOfKM = c.numOfKM;
+    this->tariff = c.tariff;
+    this->color = c.color;
+    this->type = c.type;
+    this->hasDriver = c.hasDriver;
+}

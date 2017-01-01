@@ -97,7 +97,8 @@ public:
     bool isStandart();
     bool operator !=(const Cab &other) const;
     std::string serial_str;
-
+    void setString(string s);
+    void setCab(Cab c);
     void save() {
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
@@ -120,6 +121,7 @@ public:
 
         return cab;
      }
+
 
 };
 

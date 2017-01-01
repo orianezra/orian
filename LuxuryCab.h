@@ -96,7 +96,8 @@ public:
     bool isStandart();
     bool operator !=(const LuxuryCab &other) const;
     std::string serial_str;
-
+    void setString(string s);
+    void setLuxuryCab(LuxuryCab c);
     void save() {
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);

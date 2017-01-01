@@ -585,76 +585,100 @@ CMakeFiles/ex3.dir/main.cpp.o.provides: CMakeFiles/ex3.dir/main.cpp.o.requires
 CMakeFiles/ex3.dir/main.cpp.o.provides.build: CMakeFiles/ex3.dir/main.cpp.o
 
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: CMakeFiles/ex3.dir/flags.make
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../DriverCreator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/ex3.dir/DriverCreator.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/DriverCreator.cpp.o -c /home/orian/ClionProjects/ex3/DriverCreator.cpp
+CMakeFiles/ex3.dir/client.cpp.o: CMakeFiles/ex3.dir/flags.make
+CMakeFiles/ex3.dir/client.cpp.o: ../client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/ex3.dir/client.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/client.cpp.o -c /home/orian/ClionProjects/ex3/client.cpp
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/DriverCreator.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/DriverCreator.cpp > CMakeFiles/ex3.dir/DriverCreator.cpp.i
+CMakeFiles/ex3.dir/client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/client.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/client.cpp > CMakeFiles/ex3.dir/client.cpp.i
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/DriverCreator.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/DriverCreator.cpp -o CMakeFiles/ex3.dir/DriverCreator.cpp.s
+CMakeFiles/ex3.dir/client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/client.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/client.cpp -o CMakeFiles/ex3.dir/client.cpp.s
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.o.requires:
+CMakeFiles/ex3.dir/client.cpp.o.requires:
 
-.PHONY : CMakeFiles/ex3.dir/DriverCreator.cpp.o.requires
+.PHONY : CMakeFiles/ex3.dir/client.cpp.o.requires
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.o.provides: CMakeFiles/ex3.dir/DriverCreator.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/DriverCreator.cpp.o.provides.build
-.PHONY : CMakeFiles/ex3.dir/DriverCreator.cpp.o.provides
+CMakeFiles/ex3.dir/client.cpp.o.provides: CMakeFiles/ex3.dir/client.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/client.cpp.o.provides.build
+.PHONY : CMakeFiles/ex3.dir/client.cpp.o.provides
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.o.provides.build: CMakeFiles/ex3.dir/DriverCreator.cpp.o
-
-
-CMakeFiles/ex3.dir/Vehicles.cpp.o: CMakeFiles/ex3.dir/flags.make
-CMakeFiles/ex3.dir/Vehicles.cpp.o: ../Vehicles.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/ex3.dir/Vehicles.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/Vehicles.cpp.o -c /home/orian/ClionProjects/ex3/Vehicles.cpp
-
-CMakeFiles/ex3.dir/Vehicles.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/Vehicles.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/Vehicles.cpp > CMakeFiles/ex3.dir/Vehicles.cpp.i
-
-CMakeFiles/ex3.dir/Vehicles.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/Vehicles.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/Vehicles.cpp -o CMakeFiles/ex3.dir/Vehicles.cpp.s
-
-CMakeFiles/ex3.dir/Vehicles.cpp.o.requires:
-
-.PHONY : CMakeFiles/ex3.dir/Vehicles.cpp.o.requires
-
-CMakeFiles/ex3.dir/Vehicles.cpp.o.provides: CMakeFiles/ex3.dir/Vehicles.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Vehicles.cpp.o.provides.build
-.PHONY : CMakeFiles/ex3.dir/Vehicles.cpp.o.provides
-
-CMakeFiles/ex3.dir/Vehicles.cpp.o.provides.build: CMakeFiles/ex3.dir/Vehicles.cpp.o
+CMakeFiles/ex3.dir/client.cpp.o.provides.build: CMakeFiles/ex3.dir/client.cpp.o
 
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: CMakeFiles/ex3.dir/flags.make
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../ListenerCab.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/ex3.dir/ListenerCab.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/ListenerCab.cpp.o -c /home/orian/ClionProjects/ex3/ListenerCab.cpp
+CMakeFiles/ex3.dir/server.cpp.o: CMakeFiles/ex3.dir/flags.make
+CMakeFiles/ex3.dir/server.cpp.o: ../server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/ex3.dir/server.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/server.cpp.o -c /home/orian/ClionProjects/ex3/server.cpp
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/ListenerCab.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/ListenerCab.cpp > CMakeFiles/ex3.dir/ListenerCab.cpp.i
+CMakeFiles/ex3.dir/server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/server.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/server.cpp > CMakeFiles/ex3.dir/server.cpp.i
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/ListenerCab.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/ListenerCab.cpp -o CMakeFiles/ex3.dir/ListenerCab.cpp.s
+CMakeFiles/ex3.dir/server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/server.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/server.cpp -o CMakeFiles/ex3.dir/server.cpp.s
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.o.requires:
+CMakeFiles/ex3.dir/server.cpp.o.requires:
 
-.PHONY : CMakeFiles/ex3.dir/ListenerCab.cpp.o.requires
+.PHONY : CMakeFiles/ex3.dir/server.cpp.o.requires
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.o.provides: CMakeFiles/ex3.dir/ListenerCab.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/ListenerCab.cpp.o.provides.build
-.PHONY : CMakeFiles/ex3.dir/ListenerCab.cpp.o.provides
+CMakeFiles/ex3.dir/server.cpp.o.provides: CMakeFiles/ex3.dir/server.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/server.cpp.o.provides.build
+.PHONY : CMakeFiles/ex3.dir/server.cpp.o.provides
 
-CMakeFiles/ex3.dir/ListenerCab.cpp.o.provides.build: CMakeFiles/ex3.dir/ListenerCab.cpp.o
+CMakeFiles/ex3.dir/server.cpp.o.provides.build: CMakeFiles/ex3.dir/server.cpp.o
+
+
+CMakeFiles/ex3.dir/Udp.cpp.o: CMakeFiles/ex3.dir/flags.make
+CMakeFiles/ex3.dir/Udp.cpp.o: ../Udp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/ex3.dir/Udp.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/Udp.cpp.o -c /home/orian/ClionProjects/ex3/Udp.cpp
+
+CMakeFiles/ex3.dir/Udp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/Udp.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/Udp.cpp > CMakeFiles/ex3.dir/Udp.cpp.i
+
+CMakeFiles/ex3.dir/Udp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/Udp.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/Udp.cpp -o CMakeFiles/ex3.dir/Udp.cpp.s
+
+CMakeFiles/ex3.dir/Udp.cpp.o.requires:
+
+.PHONY : CMakeFiles/ex3.dir/Udp.cpp.o.requires
+
+CMakeFiles/ex3.dir/Udp.cpp.o.provides: CMakeFiles/ex3.dir/Udp.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Udp.cpp.o.provides.build
+.PHONY : CMakeFiles/ex3.dir/Udp.cpp.o.provides
+
+CMakeFiles/ex3.dir/Udp.cpp.o.provides.build: CMakeFiles/ex3.dir/Udp.cpp.o
+
+
+CMakeFiles/ex3.dir/Socket.cpp.o: CMakeFiles/ex3.dir/flags.make
+CMakeFiles/ex3.dir/Socket.cpp.o: ../Socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/ex3.dir/Socket.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex3.dir/Socket.cpp.o -c /home/orian/ClionProjects/ex3/Socket.cpp
+
+CMakeFiles/ex3.dir/Socket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex3.dir/Socket.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orian/ClionProjects/ex3/Socket.cpp > CMakeFiles/ex3.dir/Socket.cpp.i
+
+CMakeFiles/ex3.dir/Socket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex3.dir/Socket.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orian/ClionProjects/ex3/Socket.cpp -o CMakeFiles/ex3.dir/Socket.cpp.s
+
+CMakeFiles/ex3.dir/Socket.cpp.o.requires:
+
+.PHONY : CMakeFiles/ex3.dir/Socket.cpp.o.requires
+
+CMakeFiles/ex3.dir/Socket.cpp.o.provides: CMakeFiles/ex3.dir/Socket.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/Socket.cpp.o.provides.build
+.PHONY : CMakeFiles/ex3.dir/Socket.cpp.o.provides
+
+CMakeFiles/ex3.dir/Socket.cpp.o.provides.build: CMakeFiles/ex3.dir/Socket.cpp.o
 
 
 # Object files for target ex3
@@ -681,9 +705,10 @@ ex3_OBJECTS = \
 "CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.o" \
 "CMakeFiles/ex3.dir/tests/MapTest.cpp.o" \
 "CMakeFiles/ex3.dir/main.cpp.o" \
-"CMakeFiles/ex3.dir/DriverCreator.cpp.o" \
-"CMakeFiles/ex3.dir/Vehicles.cpp.o" \
-"CMakeFiles/ex3.dir/ListenerCab.cpp.o"
+"CMakeFiles/ex3.dir/client.cpp.o" \
+"CMakeFiles/ex3.dir/server.cpp.o" \
+"CMakeFiles/ex3.dir/Udp.cpp.o" \
+"CMakeFiles/ex3.dir/Socket.cpp.o"
 
 # External object files for target ex3
 ex3_EXTERNAL_OBJECTS =
@@ -710,15 +735,16 @@ ex3: CMakeFiles/ex3.dir/TripInfo.cpp.o
 ex3: CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.o
 ex3: CMakeFiles/ex3.dir/tests/MapTest.cpp.o
 ex3: CMakeFiles/ex3.dir/main.cpp.o
-ex3: CMakeFiles/ex3.dir/DriverCreator.cpp.o
-ex3: CMakeFiles/ex3.dir/Vehicles.cpp.o
-ex3: CMakeFiles/ex3.dir/ListenerCab.cpp.o
+ex3: CMakeFiles/ex3.dir/client.cpp.o
+ex3: CMakeFiles/ex3.dir/server.cpp.o
+ex3: CMakeFiles/ex3.dir/Udp.cpp.o
+ex3: CMakeFiles/ex3.dir/Socket.cpp.o
 ex3: CMakeFiles/ex3.dir/build.make
 ex3: lib/googletest/googlemock/gtest/libgtest.a
 ex3: lib/googletest/googlemock/gtest/libgtest_main.a
 ex3: lib/googletest/googlemock/gtest/libgtest.a
 ex3: CMakeFiles/ex3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Linking CXX executable ex3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Linking CXX executable ex3"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ex3.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -748,9 +774,10 @@ CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/TripInfo.cpp.o.requires
 CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.o.requires
 CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/tests/MapTest.cpp.o.requires
 CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/main.cpp.o.requires
-CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/DriverCreator.cpp.o.requires
-CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/Vehicles.cpp.o.requires
-CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/ListenerCab.cpp.o.requires
+CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/client.cpp.o.requires
+CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/server.cpp.o.requires
+CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/Udp.cpp.o.requires
+CMakeFiles/ex3.dir/requires: CMakeFiles/ex3.dir/Socket.cpp.o.requires
 
 .PHONY : CMakeFiles/ex3.dir/requires
 

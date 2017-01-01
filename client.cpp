@@ -5,10 +5,10 @@
 #include "Udp.h"
 #include "Cab.h"
 #include "Driver.h"
-#include "MaterialStatus.h"
+#include <cstdlib>
 using namespace std;
+using namespace boost;
 int main(int argc, char *argv[]) {
-
         Udp udpClient(0, atoi(argv[1]));
         udpClient.initialize();
         char dummy, status;
@@ -42,15 +42,13 @@ int main(int argc, char *argv[]) {
         driver->save();
         udpClient.sendData(driver->serial_str);
         char buffer[2000];
-
         udpClient.reciveData(buffer, sizeof(buffer));
-        string stMess(buffer, sizeof(buffer));
-        //cout << stMess <<endl;//we know that shimi is here :)
+        string stMess(buffer);
+        cout << stMess <<endl;
         char buffer2[1];
         udpClient.reciveData(buffer2, sizeof(buffer));//this is for getting the cars type
-        string stCarType(buffer2, sizeof(buffer));
-        boost::iostreams::basic_array_source<char> device(stCarType.c_str(), stCarType.size());
-        if(stCarType.at(0) == '1') {
+        string stCarType(buffer2);
+        if(stCarType == "1") {
                 udpClient.reciveData(buffer, sizeof(buffer));
                 string stMessCab(buffer, sizeof(buffer));
                 Cab cabDummy;
@@ -70,14 +68,32 @@ int main(int argc, char *argv[]) {
                 udpClient.sendData("we got the luxurycab!");
         }
 
-        char buffer1[40000];
-        udpClient.reciveData(buffer1, sizeof(buffer1));
-        string stMessTrip(buffer1, sizeof(buffer1));
-        TripInfo tDummy;
-        tDummy.setString(stMessTrip);
+
+
+        char buffer0[2000];
+        udpClient.reciveData(buffer0, sizeof(buffer0));
+        string stMessage(buffer0);
         TripInfo* t= new TripInfo();
-        t->setTripInfo(tDummy.load());
-        driver->setTripInfo(t);
-        udpClient.sendData("we got the shimi job!! :)");
+        if (stMessage.compare("start triping shimi")) {
+                char buffer1[40000];
+                udpClient.reciveData(buffer1, sizeof(buffer1));
+                string stMessTrip(buffer1, sizeof(buffer1));
+                TripInfo tDummy;
+                tDummy.setString(stMessTrip);
+                t->setTripInfo(tDummy.load());
+                driver->setTripInfo(t);
+                udpClient.sendData("we got the shimi job!! :)");
+        }
+
+
+        char buffer4[1024];
+        udpClient.reciveData(buffer4, sizeof(buffer4));
+        string stTime(buffer4);
+        unsigned long time = strtoul(stTime, NULL,0);
+        Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
+        if (time == driver->getTripInfo()->getTimeOfTrip()) {
+
+                //driver->drive()
+        }
 
 }

@@ -1,5 +1,14 @@
+/*
+#include "gtest/gtest.h"
+#include <stdlib.h>
+#include <iostream>
+int main(int argc ,char** argv){
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+*/
 
-
+/*
 #include <string.h>
 #include <iostream>
 #include "Grid.h"
@@ -158,6 +167,7 @@ int main(){
                 break;
             }
             case 6:{
+
                 if(!texiC->getListVehicles().empty() && !texiC->getListDriver().empty()){
                     list<Driver*> drivers = texiC->getListDriver();
                     list<Vehicles*> listV = texiC->getListVehicles();
@@ -183,8 +193,11 @@ int main(){
                     }
                     texiC->setListDrivers(drivers);
                     texiC->setListVehicles(listV);
+
                 }
                 else{break;}
+
+
                 for(int n = 0; n < texiC->getListDriver().size(); n++) {
                     int size = texiC->getListTrips().size();
                     if(size){
@@ -218,3 +231,23 @@ int main(){
     delete m;
     exit(0);
 }
+ */
+/*
+#include <iostream>
+#include "TexiCenter.h"
+using namespace std;
+
+//int main(){
+    //int idInput =0;
+    //int numOKInput=0;
+    //double tariff=0;
+
+
+    //Cab* c = new Cab(idInput, numOKInput, tariff,CarColors::BLUE, CarsManufactor::FIAT);
+    //c->save();
+
+    //Cab* c2 = c->load();
+    //cout<<"id: "<< c2->getID();
+
+
+}*/

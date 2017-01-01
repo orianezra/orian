@@ -6,10 +6,11 @@
 #include "Map.h"
 #include "TexiCenter.h"
 #include <boost/cast.hpp>
+#include <boost/timer.hpp>
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-
+    long time = 0;
     Udp udp(1, atoi(argv[1]));
     udp.initialize();
     int i,j, pOfAbs;
@@ -67,7 +68,7 @@ int main(int argc, char *argv[]) {
                     udp.sendData(cab->serial_str);
                     char buffer1[40000];
                     udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1, sizeof(buffer1));
+                    string stMess(buffer1);
                     cout << stMess <<endl;
                 }else{
                     udp.sendData("0");
@@ -76,25 +77,19 @@ int main(int argc, char *argv[]) {
                     udp.sendData(cab->serial_str);
                     char buffer1[40000];
                     udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1, sizeof(buffer1));
+                    string stMess(buffer1);
                     cout << stMess <<endl;
                 }
-                TripInfo* t = texiC->getListTrips().front();
-                texiC->getListTrips().pop_front();
-                t->save();
-                udp.sendData(t->serial_str);
-                char buffer3[1024];
-                udp.reciveData(buffer3, sizeof(buffer3));
-                string stMess(buffer3, sizeof(buffer3));
-                cout << stMess <<endl;
+
                 break;
 
             }
             case 2:{
+                unsigned long timeOfTrip;
                 cin >> id >> damy >> startX >> damy >> startY >> damy
-                    >> endX >> damy >> endY >> damy >> numOfPs >> damy >>tariff;
+                    >> endX >> damy >> endY >> damy >> numOfPs >> damy >>tariff >> damy >> timeOfTrip;
                 TripInfo* tIDummy = new TripInfo(0, numOfPs, id, tariff,
-                                                 new Point(startX, startY), new Point(endX, endY));
+                                                 new Point(startX, startY), new Point(endX, endY), timeOfTrip);
                 texiC->setTripI(tIDummy);
                 break;
             }
@@ -236,9 +231,24 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 9: {
-                //time advanced by 1 second
-                //limit of 5 sec for the program
-
+                udp.sendData("start triping shimi");
+                char buffer0[2000];
+                udp.reciveData(buffer0, sizeof(buffer0));
+                string stMessage(buffer0);
+                cout << stMessage << endl;
+                string stringTime = static_cast<ostringstream*>( &(ostringstream() << time) )->str();
+                udp.sendData(stringTime);
+                
+                time++;
+                TripInfo* t = texiC->getListTrips().front();
+                texiC->getListTrips().pop_front();
+                t->save();
+                udp.sendData(t->serial_str);
+                char buffer3[1024];
+                udp.reciveData(buffer3, sizeof(buffer3));
+                string stMess(buffer3);
+                cout << stMess <<endl;
+                
                 break;
             }
         }

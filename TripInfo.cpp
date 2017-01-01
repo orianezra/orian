@@ -1,12 +1,13 @@
 #include "TripInfo.h"
 //this is the constructor of the trip info class
-TripInfo::TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP) {
+TripInfo::TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP, unsigned long time) {
     this->mettersPass = mP;
     this->numOfPassengers = nP;
     this->rideId = rID;
     this->tariff = t;
     this->endP = eP;
     this->startP = sP;
+    this->timeOfTrip = time;
 }
 //this is the destructor of the trip info class
 TripInfo::~TripInfo() {
@@ -84,4 +85,10 @@ void TripInfo::setTripInfo(TripInfo t) {
     this->rideId = t.rideId;
     this->tariff = t.tariff;
     this->startP = t.startP;
+}
+void TripInfo::setString(string s){
+    this->serial_str = s;
+}
+unsigned long TripInfo::getTimeOfTrip() {
+    return this->timeOfTrip;
 }

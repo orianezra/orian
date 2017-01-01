@@ -21,9 +21,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/ex3.dir/tests/CheckPointTest.cpp.o"
   "CMakeFiles/ex3.dir/tests/MapTest.cpp.o"
   "CMakeFiles/ex3.dir/main.cpp.o"
-  "CMakeFiles/ex3.dir/DriverCreator.cpp.o"
-  "CMakeFiles/ex3.dir/Vehicles.cpp.o"
-  "CMakeFiles/ex3.dir/ListenerCab.cpp.o"
+  "CMakeFiles/ex3.dir/client.cpp.o"
+  "CMakeFiles/ex3.dir/server.cpp.o"
+  "CMakeFiles/ex3.dir/Udp.cpp.o"
+  "CMakeFiles/ex3.dir/Socket.cpp.o"
   "ex3.pdb"
   "ex3"
 )

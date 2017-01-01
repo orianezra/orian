@@ -30,23 +30,6 @@ CMakeFiles/ex3.dir/Driver.cpp.o: ../Point.h
 CMakeFiles/ex3.dir/Driver.cpp.o: ../TripInfo.h
 CMakeFiles/ex3.dir/Driver.cpp.o: ../Vehicles.h
 
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Cab.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../CarColors.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../CarsManufactor.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../CheckPoint.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Driver.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../DriverCreator.cpp
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../DriverCreator.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Gps.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Grid.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../LuxuryCab.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Map.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../MaterialStatus.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Person.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Point.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../TripInfo.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o: ../Vehicles.h
-
 CMakeFiles/ex3.dir/Gps.cpp.o: ../CheckPoint.h
 CMakeFiles/ex3.dir/Gps.cpp.o: ../Gps.cpp
 CMakeFiles/ex3.dir/Gps.cpp.o: ../Gps.h
@@ -57,24 +40,6 @@ CMakeFiles/ex3.dir/Grid.cpp.o: ../CheckPoint.h
 CMakeFiles/ex3.dir/Grid.cpp.o: ../Grid.cpp
 CMakeFiles/ex3.dir/Grid.cpp.o: ../Grid.h
 CMakeFiles/ex3.dir/Grid.cpp.o: ../Point.h
-
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Cab.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../CarColors.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../CarsManufactor.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../CheckPoint.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Driver.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Gps.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Grid.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../ListenerCab.cpp
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../ListenerCab.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../LuxuryCab.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Map.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../MaterialStatus.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Person.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Point.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../TexiCenter.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../TripInfo.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o: ../Vehicles.h
 
 CMakeFiles/ex3.dir/LuxuryCab.cpp.o: ../CarColors.h
 CMakeFiles/ex3.dir/LuxuryCab.cpp.o: ../CarsManufactor.h
@@ -100,6 +65,9 @@ CMakeFiles/ex3.dir/Passenger.cpp.o: ../Point.h
 CMakeFiles/ex3.dir/Point.cpp.o: ../Point.cpp
 CMakeFiles/ex3.dir/Point.cpp.o: ../Point.h
 
+CMakeFiles/ex3.dir/Socket.cpp.o: ../Socket.cpp
+CMakeFiles/ex3.dir/Socket.cpp.o: ../Socket.h
+
 CMakeFiles/ex3.dir/TexiCenter.cpp.o: ../Cab.h
 CMakeFiles/ex3.dir/TexiCenter.cpp.o: ../CarColors.h
 CMakeFiles/ex3.dir/TexiCenter.cpp.o: ../CarsManufactor.h
@@ -121,8 +89,36 @@ CMakeFiles/ex3.dir/TripInfo.cpp.o: ../Point.h
 CMakeFiles/ex3.dir/TripInfo.cpp.o: ../TripInfo.cpp
 CMakeFiles/ex3.dir/TripInfo.cpp.o: ../TripInfo.h
 
-CMakeFiles/ex3.dir/Vehicles.cpp.o: ../Vehicles.cpp
+CMakeFiles/ex3.dir/Udp.cpp.o: ../Socket.h
+CMakeFiles/ex3.dir/Udp.cpp.o: ../Udp.cpp
+CMakeFiles/ex3.dir/Udp.cpp.o: ../Udp.h
 
+CMakeFiles/ex3.dir/client.cpp.o: ../Socket.h
+CMakeFiles/ex3.dir/client.cpp.o: ../Udp.h
+CMakeFiles/ex3.dir/client.cpp.o: ../client.cpp
+
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-death-test.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-message.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-param-test.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-printers.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-test-part.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-typed-test.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest_pred_impl.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/gtest_prod.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/custom/gtest-port.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/custom/gtest-printers.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-filepath.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-internal.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-param-util.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-port-arch.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-port.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-string.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-tuple.h
+CMakeFiles/ex3.dir/main.cpp.o: ../lib/googletest/googletest/include/gtest/internal/gtest-type-util.h
 CMakeFiles/ex3.dir/main.cpp.o: ../Cab.h
 CMakeFiles/ex3.dir/main.cpp.o: ../CarColors.h
 CMakeFiles/ex3.dir/main.cpp.o: ../CarsManufactor.h
@@ -139,6 +135,10 @@ CMakeFiles/ex3.dir/main.cpp.o: ../TexiCenter.h
 CMakeFiles/ex3.dir/main.cpp.o: ../TripInfo.h
 CMakeFiles/ex3.dir/main.cpp.o: ../Vehicles.h
 CMakeFiles/ex3.dir/main.cpp.o: ../main.cpp
+
+CMakeFiles/ex3.dir/server.cpp.o: ../Socket.h
+CMakeFiles/ex3.dir/server.cpp.o: ../Udp.h
+CMakeFiles/ex3.dir/server.cpp.o: ../server.cpp
 
 CMakeFiles/ex3.dir/tests/CabTest.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-death-test.h
 CMakeFiles/ex3.dir/tests/CabTest.cpp.o: ../lib/googletest/googletest/include/gtest/gtest-message.h

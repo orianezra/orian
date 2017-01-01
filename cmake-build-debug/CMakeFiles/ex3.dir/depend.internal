@@ -30,23 +30,6 @@ CMakeFiles/ex3.dir/Driver.cpp.o
  /home/orian/ClionProjects/ex3/Point.h
  /home/orian/ClionProjects/ex3/TripInfo.h
  /home/orian/ClionProjects/ex3/Vehicles.h
-CMakeFiles/ex3.dir/DriverCreator.cpp.o
- /home/orian/ClionProjects/ex3/Cab.h
- /home/orian/ClionProjects/ex3/CarColors.h
- /home/orian/ClionProjects/ex3/CarsManufactor.h
- /home/orian/ClionProjects/ex3/CheckPoint.h
- /home/orian/ClionProjects/ex3/Driver.h
- /home/orian/ClionProjects/ex3/DriverCreator.cpp
- /home/orian/ClionProjects/ex3/DriverCreator.h
- /home/orian/ClionProjects/ex3/Gps.h
- /home/orian/ClionProjects/ex3/Grid.h
- /home/orian/ClionProjects/ex3/LuxuryCab.h
- /home/orian/ClionProjects/ex3/Map.h
- /home/orian/ClionProjects/ex3/MaterialStatus.h
- /home/orian/ClionProjects/ex3/Person.h
- /home/orian/ClionProjects/ex3/Point.h
- /home/orian/ClionProjects/ex3/TripInfo.h
- /home/orian/ClionProjects/ex3/Vehicles.h
 CMakeFiles/ex3.dir/Gps.cpp.o
  /home/orian/ClionProjects/ex3/CheckPoint.h
  /home/orian/ClionProjects/ex3/Gps.cpp
@@ -58,24 +41,6 @@ CMakeFiles/ex3.dir/Grid.cpp.o
  /home/orian/ClionProjects/ex3/Grid.cpp
  /home/orian/ClionProjects/ex3/Grid.h
  /home/orian/ClionProjects/ex3/Point.h
-CMakeFiles/ex3.dir/ListenerCab.cpp.o
- /home/orian/ClionProjects/ex3/Cab.h
- /home/orian/ClionProjects/ex3/CarColors.h
- /home/orian/ClionProjects/ex3/CarsManufactor.h
- /home/orian/ClionProjects/ex3/CheckPoint.h
- /home/orian/ClionProjects/ex3/Driver.h
- /home/orian/ClionProjects/ex3/Gps.h
- /home/orian/ClionProjects/ex3/Grid.h
- /home/orian/ClionProjects/ex3/ListenerCab.cpp
- /home/orian/ClionProjects/ex3/ListenerCab.h
- /home/orian/ClionProjects/ex3/LuxuryCab.h
- /home/orian/ClionProjects/ex3/Map.h
- /home/orian/ClionProjects/ex3/MaterialStatus.h
- /home/orian/ClionProjects/ex3/Person.h
- /home/orian/ClionProjects/ex3/Point.h
- /home/orian/ClionProjects/ex3/TexiCenter.h
- /home/orian/ClionProjects/ex3/TripInfo.h
- /home/orian/ClionProjects/ex3/Vehicles.h
 CMakeFiles/ex3.dir/LuxuryCab.cpp.o
  /home/orian/ClionProjects/ex3/CarColors.h
  /home/orian/ClionProjects/ex3/CarsManufactor.h
@@ -100,6 +65,9 @@ CMakeFiles/ex3.dir/Passenger.cpp.o
 CMakeFiles/ex3.dir/Point.cpp.o
  /home/orian/ClionProjects/ex3/Point.cpp
  /home/orian/ClionProjects/ex3/Point.h
+CMakeFiles/ex3.dir/Socket.cpp.o
+ /home/orian/ClionProjects/ex3/Socket.cpp
+ /home/orian/ClionProjects/ex3/Socket.h
 CMakeFiles/ex3.dir/TexiCenter.cpp.o
  /home/orian/ClionProjects/ex3/Cab.h
  /home/orian/ClionProjects/ex3/CarColors.h
@@ -121,9 +89,37 @@ CMakeFiles/ex3.dir/TripInfo.cpp.o
  /home/orian/ClionProjects/ex3/Point.h
  /home/orian/ClionProjects/ex3/TripInfo.cpp
  /home/orian/ClionProjects/ex3/TripInfo.h
-CMakeFiles/ex3.dir/Vehicles.cpp.o
- /home/orian/ClionProjects/ex3/Vehicles.cpp
+CMakeFiles/ex3.dir/Udp.cpp.o
+ /home/orian/ClionProjects/ex3/Socket.h
+ /home/orian/ClionProjects/ex3/Udp.cpp
+ /home/orian/ClionProjects/ex3/Udp.h
+CMakeFiles/ex3.dir/client.cpp.o
+ /home/orian/ClionProjects/ex3/Socket.h
+ /home/orian/ClionProjects/ex3/Udp.h
+ /home/orian/ClionProjects/ex3/client.cpp
 CMakeFiles/ex3.dir/main.cpp.o
+ ../lib/googletest/googletest/include/gtest/gtest-death-test.h
+ ../lib/googletest/googletest/include/gtest/gtest-message.h
+ ../lib/googletest/googletest/include/gtest/gtest-param-test.h
+ ../lib/googletest/googletest/include/gtest/gtest-printers.h
+ ../lib/googletest/googletest/include/gtest/gtest-test-part.h
+ ../lib/googletest/googletest/include/gtest/gtest-typed-test.h
+ ../lib/googletest/googletest/include/gtest/gtest.h
+ ../lib/googletest/googletest/include/gtest/gtest_pred_impl.h
+ ../lib/googletest/googletest/include/gtest/gtest_prod.h
+ ../lib/googletest/googletest/include/gtest/internal/custom/gtest-port.h
+ ../lib/googletest/googletest/include/gtest/internal/custom/gtest-printers.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-filepath.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-internal.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-param-util.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-port-arch.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-port.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-string.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-tuple.h
+ ../lib/googletest/googletest/include/gtest/internal/gtest-type-util.h
  /home/orian/ClionProjects/ex3/Cab.h
  /home/orian/ClionProjects/ex3/CarColors.h
  /home/orian/ClionProjects/ex3/CarsManufactor.h
@@ -140,6 +136,10 @@ CMakeFiles/ex3.dir/main.cpp.o
  /home/orian/ClionProjects/ex3/TripInfo.h
  /home/orian/ClionProjects/ex3/Vehicles.h
  /home/orian/ClionProjects/ex3/main.cpp
+CMakeFiles/ex3.dir/server.cpp.o
+ /home/orian/ClionProjects/ex3/Socket.h
+ /home/orian/ClionProjects/ex3/Udp.h
+ /home/orian/ClionProjects/ex3/server.cpp
 CMakeFiles/ex3.dir/tests/CabTest.cpp.o
  ../lib/googletest/googletest/include/gtest/gtest-death-test.h
  ../lib/googletest/googletest/include/gtest/gtest-message.h

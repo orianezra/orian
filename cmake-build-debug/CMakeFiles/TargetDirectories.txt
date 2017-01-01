@@ -4,7 +4,8 @@
 /home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/install.dir
 /home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/install/local.dir
 /home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/install/strip.dir
-/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/ex3.dir
+/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/server.dir
+/home/orian/ClionProjects/ex3/cmake-build-debug/CMakeFiles/client.dir
 /home/orian/ClionProjects/ex3/cmake-build-debug/lib/googletest/CMakeFiles/edit_cache.dir
 /home/orian/ClionProjects/ex3/cmake-build-debug/lib/googletest/CMakeFiles/rebuild_cache.dir
 /home/orian/ClionProjects/ex3/cmake-build-debug/lib/googletest/CMakeFiles/list_install_components.dir

@@ -10,7 +10,16 @@ Driver::Driver(int id, int age , int i, MaterialStatus status, int cabId) {
     this->location = Point(0,0);
     this->existCar = false;
 }
-//this is a default constructor of the driver class
+void Driver::setDriver(Driver d) {
+    this->id = d.id;
+    this->age = d.age;
+    this->cabId = d.cabId;
+    this->yearsOfEp = d.yearsOfEp;
+    this->status = d.status;
+    this->location = d.location;
+    this->existCar = d.existCar;
+}
+//constructor of the driver class
 Driver::Driver(){}
 //this is the destructor of the driver class
 Driver::~Driver() {
@@ -104,7 +113,7 @@ void Driver::drive(queue<CheckPoint *> q) {
 bool Driver::getExist(){
     return this->existCar;
 }
-int Driver::getIdCab() {
+int Driver::getCabId() {
     return this->cabId;
 }
 unsigned long Driver::disCalculation(Point other){
@@ -112,4 +121,7 @@ unsigned long Driver::disCalculation(Point other){
     this->waze->setEnd(&other);
     queue <CheckPoint*> q = this->waze->start(this->map->getGrid());
     return q.size();
+}
+void Driver::setString(string s) {
+    this->serial_str = s;
 }

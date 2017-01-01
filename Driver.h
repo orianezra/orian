@@ -1,6 +1,6 @@
+
 #ifndef EX3_DRIVER_H
 #define EX3_DRIVER_H
-
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <iostream>
@@ -38,7 +38,6 @@ using namespace std;
 using namespace boost;
 using namespace boost::archive;
 using namespace serialization;
-//using namespace detail;
 //this class's purpose is to manage a driver object.
 //it inherits from person, and has the functionality of having a car.
 class Driver : public Person {
@@ -49,12 +48,13 @@ private:
     MaterialStatus status;
     int yearsOfEp;
     int avgSatisfaction;
-    int cabId;
     Vehicles* texiInfo;
+    Gps* waze;
     Point location;
     Map* map;
     bool existCar;
     TripInfo* trip;
+    int cabId;
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive& archive, const unsigned int version)
@@ -63,15 +63,16 @@ private:
         archive & boost::serialization::base_object<Person>(*this);
         archive & this->id;
         archive & this->age;
+        archive & this->cabId;
         archive & this->status;
         archive & this->yearsOfEp;
         archive & this->avgSatisfaction;
         archive & this->texiInfo;
         archive & this->location;
-        archive & this->map;
+        //archive & this->waze;
+        //archive & this->map;
         archive & this->existCar;
         archive & this->trip;
-        archive & this->cabId;
 
     }
     //public members section
@@ -88,19 +89,23 @@ public:
     Vehicles* getTexiOfDriver();
     void setMap(Map*);
     Map* getMap();
-    int getCabId();
     void drive(queue <CheckPoint*>);
     int getAge();
     int getId();
+    int getCabId();
+    void setGps(Gps* g);
+    Gps* getGps();
     bool getExist();
     int getSatisfaction();
     MaterialStatus getStatus();
     int getYearsOfExperiance();
     void setStatus(MaterialStatus status);
-
     void setSatisfaction(int st);
     bool operator !=(const Driver &other) const;
+    unsigned long disCalculation(Point other);
     std::string serial_str;
+    void setDriver(Driver d);
+    void setString(string);
 
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);

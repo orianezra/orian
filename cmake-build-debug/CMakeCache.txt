@@ -223,6 +223,9 @@ core_LIB_DEPENDS:STATIC=
 //Value Computed by CMake
 ex3_BINARY_DIR:STATIC=/home/orian/ClionProjects/ex3/cmake-build-debug
 
+//Dependencies for the target
+ex3_LIB_DEPENDS:STATIC=general;core;general;gtest;general;gtest_main;
+
 //Value Computed by CMake
 ex3_SOURCE_DIR:STATIC=/home/orian/ClionProjects/ex3
 

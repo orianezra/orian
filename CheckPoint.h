@@ -1,15 +1,5 @@
-//
-// Created by orian on 12/6/16.
-//
-
 #ifndef EX3_CHECKPOINT_H
 #define EX3_CHECKPOINT_H
-/*
- * This class's purpose is to manage a CheckPoint object.
- * It wraps a point and add the information whether this point
- * was touched or not.
- */
-#include "Point.h"
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <iostream>
@@ -35,12 +25,18 @@
 #include <boost/archive/detail/polymorphic_oarchive_route.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/throw_exception.hpp>
-#include <boost/serialization/base_object.hpp>
-#include <boost/serialization/export.hpp>
 using namespace std;
 using namespace boost;
 using namespace boost::archive;
 using namespace serialization;
+
+/*
+ * This class's purpose is to manage a CheckPoint object.
+ * It wraps a point and add the information whether this point
+ * was touched or not.
+ */
+#include "Point.h"
+#include <iostream>
 class CheckPoint : public Point {
     //private member section.
 private:
@@ -50,24 +46,23 @@ private:
     bool secondNeighbor;
     bool thirdNeighbor;
     bool forthNeighbor;
-    friend std::ostream& operator << (std::ostream& out, CheckPoint *c)
-    {
-        out << "(" << c->x_axis << "," << c->y_axis<< ")";
-        return out;
-    }
-    friend class boost::serialization::access;
-    template<class Archive>
-
-    void serialize(Archive& archive, const unsigned int version)
-    {
-
-        archive & boost::serialization::base_object<Point>(*this);
-        archive & this->x_axis;
-        archive & this->y_axis;
-
-    }
-
     //public member section.
+    friend class boost::serialization::access;
+
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version)
+    {
+        ar & isTouched;
+        ar & isExist;
+        ar & firstNeighbor;
+        ar & secondNeighbor;
+        ar & thirdNeighbor;
+        ar & forthNeighbor;
+        ar & x_axis;
+        ar & y_axis;
+
+    }
+
 public:
     void setFirstNeighbor(bool);
     void setSecondNeighbor(bool);
@@ -93,7 +88,6 @@ public:
     std::string serial_str;
 
     void save() {
-        //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
         boost::archive::binary_oarchive oa(s);
@@ -107,10 +101,10 @@ public:
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
-        CheckPoint check;
-        ia >> check;
+        CheckPoint p;
+        ia >> p;
 
-        return check;
+        return p;
     }
 };
 

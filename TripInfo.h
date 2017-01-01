@@ -41,7 +41,7 @@ private:
     Point* endP;
     double tariff;
     int numOfPassengers;
-
+    unsigned long timeOfTrip;
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive& archive, const unsigned int version)
@@ -53,11 +53,12 @@ private:
         archive & this->endP;
         archive & this->tariff;
         archive & this->numOfPassengers;
+        archive & this->timeOfTrip;
 
     }
     //public member section
 public:
-    TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP);
+    TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP, unsigned long);
     TripInfo();
     ~TripInfo();
     void setIdRide(int);
@@ -75,6 +76,8 @@ public:
     bool operator !=(const TripInfo &other) const;
     std::string serial_str;
     void setTripInfo(TripInfo);
+    void setString(string s);
+    unsigned long getTimeOfTrip();
     void save() {
 
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
