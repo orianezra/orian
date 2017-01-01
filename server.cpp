@@ -10,7 +10,7 @@
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-    long time = 0;
+    unsigned long time = 0;
     Udp udp(1, atoi(argv[1]));
     udp.initialize();
     int i,j, pOfAbs;
@@ -56,7 +56,8 @@ int main(int argc, char *argv[]) {
                 dDummy.setString(str);
                 Driver* d = new Driver();
                 d->setDriver(dDummy.load());
-                cout<<d->getId();
+
+                //cout<<d->getId();
                 texiC->setDrivers(d);
 
                 udp.sendData("thanks for sending shimi :)");
@@ -232,23 +233,25 @@ int main(int argc, char *argv[]) {
             }
             case 9: {
                 udp.sendData("start triping shimi");
-                char buffer0[2000];
-                udp.reciveData(buffer0, sizeof(buffer0));
-                string stMessage(buffer0);
-                cout << stMessage << endl;
-                string stringTime = static_cast<ostringstream*>( &(ostringstream() << time) )->str();
-                udp.sendData(stringTime);
-                
-                time++;
                 TripInfo* t = texiC->getListTrips().front();
                 texiC->getListTrips().pop_front();
+                Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
+                queue<CheckPoint*> way = gps->start(m->getGrid());
+                t->convertToListInit(way);
                 t->save();
                 udp.sendData(t->serial_str);
                 char buffer3[1024];
                 udp.reciveData(buffer3, sizeof(buffer3));
                 string stMess(buffer3);
                 cout << stMess <<endl;
-                
+
+
+                string stringTime = static_cast<ostringstream*>( &(ostringstream() << time) )->str();
+                udp.sendData(stringTime);
+
+                time++;
+
+
                 break;
             }
         }

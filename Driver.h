@@ -70,7 +70,7 @@ private:
         archive & this->texiInfo;
         archive & this->location;
         //archive & this->waze;
-        //archive & this->map;
+        archive & this->map;
         archive & this->existCar;
         archive & this->trip;
 

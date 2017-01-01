@@ -41,6 +41,8 @@ int main(int argc, char *argv[]) {
 
         driver->save();
         udpClient.sendData(driver->serial_str);
+        char bufferMap[80000];
+        udpClient.reciveData(bufferMap, sizeof(bufferMap));
         char buffer[2000];
         udpClient.reciveData(buffer, sizeof(buffer));
         string stMess(buffer);
@@ -68,13 +70,13 @@ int main(int argc, char *argv[]) {
                 udpClient.sendData("we got the luxurycab!");
         }
 
-
-
+        //calculate distance according to the driver's location and start point of the trip
+        //move the driver
         char buffer0[2000];
         udpClient.reciveData(buffer0, sizeof(buffer0));
         string stMessage(buffer0);
         TripInfo* t= new TripInfo();
-        if (stMessage.compare("start triping shimi")) {
+        if (stMessage.compare("start triping shimi") == 0) {
                 char buffer1[40000];
                 udpClient.reciveData(buffer1, sizeof(buffer1));
                 string stMessTrip(buffer1, sizeof(buffer1));
@@ -82,15 +84,14 @@ int main(int argc, char *argv[]) {
                 tDummy.setString(stMessTrip);
                 t->setTripInfo(tDummy.load());
                 driver->setTripInfo(t);
-                udpClient.sendData("we got the shimi job!! :)");
+                udpClient.sendData("we got shimi's job!! :)");
         }
 
 
         char buffer4[1024];
         udpClient.reciveData(buffer4, sizeof(buffer4));
         string stTime(buffer4);
-        unsigned long time = strtoul(stTime, NULL,0);
-        Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
+        unsigned long time = strtoul(stTime.c_str(), NULL, 0);
         if (time == driver->getTripInfo()->getTimeOfTrip()) {
 
                 //driver->drive()
