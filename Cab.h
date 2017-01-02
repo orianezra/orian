@@ -1,3 +1,4 @@
+
 #ifndef EX3_CAB_H
 #define EX3_CAB_H
 
@@ -52,21 +53,12 @@ private:
     enum CarColors color;
     double tariff;
     bool hasDriver;
-    friend std::ostream& operator << (std::ostream& out, Cab *c)
-    {
-        string type = type.c_str();
-        string color = color.c_str();
-        out << " " << c->id << " " << c->numOfKM << " " << c->tariff << " " << type << " " << color;
-
-        return out;
-    }
-
+    int moveByOne;
     friend class boost::serialization::access;
     template<class Archive>
-
+    //this a serialization method
     void serialize(Archive& archive, const unsigned int version)
     {
-
         archive & boost::serialization::base_object<Vehicles>(*this);
         archive & this->id;
         archive & this->numOfKM;
@@ -74,16 +66,14 @@ private:
         archive & this->color;
         archive & this->tariff;
         archive & this->hasDriver;
-
+        archive & this->moveByOne;
     }
-
     //public members section
 public:
-
     Cab();
     Cab(int, int, double, CarColors, CarsManufactor);
     ~Cab();
-    int move(int);
+    int move();
     int getID();
     int getKM();
     double getTariff();
@@ -94,13 +84,14 @@ public:
     void setTariff(double tarif);
     bool hasADriver();
     void setADriver(bool b);
-    bool isStandart();
+    void setString(string);
+    void setCab(Cab);
+    int getTheMove();
     bool operator !=(const Cab &other) const;
     std::string serial_str;
-    void setString(string s);
-    void setCab(Cab c);
+    bool isA();
+    //this is a save method for serialization
     void save() {
-        //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
         boost::archive::binary_oarchive oa(s);
@@ -108,21 +99,16 @@ public:
 
         s.flush();
     }
-
+    //this is a load method for deserialization
     Cab load(){
-
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
         Cab cab;
         ia >> cab;
 
-
-
         return cab;
-     }
-
-
+    }
 };
 
 #endif //EX3_CAB_H

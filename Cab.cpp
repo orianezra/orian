@@ -1,5 +1,3 @@
-//#include <boost/archive/xml_oarchive.hpp>
-//#include <boost/archive/xml_iarchive.hpp>
 #include "Cab.h"
 using namespace boost::archive;
 
@@ -11,16 +9,29 @@ Cab::Cab(int idInput, int numOKInput, double tariff, CarColors c, CarsManufactor
     this->color = c;
     this->type = m;
     this->hasDriver = false;
+    this->moveByOne = 1;
 }
 //this is the default constructor of the cab's class
 Cab::Cab(){}
 //this is the destructor of the cab class
 Cab::~Cab() {
 }
+void Cab::setCab(Cab c) {
+    this->id = c.id;
+    this->numOfKM = c.numOfKM;
+    this->tariff = c.tariff;
+    this->color = c.color;
+    this->type = c.type;
+    this->hasDriver = c.hasDriver;
+    this->moveByOne = c.moveByOne;
+}
 //this is a move method for the cab
-int Cab::move(int sizeToMove) {
-    return this->numOfKM += sizeToMove;
+int Cab::move() {
+    return this->numOfKM += this->getTheMove();
 
+}
+int Cab::getTheMove() {
+    return this->moveByOne;
 }
 //this is a getter method for the id of the cab
 int Cab::getID() {
@@ -70,18 +81,11 @@ bool Cab::hasADriver(){
 void Cab::setADriver(bool b){
     this->hasDriver = b;
 }
-
+//this is a setter method for the serialized string
 void Cab::setString(string s) {
     this->serial_str = s;
 }
-bool Cab::isStandart() {
+//this method determines the cab's type. if this is a standart cab, return true
+bool Cab::isA() {
     return true;
-}
-void Cab::setCab(Cab c) {
-    this->id = c.id;
-    this->numOfKM = c.numOfKM;
-    this->tariff = c.tariff;
-    this->color = c.color;
-    this->type = c.type;
-    this->hasDriver = c.hasDriver;
 }

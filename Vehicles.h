@@ -54,10 +54,8 @@ class Vehicles {
     void serialize(Archive& archive, const unsigned int version){}
 
 public:
-    //virtual void save() = 0;
-    //virtual Vehicles load() = 0;
     virtual int move(int)=0;
-    virtual bool isStandart() = 0;
+    virtual bool isA() = 0;
     virtual int getID() = 0;
 
     virtual int getKM() = 0;
@@ -77,6 +75,7 @@ public:
     virtual void setADriver(bool) = 0;
 
     virtual bool hasADriver() = 0;
+    virtual int getTheMove()=0;
 };
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Vehicles)

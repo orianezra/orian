@@ -57,6 +57,7 @@ private:
     int cabId;
     friend class boost::serialization::access;
     template<class Archive>
+    //this is a serialize method
     void serialize(Archive& archive, const unsigned int version)
     {
 
@@ -106,6 +107,7 @@ public:
     std::string serial_str;
     void setDriver(Driver d);
     void setString(string);
+    //this is a save method for serialization
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -114,7 +116,7 @@ public:
 
         s.flush();
     }
-
+    //this is a load method for deserialization
     Driver load(){
 
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());

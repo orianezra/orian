@@ -58,7 +58,7 @@ private:
     }
     friend class boost::serialization::access;
     template<class Archive>
-
+    //this is a method for serialization
     void serialize(Archive& archive, const unsigned int version)
     {
         archive & this->g;
@@ -75,6 +75,7 @@ public:
     list<Point> getListOfO();
     void createO(Point);
     std::string serial_str;
+    //this is a method for serialization
     void save() {
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
@@ -84,7 +85,7 @@ public:
 
         s.flush();
     }
-
+    //this is a method for deserialization
     Map load(){
 
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());

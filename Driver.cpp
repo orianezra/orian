@@ -113,15 +113,18 @@ void Driver::drive(list<CheckPoint *> q) {
 bool Driver::getExist(){
     return this->existCar;
 }
+//this is a getter methos for the cab's id
 int Driver::getCabId() {
     return this->cabId;
 }
+//this is a distance calcularing method
 unsigned long Driver::disCalculation(Point other){
     this->waze->setStart(&this->location);
     this->waze->setEnd(&other);
     queue <CheckPoint*> q = this->waze->start(this->map->getGrid());
     return q.size();
 }
+//this is a setter method for the string
 void Driver::setString(string s) {
     this->serial_str = s;
 }

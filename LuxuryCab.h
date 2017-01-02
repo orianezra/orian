@@ -1,12 +1,6 @@
 
 #ifndef EX3_LUXURYCAB_H
 #define EX3_LUXURYCAB_H
-#include "CarsManufactor.h"
-#include "CarColors.h"
-#include "Vehicles.h"
-#include "TripInfo.h"
-#include "CheckPoint.h"
-#include <queue>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <iostream>
@@ -34,12 +28,16 @@
 #include <boost/serialization/throw_exception.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/base_object.hpp>
-#include <boost/serialization/export.hpp>
+#include "CarsManufactor.h"
+#include "CarColors.h"
+#include "Vehicles.h"
+#include "TripInfo.h"
+#include "CheckPoint.h"
+#include <queue>
+#define BOOST_THREAD_USE_LIB
 using namespace std;
 using namespace boost;
+using namespace boost::archive;
 using namespace serialization;
 //this is a class to manage a car object
 //it has an id, holds and updates number of kms, and has a method for moving functionality.
@@ -52,18 +50,9 @@ private:
     enum CarColors color;
     double tariff;
     bool hasDriver;
-    friend std::ostream& operator << (std::ostream& out, LuxuryCab *c)
-    {
-        string type = type.c_str();
-        string color = color.c_str();
-        out << " " << c->id << " " << c->numOfKM << " " << c->tariff << " " << type << " " << color;
-
-        return out;
-    }
-
+    int moveByTwo;
     friend class boost::serialization::access;
     template<class Archive>
-
     void serialize(Archive& archive, const unsigned int version)
     {
 
@@ -74,13 +63,15 @@ private:
         archive & this->color;
         archive & this->tariff;
         archive & this->hasDriver;
+        archive & this->moveByTwo;
+
     }
     //public members section
 public:
     LuxuryCab();
     LuxuryCab(int, int, double, CarColors, CarsManufactor);
     ~LuxuryCab();
-    int move(int);
+    int move();
 
     int getID();
     int getKM();
@@ -90,14 +81,15 @@ public:
     void setID(int id);
     void setKM(int km);
     void setTariff(double tarif);
-
+    void setString(string);
+    void setLuxuryCab(LuxuryCab);
+    int getTheMove();
     CarColors getColor();
     CarsManufactor getCarType();
-    bool isStandart();
+    bool isA();
     bool operator !=(const LuxuryCab &other) const;
     std::string serial_str;
-    void setString(string s);
-    void setLuxuryCab(LuxuryCab c);
+
     void save() {
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
@@ -108,7 +100,7 @@ public:
         s.flush();
     }
 
-    LuxuryCab load(){
+    LuxuryCab load(){ //need to be change to vehicles
 
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);

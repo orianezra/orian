@@ -50,7 +50,7 @@ private:
     }
     friend class boost::serialization::access;
     template<class Archive>
-
+    //this is a serialize method
     void serialize(Archive& archive, const unsigned int version)
     {
         archive & this->x;
@@ -69,7 +69,7 @@ public:
     void maker();
     CheckPoint * giving(int xCor, int yCor);
     std::string serial_str;
-
+    //this is a save method for serialization
     void save() {
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
@@ -79,7 +79,7 @@ public:
 
         s.flush();
     }
-
+    //this is a method for deserialization
     Grid load(){
 
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());

@@ -116,3 +116,6 @@ list<Vehicles*> TexiCenter::getListVehicles(){
 list<TripInfo*> TexiCenter::getListTrips(){
     return this->tripsI;
 }
+void TexiCenter::upData(Driver * d) {
+    d->drive(d->getTripInfo()->getWay().front());
+}

@@ -50,6 +50,7 @@ private:
     friend class boost::serialization::access;
 
     template<class Archive>
+    //this is a serialization methos
     void serialize(Archive &ar, const unsigned int version)
     {
         ar & isTouched;
@@ -86,7 +87,7 @@ public:
     bool operator ==(const CheckPoint &point) const;
     bool operator !=(const CheckPoint &other) const;
     std::string serial_str;
-
+    //this is a save method for serialization
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -95,7 +96,7 @@ public:
 
         s.flush();
     }
-
+    //this is a load method for deserialization
     CheckPoint load(){
 
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());

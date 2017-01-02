@@ -44,6 +44,7 @@ protected:
     friend class boost::serialization::access;
 
     template<class Archive>
+    //this is a method for serialization
     void serialize(Archive &ar, const unsigned int version)
     {
         ar & x_axis;

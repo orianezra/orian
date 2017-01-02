@@ -1,4 +1,3 @@
-//
 
 #ifndef EX3_TEXICENTER_H
 #define EX3_TEXICENTER_H
@@ -40,6 +39,7 @@ public:
     list<TripInfo*> getListTrips();
     Driver* getDriver(int);
     Vehicles* getVehicle(int);
+    void upData(Driver*);
     TripInfo* getTripI(int);//maybe by id of the rode
     Point getLocation(Driver*);//return by spes driver! so need to check the driver that we pull
 };

@@ -1,14 +1,13 @@
-
 #include <iostream>
 #include <string>
 #include <unistd.h>
 #include "Udp.h"
 #include "Cab.h"
 #include "Driver.h"
-#include <cstdlib>
+#include "MaterialStatus.h"
 using namespace std;
-using namespace boost;
 int main(int argc, char *argv[]) {
+
         Udp udpClient(0, atoi(argv[1]));
         udpClient.initialize();
         char dummy, status;
@@ -41,8 +40,6 @@ int main(int argc, char *argv[]) {
 
         driver->save();
         udpClient.sendData(driver->serial_str);
-        char bufferMap[80000];
-        udpClient.reciveData(bufferMap, sizeof(bufferMap));
         char buffer[2000];
         udpClient.reciveData(buffer, sizeof(buffer));
         string stMess(buffer);
@@ -50,7 +47,9 @@ int main(int argc, char *argv[]) {
         char buffer2[1];
         udpClient.reciveData(buffer2, sizeof(buffer));//this is for getting the cars type
         string stCarType(buffer2);
+
         if(stCarType == "1") {
+
                 udpClient.reciveData(buffer, sizeof(buffer));
                 string stMessCab(buffer, sizeof(buffer));
                 Cab cabDummy;
@@ -59,6 +58,7 @@ int main(int argc, char *argv[]) {
                 cabO->setCab(cabDummy.load());
                 driver->setTexi(cabO);
                 udpClient.sendData("we got the cab!");
+
         } else {
                 udpClient.reciveData(buffer, sizeof(buffer));
                 string stMessCab(buffer, sizeof(buffer));
@@ -70,13 +70,11 @@ int main(int argc, char *argv[]) {
                 udpClient.sendData("we got the luxurycab!");
         }
 
-        //calculate distance according to the driver's location and start point of the trip
-        //move the driver
         char buffer0[2000];
         udpClient.reciveData(buffer0, sizeof(buffer0));
         string stMessage(buffer0);
-        TripInfo* t = new TripInfo();
-        if (stMessage.compare("start triping shimi") == 0) {
+        TripInfo* t= new TripInfo();
+        if (stMessage.compare("start triping shimi")) {
                 char buffer1[40000];
                 udpClient.reciveData(buffer1, sizeof(buffer1));
                 string stMessTrip(buffer1, sizeof(buffer1));
@@ -84,19 +82,22 @@ int main(int argc, char *argv[]) {
                 tDummy.setString(stMessTrip);
                 t->setTripInfo(tDummy.load());
                 driver->setTripInfo(t);
-                udpClient.sendData("we got shimi's job!! :)");
+                udpClient.sendData("we got the shimi job!! :)");
         }
 
+        int i = 5;
+        do {
+                char buffer4[1024];
+                udpClient.reciveData(buffer4, sizeof(buffer4));
+                string stMoveBy(buffer4);
+                if (stMoveBy.compare("you can drive :)") == 0) {
 
-        char buffer4[1024];
-        udpClient.reciveData(buffer4, sizeof(buffer4));
-        string stTime(buffer4);
-        unsigned long time = strtoul(stTime.c_str(), NULL, 0);
-        if (time == driver->getTripInfo()->getTimeOfTrip()) {
-            CheckPoint* p  = driver->getTripInfo()->getWay().front();
-            //set location of the driver
-            //move the cab (km++)
-            //update trip info (km++)
+                        driver->drive(driver->getTripInfo()->getWay().front());
+                        udpClient.sendData("drive one step");
+                }
+                i--;
         }
+        while (i > 0);
+
 
 }

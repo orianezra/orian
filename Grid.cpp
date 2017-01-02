@@ -24,9 +24,11 @@ CheckPoint * Grid:: giving(int xCor,int yCor){
     }
     return NULL;
 }
+//this is a getter for the x member
 int Grid::getX() {
     return this->x;
 }
+//this is a getter for the y member
 int Grid::getY() {
     return this->y;
 }

@@ -9,6 +9,7 @@ LuxuryCab::LuxuryCab(int idInput, int kmInput, double tariff, CarColors c, CarsM
     this->color = c;
     this->type = m;
     this->hasDriver = false;
+    this->moveByTwo = 2;
 }
 //this is the destructor of the LuxuryCab class
 LuxuryCab::~LuxuryCab() {
@@ -17,8 +18,8 @@ LuxuryCab::~LuxuryCab() {
 LuxuryCab::LuxuryCab() {
 }
 //this is a move method for the LuxuryCab
-int LuxuryCab :: move(int sizeToMove) {
-    return this->numOfKM+=sizeToMove;
+int LuxuryCab :: move() {
+    return this->numOfKM+=this->moveByTwo;
 }
 //this is a getter method for the color of the luxurycab
 CarColors LuxuryCab::getColor() {
@@ -66,16 +67,11 @@ bool  LuxuryCab::operator !=(const LuxuryCab &other) const{
 bool LuxuryCab::hasADriver(){
     return this->hasDriver;
 }
-//setter
+//setter for the has driver member
 void LuxuryCab::setADriver(bool b){
     this->hasDriver = b;
 }
-bool LuxuryCab::isStandart() {
-    return false;
-}
-void LuxuryCab::setString(string s) {
-    this->serial_str = s;
-}
+//setter for the luxury cab itself, after passing serialization
 void LuxuryCab::setLuxuryCab(LuxuryCab c) {
     this->id = c.id;
     this->numOfKM = c.numOfKM;
@@ -83,4 +79,17 @@ void LuxuryCab::setLuxuryCab(LuxuryCab c) {
     this->color = c.color;
     this->type = c.type;
     this->hasDriver = c.hasDriver;
+    this->moveByTwo = c.moveByTwo;
+}
+//setter for the serial string member
+void LuxuryCab::setString(string s) {
+    this->serial_str = s;
+}
+//check for the type of the car.
+bool LuxuryCab::isA() {
+    return false;
+}
+//get the car's movement
+int LuxuryCab::getTheMove() {
+    return this->moveByTwo;
 }

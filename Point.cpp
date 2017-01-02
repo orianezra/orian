@@ -27,19 +27,19 @@ int Point::getY_axis() {
     return y_axis;
 }
 //this method check if a current point is eqal to a given point
-/*
-bool Point :: askIfEqual(Point other) {
-    return ((this->x_axis == other.getX_axis()) && (this->x_axis == other.getY_axis()));
-}*/
+//operator overriding ==
 bool Point ::operator ==(const Point &other) const{
     return ((this->x_axis == other.x_axis) && (this->y_axis == other.y_axis));
 }
+//operator overriding !=
 bool Point ::operator !=(const Point &other) const {
     return !(*this == other);
 }
+//operator overriding <=
 bool Point ::operator <=(const Point &other) const {
     return ((this->x_axis <= other.x_axis) && (this->y_axis <= other.y_axis));
 }
+//operator overriding >=
 bool Point ::operator >=(const Point &other) const {
     return ((this->x_axis >= other.x_axis) && (this->y_axis >= other.y_axis));
 }
