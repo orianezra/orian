@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
         char buffer0[2000];
         udpClient.reciveData(buffer0, sizeof(buffer0));
         string stMessage(buffer0);
-        TripInfo* t= new TripInfo();
+        TripInfo* t = new TripInfo();
         if (stMessage.compare("start triping shimi") == 0) {
                 char buffer1[40000];
                 udpClient.reciveData(buffer1, sizeof(buffer1));
