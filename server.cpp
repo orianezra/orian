@@ -221,7 +221,8 @@ int main(int argc, char *argv[]) {
                         lDDummy.front()->setTripInfo(t);
                         Driver* driverDumm = lDDummy.front();
                         lDDummy.pop_front();
-                        driverDumm->drive(Q);
+                        driverDumm->getTripInfo()->convertToListInit(Q);
+                        driverDumm->drive(driverDumm->getTripInfo()->getWay());
                         lDDummy.push_back(driverDumm);
                         texiC->setListDrivers(lDDummy);
                         texiC->setListTripI(tL);

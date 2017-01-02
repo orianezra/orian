@@ -104,8 +104,8 @@ TripInfo*  Driver::getTripInfo(){
     return this->trip;
 }
 //this method enabeles the driver to drive (get to the end point of the trip)
-void Driver::drive(queue<CheckPoint *> q) {
-
+void Driver::drive(list<CheckPoint *> q) {
+    //might not get the list, take it from shimi's trip info :) 
     this->getTripInfo()->setMetters(this->getTexiOfDriver()->move(q.size()));
     this->setLocation(*this->getTripInfo()->getEndPoint());
 }

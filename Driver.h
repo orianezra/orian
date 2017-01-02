@@ -89,7 +89,7 @@ public:
     Vehicles* getTexiOfDriver();
     void setMap(Map*);
     Map* getMap();
-    void drive(queue <CheckPoint*>);
+    void drive(list <CheckPoint*>);
     int getAge();
     int getId();
     int getCabId();
@@ -106,7 +106,6 @@ public:
     std::string serial_str;
     void setDriver(Driver d);
     void setString(string);
-
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);

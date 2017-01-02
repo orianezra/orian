@@ -80,7 +80,8 @@ public:
     std::string serial_str;
     void setTripInfo(TripInfo);
     void setString(string s);
-    list<CheckPoint*> convertToListInit(queue<CheckPoint*> wayQueue);
+    void convertToListInit(queue<CheckPoint*> wayQueue);
+    list<CheckPoint*> getWay();
     unsigned long getTimeOfTrip();
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);

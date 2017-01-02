@@ -93,7 +93,7 @@ void TripInfo::setString(string s){
 unsigned long TripInfo::getTimeOfTrip() {
     return this->timeOfTrip;
 }
-list<CheckPoint*> TripInfo::convertToListInit(queue<CheckPoint*> wayQueue) {
+void TripInfo::convertToListInit(queue<CheckPoint*> wayQueue) {
     list<CheckPoint*> way;
     for (int i = 0; i < wayQueue.size() ; i++) {
         CheckPoint* p = wayQueue.front();
@@ -101,4 +101,7 @@ list<CheckPoint*> TripInfo::convertToListInit(queue<CheckPoint*> wayQueue) {
         wayQueue.pop();
     }
     this->way = way;
+}
+list<CheckPoint*> TripInfo::getWay() {
+    return this->way;
 }

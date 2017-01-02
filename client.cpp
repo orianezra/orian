@@ -93,8 +93,10 @@ int main(int argc, char *argv[]) {
         string stTime(buffer4);
         unsigned long time = strtoul(stTime.c_str(), NULL, 0);
         if (time == driver->getTripInfo()->getTimeOfTrip()) {
-
-                //driver->drive()
+            CheckPoint* p  = driver->getTripInfo()->getWay().front();
+            //set location of the driver
+            //move the cab (km++)
+            //update trip info (km++)
         }
 
 }
