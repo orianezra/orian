@@ -233,6 +233,31 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 9: {
+                if(time == texiC->getListTrips().front()->getTimeOfTrip()){
+                    //check the place of shimi!!
+                    udp.sendData("start triping shimi");
+                    TripInfo* t = texiC->getListTrips().front();
+                    texiC->getListTrips().pop_front();
+                    Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
+                    queue<CheckPoint*> way = gps->start(m->getGrid());
+                    t->convertToListInit(way);
+                    t->save();
+                    //the tzivot
+                    udp.sendData(t->serial_str);
+
+                }
+                else{
+                    udp.sendData("you can drive :)");
+
+                }
+
+                time++;
+
+
+
+
+
+                /*
                 udp.sendData("start triping shimi");
                 TripInfo* t = texiC->getListTrips().front();
                 texiC->getListTrips().pop_front();
@@ -252,7 +277,7 @@ int main(int argc, char *argv[]) {
 
                 time++;
 
-
+                */
                 break;
             }
         }
