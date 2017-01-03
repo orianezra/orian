@@ -19,7 +19,7 @@ LuxuryCab::LuxuryCab() {
 }
 //this is a move method for the LuxuryCab
 int LuxuryCab :: move() {
-    return this->numOfKM+=this->moveByTwo;
+    return this->numOfKM += this->moveByTwo;
 }
 //this is a getter method for the color of the luxurycab
 CarColors LuxuryCab::getColor() {

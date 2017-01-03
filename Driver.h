@@ -90,7 +90,7 @@ public:
     Vehicles* getTexiOfDriver();
     void setMap(Map*);
     Map* getMap();
-    void drive(list <CheckPoint*>);
+    void drive(CheckPoint*);
     int getAge();
     int getId();
     int getCabId();

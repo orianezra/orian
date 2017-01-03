@@ -81,7 +81,7 @@ public:
     void setTripInfo(TripInfo);
     void setString(string s);
     void convertToListInit(queue<CheckPoint*> wayQueue);
-    list<CheckPoint*> getWay();
+    list<CheckPoint*>& getWay();
     unsigned long getTimeOfTrip();
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);

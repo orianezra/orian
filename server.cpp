@@ -1,3 +1,4 @@
+
 #include "Udp.h"
 #include <unistd.h>
 #include <string.h>
@@ -6,21 +7,23 @@
 #include "Map.h"
 #include "TexiCenter.h"
 #include <boost/cast.hpp>
-#include <boost/timer.hpp>
+#include <boost/serialization/list.hpp>
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-    unsigned long time = 0;
+
     Udp udp(1, atoi(argv[1]));
     udp.initialize();
     int i,j, pOfAbs;
     char damy;
+    long time = 0;
     cin >> i >> j;
     Grid* gDummy2;
+    Driver dDummy;
     Grid* g = new Grid(i, j);
     Map* m = new Map(g);
     TexiCenter* texiC = new TexiCenter();
-
+    bool hasTrip = false;
     cin >> pOfAbs;
     if(pOfAbs >0){
         int arr[2];
@@ -41,6 +44,7 @@ int main(int argc, char *argv[]) {
 
         MaterialStatus mS;
         CarColors color;
+
         CarsManufactor cMF;
         cin >> i;
         switch(i){
@@ -48,42 +52,39 @@ int main(int argc, char *argv[]) {
                 int numOfDrivers;
                 cin >> numOfDrivers;
 
-                Driver dDummy;
-                char buffer[50000];
-                udp.reciveData(buffer, sizeof(buffer));
 
+                char buffer[1024];
+                udp.reciveData(buffer, sizeof(buffer));
                 string str(buffer, sizeof(buffer));
                 dDummy.setString(str);
                 Driver* d = new Driver();
                 d->setDriver(dDummy.load());
-
-                //cout<<d->getId();
                 texiC->setDrivers(d);
+                //udp.sendData("thanks for sending shimi :)");
 
-                udp.sendData("thanks for sending shimi :)");
-
-                if(texiC->getVehicle(d->getCabId())->isStandart()){
+                if(texiC->getVehicle(d->getCabId())->isA()){
                     udp.sendData("1");
                     Cab* cab = boost::polymorphic_downcast<Cab*>(texiC->getVehicle(d->getCabId()));
                     cab->save();
                     udp.sendData(cab->serial_str);
-                    char buffer1[40000];
-                    udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1);
-                    cout << stMess <<endl;
+                    texiC->getListDriver().front()->setTexi(cab);
+                    //char buffer1[1024];
+                    //udp.reciveData(buffer1, sizeof(buffer1));
+                    //string stMess(buffer1);
+                    //cout << stMess <<endl;//we got the cab!
+
                 }else{
                     udp.sendData("0");
                     LuxuryCab* cab = boost::polymorphic_downcast<LuxuryCab*>(texiC->getVehicle(d->getCabId()));
                     cab->save();
                     udp.sendData(cab->serial_str);
-                    char buffer1[40000];
-                    udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1);
-                    cout << stMess <<endl;
+                    texiC->getListDriver().front()->setTexi(cab);
+                    //char buffer1[1024];
+                    //udp.reciveData(buffer1, sizeof(buffer1));
+                    //string stMess(buffer1);
+                    //cout << stMess <<endl;
                 }
-
                 break;
-
             }
             case 2:{
                 unsigned long timeOfTrip;
@@ -174,110 +175,47 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 6:{
-
-                if(!texiC->getListVehicles().empty() && !texiC->getListDriver().empty()){
-                    list<Driver*> drivers = texiC->getListDriver();
-                    list<Vehicles*> listV = texiC->getListVehicles();
-                    int ls = texiC->getListDriver().size();
-                    for(int g = 0; g < ls; g++){
-                        Driver* dDummy = drivers.front();
-                        drivers.pop_front();
-                        if(!dDummy->getExist()){
-                            for(int v =0; v<listV.size(); v++){
-                                Vehicles* vCab = listV.front();
-                                listV.pop_front();
-                                if ((!vCab->hasADriver())){
-                                    dDummy->setTexi(vCab);
-                                    listV.push_back(vCab);
-                                    drivers.push_back(dDummy);
-                                    break;
-                                } else{
-                                    listV.push_back(vCab);}
-                            }
-                        }else{
-                            drivers.push_back(dDummy);
-                        }
-                    }
-                    texiC->setListDrivers(drivers);
-                    texiC->setListVehicles(listV);
-
-                }
-                else{break;}
-
-
-                for(int n = 0; n < texiC->getListDriver().size(); n++) {
-                    int size = texiC->getListTrips().size();
-                    if(size){
-                        Gps* gps = new Gps(texiC->getListTrips().front()->getStartPoint()
-                                ,texiC->getListTrips().front()->getEndPoint());
-                        list<Driver*> lDDummy = texiC->getListDriver();
-
-                        gDummy2 = lDDummy.front()->getMap()->getGrid();
-                        queue <CheckPoint*> Q = gps->start(gDummy2);
-                        list<TripInfo*> tL = texiC->getListTrips();
-                        TripInfo* t = tL.front();
-                        tL.pop_front();
-                        lDDummy.front()->setTripInfo(t);
-                        Driver* driverDumm = lDDummy.front();
-                        lDDummy.pop_front();
-                        driverDumm->getTripInfo()->convertToListInit(Q);
-                        driverDumm->drive(driverDumm->getTripInfo()->getWay());
-                        lDDummy.push_back(driverDumm);
-                        texiC->setListDrivers(lDDummy);
-                        texiC->setListTripI(tL);
-                        delete gps;
-                        delete gDummy2;
-                    }
-                }
-                break;
-            }
+            case 6:{}
             case 9: {
+
+                TripInfo* t;
                 if(time == texiC->getListTrips().front()->getTimeOfTrip()){
                     //check the place of shimi!!
                     udp.sendData("start triping shimi");
-                    TripInfo* t = texiC->getListTrips().front();
-                    texiC->getListTrips().pop_front();
+                    t = texiC->getListTrips().front();
+
                     Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
                     queue<CheckPoint*> way = gps->start(m->getGrid());
                     t->convertToListInit(way);
                     t->save();
+
                     //the tzivot
                     udp.sendData(t->serial_str);
+                    texiC->getListDriver().front()->setTripInfo(t);
+                    t->getWay().pop_front();
+                    texiC->upData(texiC->getListDriver().front());
+                    hasTrip = true;
 
                 }
-                else{
+                else if(time < texiC->getListTrips().front()->getTimeOfTrip()) {
+                    udp.sendData("you can`t drive :(");
+                    //time++;
+                    //break;
+                }
+                else if (hasTrip){
                     udp.sendData("you can drive :)");
-
-                }
-
-                time++;
-
-
-
-
-
-                /*
-                udp.sendData("start triping shimi");
-                TripInfo* t = texiC->getListTrips().front();
-                texiC->getListTrips().pop_front();
-                Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
-                queue<CheckPoint*> way = gps->start(m->getGrid());
-                t->convertToListInit(way);
-                t->save();
-                udp.sendData(t->serial_str);
-                char buffer3[1024];
-                udp.reciveData(buffer3, sizeof(buffer3));
-                string stMess(buffer3);
-                cout << stMess <<endl;
-
-
-                string stringTime = static_cast<ostringstream*>( &(ostringstream() << time) )->str();
-                udp.sendData(stringTime);
+                    char buffer0[2000];
+                    udp.reciveData(buffer0, sizeof(buffer0));
+                    string stMessage(buffer0);
+                    if(stMessage.compare("drive one step")==0){
+                        texiC->upData(texiC->getListDriver().front());
+                    } else if ( stMessage.compare("finnish the drive") == 0){
+                        texiC->getListTrips().pop_front();
+                        hasTrip = false;
+                    }
+                    }
 
                 time++;
-
-                */
                 break;
             }
         }
@@ -288,3 +226,12 @@ int main(int argc, char *argv[]) {
     delete m;
     return 0;
 }
+/*
+3 3
+0
+3
+0,1,H,R
+2
+0,0,0,2,2,1,20,1
+1
+ */

@@ -86,6 +86,7 @@ void TripInfo::setTripInfo(TripInfo t) {
     this->tariff = t.tariff;
     this->startP = t.startP;
     this->timeOfTrip = t.timeOfTrip;
+    this->way = t.way;
 }
 void TripInfo::setString(string s){
     this->serial_str = s;
@@ -94,14 +95,13 @@ unsigned long TripInfo::getTimeOfTrip() {
     return this->timeOfTrip;
 }
 void TripInfo::convertToListInit(queue<CheckPoint*> wayQueue) {
-    list<CheckPoint*> way;
-    for (int i = 0; i < wayQueue.size() ; i++) {
+    int size = wayQueue.size();
+        for (int i = 0; i < size ; i++) {
         CheckPoint* p = wayQueue.front();
         way.push_back(p);
         wayQueue.pop();
     }
-    this->way = way;
 }
-list<CheckPoint*> TripInfo::getWay() {
+list<CheckPoint*>& TripInfo::getWay() {
     return this->way;
 }

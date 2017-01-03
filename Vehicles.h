@@ -54,7 +54,7 @@ class Vehicles {
     void serialize(Archive& archive, const unsigned int version){}
 
 public:
-    virtual int move(int)=0;
+    virtual int move()=0;
     virtual bool isA() = 0;
     virtual int getID() = 0;
 

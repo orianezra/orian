@@ -104,10 +104,18 @@ TripInfo*  Driver::getTripInfo(){
     return this->trip;
 }
 //this method enabeles the driver to drive (get to the end point of the trip)
-void Driver::drive(list<CheckPoint *> q) {
-    //might not get the list, take it from shimi's trip info :) 
-    this->getTripInfo()->setMetters(this->getTexiOfDriver()->move(q.size()));
-    this->setLocation(*this->getTripInfo()->getEndPoint());
+void Driver::drive(CheckPoint * cP) {
+    if(this->getTexiOfDriver()->isA()){
+        this->getTripInfo()->setMetters(this->getTexiOfDriver()->move());
+        this->setLocation(Point(cP->getX_axis(), cP->getY_axis()));
+        this->trip->getWay().pop_front();
+    }else{
+        this->getTripInfo()->setMetters(this->getTexiOfDriver()->move());
+        this->trip->getWay().pop_front();
+        CheckPoint* skipped = this->trip->getWay().front();
+        this->setLocation(Point(skipped->getX_axis(), skipped->getY_axis()));
+        this->trip->getWay().pop_front();
+    };
 }
 //this is a boolean method for car's exsistance
 bool Driver::getExist(){

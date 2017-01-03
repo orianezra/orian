@@ -57,8 +57,8 @@ public:
     virtual ~Point();
     void setX_axis(int x);
     void setY_axis(int y);
-    int getX_axis();
-    int getY_axis();
+    virtual int getX_axis();
+    virtual int getY_axis();
     bool operator ==(const Point &point) const;
     bool operator !=(const Point &other) const;
     virtual bool operator <=(const Point &other) const;
