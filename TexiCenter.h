@@ -36,7 +36,7 @@ public:
     void getCall(Point, Point);//this func ask the gps about the faster way and ask for sendtexi
     list<Driver*> getListDriver();
     list<Vehicles*> getListVehicles();
-    list<TripInfo*> getListTrips();
+    list<TripInfo*>& getListTrips();
     Driver* getDriver(int);
     Vehicles* getVehicle(int);
     void upData(Driver*);

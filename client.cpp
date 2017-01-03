@@ -113,6 +113,6 @@ int main(int argc, char *argv[]) {
         }
     }while (stMessage.compare("go home") != 0);
     udpClient.~Socket();
-
+    delete driver;
 
 }
