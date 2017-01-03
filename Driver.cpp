@@ -23,7 +23,7 @@ void Driver::setDriver(Driver d) {
 Driver::Driver(){}
 //this is the destructor of the driver class
 Driver::~Driver() {
-    delete this->trip;
+    //delete this->trip;
 }
 //this is the setter method for setting a texi to a given driver
 void Driver:: setTexi(Vehicles* texi) {
@@ -111,10 +111,15 @@ void Driver::drive(CheckPoint * cP) {
         this->trip->getWay().pop_front();
     }else{
         this->getTripInfo()->setMetters(this->getTexiOfDriver()->move());
-        this->trip->getWay().pop_front();
-        CheckPoint* skipped = this->trip->getWay().front();
-        this->setLocation(Point(skipped->getX_axis(), skipped->getY_axis()));
-        this->trip->getWay().pop_front();
+
+        if (this->getTripInfo()->getWay().size() > 1 ) {
+            this->trip->getWay().pop_front();
+            CheckPoint* skipped = this->trip->getWay().front();
+            this->setLocation(Point(skipped->getX_axis(), skipped->getY_axis()));
+            this->trip->getWay().pop_front();
+        } else {
+            this->setLocation(Point(cP->getX_axis(), cP->getY_axis()));
+        }
     };
 }
 //this is a boolean method for car's exsistance

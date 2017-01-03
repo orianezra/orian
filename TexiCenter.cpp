@@ -113,7 +113,7 @@ list<Vehicles*> TexiCenter::getListVehicles(){
     return this->vehicles;
 }
 //this method enables acess to the list of the trips in the texi center
-list<TripInfo*> TexiCenter::getListTrips(){
+list<TripInfo*>& TexiCenter::getListTrips(){
     return this->tripsI;
 }
 void TexiCenter::upData(Driver * d) {

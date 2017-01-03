@@ -71,37 +71,48 @@ int main(int argc, char *argv[]) {
         //udpClient.sendData("we got the luxurycab!");
     }
 
-    string stMessage;
+    string stMessage, stMoveBy;
     TripInfo* t= new TripInfo();
     TripInfo tDummy;
-
     do {
+        do {
+            char buffer0[2000];
+            udpClient.reciveData(buffer0, sizeof(buffer0));
+            string stMessage(buffer0);
+            if (stMessage.compare("start triping shimi") == 0) {
+                char buffer1[40000];
+                udpClient.reciveData(buffer1, sizeof(buffer1));
+                string stMessTrip(buffer1, sizeof(buffer1));
+
+                tDummy.setString(stMessTrip);
+                t->setTripInfo(tDummy.load());
+                driver->setTripInfo(t);
+                break;
+                //udpClient.sendData("we got the shimi job!! :)");
+            }
+        } while (stMessage.compare("start triping shimi") != 0);
+
+        do {
+            char buffer4[1024];
+            udpClient.reciveData(buffer4, sizeof(buffer4));
+            string stMoveBy(buffer4);
+            if (stMoveBy.compare("you can drive :)") == 0) {
+                driver->drive(driver->getTripInfo()->getWay().front());
+                udpClient.sendData("drive one step");
+            }
+            if (stMoveBy.compare("end of trip") == 0) {
+                break;
+            }
+        } while (driver->getTripInfo()->getWay().size() > 0);
+        //udpClient.sendData("finnish the drive");
         char buffer0[2000];
         udpClient.reciveData(buffer0, sizeof(buffer0));
         string stMessage(buffer0);
-        if (stMessage.compare("start triping shimi") == 0) {
-            char buffer1[40000];
-            udpClient.reciveData(buffer1, sizeof(buffer1));
-            string stMessTrip(buffer1, sizeof(buffer1));
-
-            tDummy.setString(stMessTrip);
-            t->setTripInfo(tDummy.load());
-            driver->setTripInfo(t);
+        if (stMessage.compare("go home") == 0){
             break;
-            //udpClient.sendData("we got the shimi job!! :)");
         }
-    }while (stMessage.compare("start triping shimi") != 0);
+    }while (stMessage.compare("go home") != 0);
+    udpClient.~Socket();
 
-    do {
-        char buffer4[1024];
-        udpClient.reciveData(buffer4, sizeof(buffer4));
-        string stMoveBy(buffer4);
-        if (stMoveBy.compare("you can drive :)") == 0) {
-            driver->drive(driver->getTripInfo()->getWay().front());
-            udpClient.sendData("drive one step");
-        }
-    }
-    while (driver->getTripInfo()->getWay().size()>0);
-    udpClient.sendData("finnish the drive");
 
 }

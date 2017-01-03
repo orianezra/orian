@@ -209,9 +209,11 @@ int main(int argc, char *argv[]) {
                     string stMessage(buffer0);
                     if(stMessage.compare("drive one step")==0){
                         texiC->upData(texiC->getListDriver().front());
-                    } else if ( stMessage.compare("finnish the drive") == 0){
-                        texiC->getListTrips().pop_front();
-                        hasTrip = false;
+                        if (texiC->getListDriver().front()->getTripInfo()->getWay().size() == 0){
+                            udp.sendData("end of trip");
+                            texiC->getListTrips().pop_front();
+                            hasTrip = false;
+                        }
                     }
                     }
 
@@ -221,6 +223,7 @@ int main(int argc, char *argv[]) {
         }
     }
     while(i != 7);
+    udp.sendData("go home");
     delete texiC;
     delete g;
     delete m;
@@ -234,4 +237,20 @@ int main(int argc, char *argv[]) {
 2
 0,0,0,2,2,1,20,1
 1
+1
+9
+9
+9
+9
+9
+2
+1,2,2,0,1,1,30,8
+9
+9
+9
+9
+9
+9
+4
+0
  */
