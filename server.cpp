@@ -11,9 +11,10 @@
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-
+    //initiallize the udp for connection
     Udp udp(1, atoi(argv[1]));
     udp.initialize();
+    //setting variables
     int i,j, pOfAbs;
     char damy;
     long time = 0;
@@ -25,6 +26,7 @@ int main(int argc, char *argv[]) {
     TexiCenter* texiC = new TexiCenter();
     bool hasTrip = false;
     cin >> pOfAbs;
+    //creating the obstacles
     if(pOfAbs >0){
         int arr[2];
         while(pOfAbs > 0) {
@@ -49,6 +51,7 @@ int main(int argc, char *argv[]) {
         cin >> i;
         switch(i){
             case 1:{
+                //create drivers
                 int numOfDrivers;
                 cin >> numOfDrivers;
 
@@ -60,7 +63,7 @@ int main(int argc, char *argv[]) {
                 Driver* d = new Driver();
                 d->setDriver(dDummy.load());
                 texiC->setDrivers(d);
-                //udp.sendData("thanks for sending shimi :)");
+                udp.sendData("thanks for sending shimi :)");
 
                 if(texiC->getVehicle(d->getCabId())->isA()){
                     udp.sendData("1");
@@ -68,9 +71,9 @@ int main(int argc, char *argv[]) {
                     cab->save();
                     udp.sendData(cab->serial_str);
                     texiC->getListDriver().front()->setTexi(cab);
-                    //char buffer1[1024];
-                    //udp.reciveData(buffer1, sizeof(buffer1));
-                    //string stMess(buffer1);
+                    char buffer1[1024];
+                    udp.reciveData(buffer1, sizeof(buffer1));
+                    string stMess(buffer1);
                     //cout << stMess <<endl;//we got the cab!
 
                 }else{
@@ -79,9 +82,9 @@ int main(int argc, char *argv[]) {
                     cab->save();
                     udp.sendData(cab->serial_str);
                     texiC->getListDriver().front()->setTexi(cab);
-                    //char buffer1[1024];
-                    //udp.reciveData(buffer1, sizeof(buffer1));
-                    //string stMess(buffer1);
+                    char buffer1[1024];
+                    udp.reciveData(buffer1, sizeof(buffer1));
+                    string stMess(buffer1);
                     //cout << stMess <<endl;
                 }
                 break;
@@ -166,6 +169,7 @@ int main(int argc, char *argv[]) {
             }
             case 4:{
                 cin >> id;
+                //get driver's location according to its id
                 if (texiC->getDriver(id) != NULL) {
                     int z = texiC->getDriver(id)->getLocation().getX_axis();
                     int v = texiC->getDriver(id)->getLocation().getY_axis();
@@ -215,7 +219,7 @@ int main(int argc, char *argv[]) {
                             hasTrip = false;
                         }
                     }
-                    }
+                }
 
                 time++;
                 break;

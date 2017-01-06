@@ -8,9 +8,10 @@
 #include "MaterialStatus.h"
 using namespace std;
 int main(int argc, char *argv[]) {
-
+    //initiallize udp for message getting
     Udp udpClient(0, atoi(argv[1]));
     udpClient.initialize();
+    //setting variables
     char dummy, status;
     MaterialStatus materialStatus;
     int id, age, exp, vehicleId;
@@ -42,15 +43,15 @@ int main(int argc, char *argv[]) {
     driver->save();
     udpClient.sendData(driver->serial_str);
     char buffer[2000];
-    //udpClient.reciveData(buffer, sizeof(buffer));
-    //string stMess(buffer);
+    udpClient.reciveData(buffer, sizeof(buffer));
+    string stMess(buffer);
     //cout << stMess <<endl;//thenks for
     char buffer2[1];
     udpClient.reciveData(buffer2, sizeof(buffer2));//this is for getting the cars type
     string stCarType(buffer2);
 
     if(stCarType == "1") {
-
+        //set the driver's cab
         udpClient.reciveData(buffer, sizeof(buffer));
         string stMessCab(buffer, sizeof(buffer));
         Cab cabDummy;
@@ -58,9 +59,10 @@ int main(int argc, char *argv[]) {
         Cab* cabO = new Cab();
         cabO->setCab(cabDummy.load());
         driver->setTexi(cabO);
-        //udpClient.sendData("we got the cab!");
+        udpClient.sendData("we got the cab!");
 
     } else {
+        //set the driver's cab
         udpClient.reciveData(buffer, sizeof(buffer));
         string stMessCab(buffer, sizeof(buffer));
         LuxuryCab cabDummy;
@@ -68,7 +70,7 @@ int main(int argc, char *argv[]) {
         LuxuryCab* luxuryCabO = new LuxuryCab();
         luxuryCabO->setLuxuryCab(cabDummy.load());
         driver->setTexi(luxuryCabO);
-        //udpClient.sendData("we got the luxurycab!");
+        udpClient.sendData("we got the luxurycab!");
     }
 
     string stMessage, stMoveBy;
@@ -76,6 +78,7 @@ int main(int argc, char *argv[]) {
     TripInfo tDummy;
     do {
         do {
+            //wait for a message to get the trip
             char buffer0[2000];
             udpClient.reciveData(buffer0, sizeof(buffer0));
             string stMessage(buffer0);
@@ -88,11 +91,12 @@ int main(int argc, char *argv[]) {
                 t->setTripInfo(tDummy.load());
                 driver->setTripInfo(t);
                 break;
-                //udpClient.sendData("we got the shimi job!! :)");
+                udpClient.sendData("we got the shimi job!! :)");
             }
         } while (stMessage.compare("start triping shimi") != 0);
 
         do {
+            //wait for a message to drive
             char buffer4[1024];
             udpClient.reciveData(buffer4, sizeof(buffer4));
             string stMoveBy(buffer4);
@@ -104,7 +108,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
         } while (driver->getTripInfo()->getWay().size() > 0);
-        //udpClient.sendData("finnish the drive");
+        udpClient.sendData("finnish the drive");
         char buffer0[2000];
         udpClient.reciveData(buffer0, sizeof(buffer0));
         string stMessage(buffer0);
@@ -113,6 +117,6 @@ int main(int argc, char *argv[]) {
         }
     }while (stMessage.compare("go home") != 0);
     udpClient.~Socket();
-    delete driver;
+    //delete driver;
 
 }
