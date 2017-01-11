@@ -1,5 +1,8 @@
+//
+// Created by amitrdt on 12/31/16.
+//
 
-#include "Udp.h"
+#include "Tcp.h"
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
@@ -8,25 +11,25 @@
 #include "TexiCenter.h"
 #include <boost/cast.hpp>
 #include <boost/serialization/list.hpp>
+
 using namespace std;
 using namespace boost;
 int main(int argc, char *argv[]) {
-    //initiallize the udp for connection
-    Udp udp(1, atoi(argv[1]));
-    udp.initialize();
-    //setting variables
+
+    Tcp tcp(1, atoi(argv[1]));
+    tcp.initialize();
     int i,j, pOfAbs;
     char damy;
-    long time = 0;
+    long time;
     cin >> i >> j;
     Grid* gDummy2;
     Driver dDummy;
     Grid* g = new Grid(i, j);
     Map* m = new Map(g);
-    TexiCenter* texiC = new TexiCenter();
     bool hasTrip = false;
+    TexiCenter* texiC = new TexiCenter();
+
     cin >> pOfAbs;
-    //creating the obstacles
     if(pOfAbs >0){
         int arr[2];
         while(pOfAbs > 0) {
@@ -48,44 +51,55 @@ int main(int argc, char *argv[]) {
         CarColors color;
 
         CarsManufactor cMF;
-        cin >> i;
+         cin >> i;
         switch(i){
             case 1:{
                 //create drivers
                 int numOfDrivers;
                 cin >> numOfDrivers;
+                while(numOfDrivers) {
+                    char buffer[1024];
+                    tcp.reciveData(buffer, sizeof(buffer));
+                    string str(buffer, sizeof(buffer));
+                    dDummy.setString(str);
+                    Driver *d = new Driver();
+                    d->setDriver(dDummy.load());
+                    texiC->setDrivers(d);
+                    sleep(1);
+                    tcp.sendData("thanks for sending shimi :)");
 
+                    if (texiC->getVehicle(d->getCabId())->isA()) {
 
-                char buffer[1024];
-                udp.reciveData(buffer, sizeof(buffer));
-                string str(buffer, sizeof(buffer));
-                dDummy.setString(str);
-                Driver* d = new Driver();
-                d->setDriver(dDummy.load());
-                texiC->setDrivers(d);
-                udp.sendData("thanks for sending shimi :)");
+                        sleep(1);
+                        tcp.sendData("1");
+                        Cab *cab = boost::polymorphic_downcast<Cab *>(texiC->getVehicle(d->getCabId()));
+                        cab->save();
+                        char bufferCar[1024];
+                        tcp.reciveData(bufferCar, sizeof(bufferCar));
+                        string str(bufferCar);
+                        cout << bufferCar << endl;//getting cab
+                        sleep(1);
+                        tcp.sendData(cab->serial_str);
+                        texiC->getListDriver().front()->setTexi(cab);
+                        char buffer1[1024];
+                        tcp.reciveData(buffer1, sizeof(buffer1));
+                        string stMess(buffer1);
+                        cout << stMess <<endl;//we got the cab!
 
-                if(texiC->getVehicle(d->getCabId())->isA()){
-                    udp.sendData("1");
-                    Cab* cab = boost::polymorphic_downcast<Cab*>(texiC->getVehicle(d->getCabId()));
-                    cab->save();
-                    udp.sendData(cab->serial_str);
-                    texiC->getListDriver().front()->setTexi(cab);
-                    char buffer1[1024];
-                    udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1);
-                    //cout << stMess <<endl;//we got the cab!
-
-                }else{
-                    udp.sendData("0");
-                    LuxuryCab* cab = boost::polymorphic_downcast<LuxuryCab*>(texiC->getVehicle(d->getCabId()));
-                    cab->save();
-                    udp.sendData(cab->serial_str);
-                    texiC->getListDriver().front()->setTexi(cab);
-                    char buffer1[1024];
-                    udp.reciveData(buffer1, sizeof(buffer1));
-                    string stMess(buffer1);
-                    //cout << stMess <<endl;
+                    } else {
+                        sleep(1);
+                        tcp.sendData("0");
+                        LuxuryCab *cab = boost::polymorphic_downcast<LuxuryCab *>(texiC->getVehicle(d->getCabId()));
+                        cab->save();
+                        sleep(1);
+                        tcp.sendData(cab->serial_str);
+                        texiC->getListDriver().front()->setTexi(cab);
+                        char buffer1[1024];
+                        tcp.reciveData(buffer1, sizeof(buffer1));
+                        string stMess(buffer1);
+                        cout << stMess <<endl;
+                    }
+                    numOfDrivers--;
                 }
                 break;
             }
@@ -169,7 +183,6 @@ int main(int argc, char *argv[]) {
             }
             case 4:{
                 cin >> id;
-                //get driver's location according to its id
                 if (texiC->getDriver(id) != NULL) {
                     int z = texiC->getDriver(id)->getLocation().getX_axis();
                     int v = texiC->getDriver(id)->getLocation().getY_axis();
@@ -185,36 +198,36 @@ int main(int argc, char *argv[]) {
                 TripInfo* t;
                 if(time == texiC->getListTrips().front()->getTimeOfTrip()){
                     //check the place of shimi!!
-                    udp.sendData("start triping shimi");
+                    sleep(1);
+                    tcp.sendData("start triping shimi");
                     t = texiC->getListTrips().front();
 
                     Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
                     queue<CheckPoint*> way = gps->start(m->getGrid());
                     t->convertToListInit(way);
                     t->save();
-
-                    //the tzivot
-                    udp.sendData(t->serial_str);
+                    sleep(1);
+                    tcp.sendData(t->serial_str);
                     texiC->getListDriver().front()->setTripInfo(t);
                     t->getWay().pop_front();
                     texiC->upData(texiC->getListDriver().front());
                     hasTrip = true;
-
                 }
                 else if(time < texiC->getListTrips().front()->getTimeOfTrip()) {
-                    udp.sendData("you can`t drive :(");
-                    //time++;
-                    //break;
+                    sleep(1);
+                    tcp.sendData("you can`t drive :(");
                 }
                 else if (hasTrip){
-                    udp.sendData("you can drive :)");
+                    sleep(1);
+                    tcp.sendData("you can drive :)");
                     char buffer0[2000];
-                    udp.reciveData(buffer0, sizeof(buffer0));
+                    tcp.reciveData(buffer0, sizeof(buffer0));
                     string stMessage(buffer0);
                     if(stMessage.compare("drive one step")==0){
                         texiC->upData(texiC->getListDriver().front());
                         if (texiC->getListDriver().front()->getTripInfo()->getWay().size() == 0){
-                            udp.sendData("end of trip");
+                            sleep(1);
+                            tcp.sendData("end of trip");
                             texiC->getListTrips().pop_front();
                             hasTrip = false;
                         }
@@ -227,10 +240,12 @@ int main(int argc, char *argv[]) {
         }
     }
     while(i != 7);
-    udp.sendData("go home");
+    sleep(1);
+    tcp.sendData("go home");
     delete texiC;
     delete g;
     delete m;
+    //tcp.~Tcp();
     return 0;
 }
 /*
@@ -241,20 +256,4 @@ int main(int argc, char *argv[]) {
 2
 0,0,0,2,2,1,20,1
 1
-1
-9
-9
-9
-9
-9
-2
-1,2,2,0,1,1,30,8
-9
-9
-9
-9
-9
-9
-4
-0
  */
