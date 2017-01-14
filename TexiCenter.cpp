@@ -91,7 +91,6 @@ Point TexiCenter::getLocation(Driver* d){
 }
 //this method returns a driver according to his id number
 Driver* TexiCenter::getDriver(int iDD){
-    //list<Driver*>
     for(int i = 0; i < this->drivers.size(); i++){
         Driver* d = this->drivers.front();
         this->drivers.pop_front();
@@ -118,4 +117,10 @@ list<TripInfo*>& TexiCenter::getListTrips(){
 }
 void TexiCenter::upData(Driver * d) {
     d->drive(d->getTripInfo()->getWay().front());
+}
+void TexiCenter::setMap(Map* m) {
+    this->map = m;
+}
+Map* TexiCenter::getMap() {
+    return this->map;
 }

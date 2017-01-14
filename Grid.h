@@ -42,7 +42,7 @@ class Grid {
 private:
     int x;
     int y;
-    CheckPoint* arr[10][10];
+    CheckPoint* arr[1000][1000];
     friend std::ostream& operator << (std::ostream& out, Grid *g)
     {
         out << g->x << "_" << g->y;

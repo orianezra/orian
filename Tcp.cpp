@@ -124,7 +124,7 @@ int Tcp::reciveData(char* buffer, int size) {
 * The output: int number representing the return descript	           *
 * The Function operation: 						                	   *
 ***********************************************************************/
-int Tcp::accept() {
+int Tcp::acceptt() {
     struct sockaddr_in client_sin;
     unsigned int addr_len = sizeof(client_sin);
     this->descriptorCommunicateClient = accept(this->socketDescriptor,

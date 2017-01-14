@@ -18,7 +18,7 @@ private:
     list<Driver*> drivers;
     list<Vehicles*> vehicles;
     list<TripInfo*> tripsI;
-    CheckPoint location;
+    Map* map;
 //public member section
 protected:
 
@@ -42,6 +42,8 @@ public:
     void upData(Driver*);
     TripInfo* getTripI(int);//maybe by id of the rode
     Point getLocation(Driver*);//return by spes driver! so need to check the driver that we pull
+    void setMap(Map*);
+    Map* getMap();
 };
 
 #endif //EX3_TEXICENTER_H
