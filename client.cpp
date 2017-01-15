@@ -110,7 +110,6 @@ int main(int argc, char *argv[]) {
                 t->setTripInfo(tDummy.load());
                 driver->setTripInfo(t);
                 break;
-                tcpClient.sendData("we got the shimi job!! :)");
             }
         } while (stMessage.compare("start triping shimi") != 0);
 

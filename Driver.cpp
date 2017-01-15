@@ -9,6 +9,7 @@ Driver::Driver(int id, int age , int i, MaterialStatus status, int cabId) {
     this->status = status;
     this->location = Point(0,0);
     this->existCar = false;
+    this->hasTrip = false;
 }
 void Driver::setDriver(Driver d) {
     this->id = d.id;
@@ -98,6 +99,7 @@ Map* Driver::getMap() {
 //this is a setter method for the driver's trip info
 void  Driver::setTripInfo(TripInfo* trip){
     this->trip = trip;
+    this->hasTrip = true;
 }
 //this is a getter method for the driver's trip info
 TripInfo*  Driver::getTripInfo(){
@@ -140,4 +142,10 @@ unsigned long Driver::disCalculation(Point other){
 //this is a setter method for the string
 void Driver::setString(string s) {
     this->serial_str = s;
+}
+bool Driver::ifHasTrip() {
+    return this->hasTrip;
+}
+void Driver::setHasTrip(bool b) {
+    this->hasTrip = b;
 }

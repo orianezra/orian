@@ -8,33 +8,35 @@
 #include "Information.h"
 #include "pthread.h"
 #include <boost/cast.hpp>
+#include <map>
 #include <boost/serialization/list.hpp>
 using namespace std;
 using namespace boost;
 void* createClientCon(void*);
 void* managerClient(void*);
 void* calculateWay(void*);
+map <Driver*, int> options;
 int main(int argc, char *argv[]) {
-
+    Information *in;
     Tcp *tcp = new Tcp(1, atoi(argv[1]));
-    tcp->initialize();
-    int i,j, pOfAbs;
+    //tcp->initialize();
+    int i, j, pOfAbs;
     char damy;
     long time;
     cin >> i >> j;
-    Grid* gDummy2;
+    Grid *gDummy2;
     Driver dDummy;
-    TripInfo* tIDummy;
+    TripInfo *tIDummy;
     pthread_t tTrip;
-    Grid* g = new Grid(i, j);
-    Map* m = new Map(g);
-    bool hasTrip = false;
-    TexiCenter* texiC = new TexiCenter();
+    Grid *g = new Grid(i, j);
+    Map *m = new Map(g);
+
+    TexiCenter *texiC = new TexiCenter();
 
     cin >> pOfAbs;
-    if(pOfAbs >0){
+    if (pOfAbs > 0) {
         int arr[2];
-        while(pOfAbs > 0) {
+        while (pOfAbs > 0) {
             cin >> arr[0] >> damy >> arr[1];
             m->createO(Point(arr[0], arr[1]));
             pOfAbs--;
@@ -42,7 +44,7 @@ int main(int argc, char *argv[]) {
         }
     }
     texiC->setMap(m);
-    do{
+    do {
         int id, age, exp, vId, startX, startY, endX, endY, numOfPs, type;
         double tariff;
         char ch;
@@ -54,46 +56,47 @@ int main(int argc, char *argv[]) {
 
         CarsManufactor cMF;
         cin >> i;
-        switch(i){
-            case 1:{
+        switch (i) {
+            case 1: {
                 //create drivers
                 int numOfDrivers;
                 cin >> numOfDrivers;
                 pthread_t t1;
-                int* num = new int(numOfDrivers);
-                //tcp->initialize();
-                Information* in = new Information(tcp, texiC, num);
-                int status = pthread_create(&t1,NULL,createClientCon,(void*)in);
-                pthread_join(t1,NULL);
+                int *num = new int(numOfDrivers);
+                tcp->initialize();
+                in = new Information(tcp, texiC, num);
+                int status = pthread_create(&t1, NULL, createClientCon, (void *) in);
+                pthread_join(t1, NULL);
             }
-            case 2:{
+            case 2: {
                 unsigned long timeOfTrip;
                 cin >> id >> damy >> startX >> damy >> startY >> damy
-                    >> endX >> damy >> endY >> damy >> numOfPs >> damy >>tariff >> damy >> timeOfTrip;
+                    >> endX >> damy >> endY >> damy >> numOfPs >> damy >> tariff >> damy >> timeOfTrip;
                 tIDummy = new TripInfo(0, numOfPs, id, tariff,
-                                                 new Point(startX, startY), new Point(endX, endY), timeOfTrip);
+                                       new Point(startX, startY), new Point(endX, endY), timeOfTrip);
                 texiC->setTripI(tIDummy);
-                int* num = new int(texiC->getListTrips().size());
-                Information* inf = new Information(tcp, texiC, num);
-                int statusT = pthread_create(&tTrip,NULL,calculateWay,(void*)inf);
+                int *num = new int(texiC->getListTrips().size());
+                Information *inf = new Information(tcp, texiC, num);
+                int statusT = pthread_create(&tTrip, NULL, calculateWay, (void *) inf);
+                pthread_join(tTrip, NULL);
                 break;
             }
-            case 3:{
-                cin >> id >> damy >>  type >> damy >> ch >> damy >> ch2;
-                switch (ch){
-                    case 'H':{
+            case 3: {
+                cin >> id >> damy >> type >> damy >> ch >> damy >> ch2;
+                switch (ch) {
+                    case 'H': {
                         cMF = CarsManufactor::HONDA;
                         break;
                     }
-                    case 'F':{
+                    case 'F': {
                         cMF = CarsManufactor::FIAT;
                         break;
                     }
-                    case 'S':{
+                    case 'S': {
                         cMF = CarsManufactor::SUBARO;
                         break;
                     }
-                    case 'T':{
+                    case 'T': {
                         cMF = CarsManufactor::TESLA;
                         break;
                     }
@@ -102,24 +105,24 @@ int main(int argc, char *argv[]) {
                         break;
                     }
                 }
-                switch (ch2){
-                    case 'B':{
+                switch (ch2) {
+                    case 'B': {
                         color = CarColors::BLUE;
                         break;
                     }
-                    case 'R':{
+                    case 'R': {
                         color = CarColors::RED;
                         break;
                     }
-                    case 'G':{
+                    case 'G': {
                         color = CarColors::GREEN;
                         break;
                     }
-                    case 'W':{
+                    case 'W': {
                         color = CarColors::WHITE;
                         break;
                     }
-                    case 'P':{
+                    case 'P': {
                         color = CarColors::PINK;
                         break;
                     }
@@ -128,14 +131,14 @@ int main(int argc, char *argv[]) {
                         break;
                     }
                 }
-                switch (type){
-                    case 1:{
-                        Cab* cabDummy = new Cab(id, 0, 0, color, cMF);
+                switch (type) {
+                    case 1: {
+                        Cab *cabDummy = new Cab(id, 0, 0, color, cMF);
                         texiC->setVehicleCab(cabDummy);
                         break;
                     }
-                    case 2:{
-                        LuxuryCab* cabDummy = new LuxuryCab(id, 0, 0, color, cMF);
+                    case 2: {
+                        LuxuryCab *cabDummy = new LuxuryCab(id, 0, 0, color, cMF);
                         texiC->setVehicleCab(cabDummy);
 
                         break;
@@ -147,7 +150,7 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 4:{
+            case 4: {
                 cin >> id;
                 if (texiC->getDriver(id) != NULL) {
                     int z = texiC->getDriver(id)->getLocation().getX_axis();
@@ -158,54 +161,40 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 6:{}
+            case 6: {
+            }
             case 9: {//need to get out
-                pthread_join(tTrip,NULL);
-
-                TripInfo* t;
-                if(time == texiC->getListTrips().front()->getTimeOfTrip()){
-                    //check the place of shimi!!
-                    sleep(1);
-                    tcp->sendData("start triping shimi");
+                Driver *d = texiC->getListDriver().front();
+                TripInfo *t;
+                //loop over the trips, check if its the time
+                for (int i = 0; i < texiC->getListTrips().size(); i++) {
                     t = texiC->getListTrips().front();
+                    texiC->getListTrips().pop_front();
+                    if (time == t->getTimeOfTrip()) {
 
-                    Gps* gps = new Gps(t->getStartPoint(), t->getEndPoint());
-                    queue<CheckPoint*> way = gps->start(m->getGrid());
-                    t->convertToListInit(way);
-                    t->save();
-                    sleep(1);
-                    tcp->sendData(t->serial_str);
-                    texiC->getListDriver().front()->setTripInfo(t);
-                    t->getWay().pop_front();
-                    texiC->upData(texiC->getListDriver().front());
-                    hasTrip = true;
-                }
-                else if(time < texiC->getListTrips().front()->getTimeOfTrip()) {
-                    sleep(1);
-                    tcp->sendData("you can`t drive :(");
-                }
-                else if (hasTrip){
-                    sleep(1);
-                    tcp->sendData("you can drive :)");
-                    char buffer0[2000];
-                    tcp->reciveData(buffer0, sizeof(buffer0));
-                    string stMessage(buffer0);
-                    if(stMessage.compare("drive one step")==0){
-                        texiC->upData(texiC->getListDriver().front());
-                        if (texiC->getListDriver().front()->getTripInfo()->getWay().size() == 0){
-                            sleep(1);
-                            tcp->sendData("end of trip");
-                            texiC->getListTrips().pop_front();
-                            hasTrip = false;
-                        }
+                        d->setTripInfo(t);
+                        t->getWay().pop_front();
+                        texiC->upData(d);
+                        int firstOpt = 1;
+                        options.insert(std::pair<Driver *, int>(d, firstOpt));
+
+                    } else {
+                        texiC->getListTrips().push_back(t);
+                    }
+                    if (time < t->getTimeOfTrip()) {
+                        int secondOpt = 2;
+                        options.insert(std::pair<Driver *, int>(d, secondOpt));
+
+                    } else if (d->ifHasTrip()) {
+                        int thirdOpt = 3;
+                        options.insert(std::pair<Driver *, int>(d, thirdOpt));
                     }
                 }
                 time++;
                 break;
             }
         }
-    }
-    while(i != 7);
+    } while (i != 7);
     tcp->sendData("go home");
     delete texiC;
     delete g;
@@ -214,35 +203,33 @@ int main(int argc, char *argv[]) {
     tcp->~Tcp();
     return 0;
 }
+
 void* createClientCon(void* in) {
     Information *info = (Information *) in;
     int *numOf = info->getNumOfDrivers();
     int conn;
-    while (&numOf) {
+    while (*numOf) {
         conn = info->getTcp()->acceptt();
         if (conn < 0) {
             cout << "Connection not established!" << endl;
 
         } else {
             pthread_t myThread;
-            info->lockList();
-            info->addClient(conn);
-            info->unLockList();
+
             int status = pthread_create(&myThread, NULL, managerClient, (void *) info);
             if (status) {
                 cout << "ERROR! ";
             }
             pthread_join(myThread, NULL);
-            //cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
-
+            info->setConnection(&conn);
         }
         ///////////////added
         (*numOf)--;
 
     }
 }
-    void* managerClient(void* in){
-        Information* info = (Information*)in;
+    void* managerClient(void* in) {
+        Information *info = (Information *) in;
 
         sleep(1);
         info->getTcp()->sendData("getting shimi");
@@ -255,13 +242,15 @@ void* createClientCon(void* in) {
         Driver *d = new Driver();
         d->setDriver(dDummy.load());
         info->getTexiC()->setDrivers(d);
+        info->addClient(d, info->getConnection());
         sleep(1);
         info->getTcp()->sendData("thanks for sending shimi :)");
 
         if (info->getTexiC()->getVehicle(d->getCabId())->isA()) {
             sleep(1);
             info->getTcp()->sendData("1");
-            Cab *cab = boost::polymorphic_downcast<Cab *>(info->getTexiC()->getVehicle(d->getCabId()));
+            Cab *cab = boost::polymorphic_downcast<Cab *>
+                    (info->getTexiC()->getVehicle(d->getCabId()));
             cab->save();
             char bufferCar[1024];
             info->getTcp()->reciveData(bufferCar, sizeof(bufferCar));
@@ -276,10 +265,12 @@ void* createClientCon(void* in) {
             string stMess(buffer1);
             cout << stMess << endl;//we got the cab!
 
-        }else{
+        } else {
             sleep(1);
             info->getTcp()->sendData("0");
-            LuxuryCab *cab = boost::polymorphic_downcast<LuxuryCab *>(info->getTexiC()->getVehicle(d->getCabId()));
+            LuxuryCab *cab =
+                    boost::polymorphic_downcast<LuxuryCab *>
+                            (info->getTexiC()->getVehicle(d->getCabId()));
             cab->save();
             char bufferCar[1024];
             info->getTcp()->reciveData(bufferCar, sizeof(bufferCar));
@@ -292,26 +283,49 @@ void* createClientCon(void* in) {
             char buffer1[1024];
             info->getTcp()->reciveData(buffer1, sizeof(buffer1));
             string stMess(buffer1);
-            cout << stMess <<endl;
+            cout << stMess << endl;
 
         }
-        TripInfo* t;
-        info->lockTrips();
-        t = info->getTexiC()->getListTrips().front();
-        info->unLockTrips();
-        sleep(1);
-        info->getTcp()->sendData("start triping shimi");
+        int option = options.find(d)->second;
+        switch (option) {
+            case 1: {
+                sleep(1);
+                info->getTcp()->sendData("start triping shimi");
+                d->getTripInfo()->save();
+                sleep(1);
+                info->getTcp()->sendData(d->getTripInfo()->serial_str);
 
-
+            }
+            case 2: {
+                sleep(1);
+                info->getTcp()->sendData("you can`t drive :(");
+            }
+            case 3: {
+                sleep(1);
+                info->getTcp()->sendData("you can drive :)");
+                char buffer0[2000];
+                info->getTcp()->reciveData(buffer0, sizeof(buffer0));
+                string stMessage(buffer0);
+                if (stMessage.compare("drive one step") == 0) {
+                    info->getTexiC()->upData(info->getTexiC()->getListDriver().front());
+                    if (info->getTexiC()->getListDriver().front()->getTripInfo()->getWay().size() == 0) {
+                        sleep(1);
+                        info->getTcp()->sendData("end of trip");
+                        info->getTexiC()->getListTrips().pop_front();
+                        d->setHasTrip(false);
+                    }
+                }
+            }
+        }
     }
-
 void* calculateWay(void* inf) {
     Information *info = (Information *) inf;
     info->lockTrips();
-    TripInfo* t = info->getTexiC()->getListTrips().front();
+    TripInfo* t = info->getTexiC()->getListTrips().back();
     info->unLockTrips();
     Gps *gps = new Gps(t->getStartPoint(), t->getEndPoint());
     Map *m = info->getTexiC()->getMap();
     queue<CheckPoint *> way = gps->start(m->getGrid());
     t->convertToListInit(way);
+
 }

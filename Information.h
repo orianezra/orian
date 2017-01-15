@@ -14,9 +14,9 @@ private:
     Tcp* tcp;
     TexiCenter* texiC;
     int* numOfDrivers;
-    list <int> clients;
-    pthread_mutex_t list_locker;
+    map <Driver*, int*> clients;
     pthread_mutex_t trips_locker;
+    int* connection;
 public:
     Information();
     ~Information();
@@ -25,11 +25,12 @@ public:
     Tcp* getTcp();
     TexiCenter* getTexiC();
     int* getNumOfDrivers();
-    void addClient(int);
-    void lockList();
-    void unLockList();
+    void addClient(Driver* d , int* num);
     void lockTrips();
     void unLockTrips();
+    void setConnection(int*);
+    int* getConnection();
+    int* getConnOfDriver();
 };
 
 

@@ -10,7 +10,6 @@ Information::Information(Tcp* c, TexiCenter *t, int *num) {
     this->texiC = t;
     this->numOfDrivers = num;
     this->tcp = c;
-    pthread_mutex_init(&this->list_locker, 0);
     pthread_mutex_init(&this->trips_locker, 0);
 }
 
@@ -29,18 +28,23 @@ TexiCenter*  Information::getTexiC(){
 int*  Information::getNumOfDrivers(){
     return this->numOfDrivers;
 }
-void Information::addClient(int num) {
-    this->clients.push_back(num);
+void Information::addClient(Driver* d , int* num) {
+    //this->clients.push_back(num);
+    this->clients.insert(std::pair<Driver*,int*>(d,num));
 }
-void Information::lockList() {
-    pthread_mutex_lock(&this->list_locker);
-}
-void Information::unLockList() {
-    pthread_mutex_unlock(&this->list_locker);
-}
+
 void Information::lockTrips() {
     pthread_mutex_lock(&this->trips_locker);
 }
 void Information::unLockTrips() {
     pthread_mutex_unlock(&this->trips_locker);
+}
+void Information::setConnection(int* c) {
+    this->connection = c;
+}
+int* Information::getConnection(){
+    return this->connection;
+}
+int* Information::getConnOfDriver() {
+    //this->clients
 }

@@ -55,6 +55,7 @@ private:
     bool existCar;
     TripInfo* trip;
     int cabId;
+    bool hasTrip;
     friend class boost::serialization::access;
     template<class Archive>
     //this is a serialize method
@@ -70,7 +71,7 @@ private:
         archive & this->avgSatisfaction;
         archive & this->texiInfo;
         archive & this->location;
-        //archive & this->waze;
+        archive & this->hasTrip;
         archive & this->map;
         archive & this->existCar;
         archive & this->trip;
@@ -98,6 +99,8 @@ public:
     Gps* getGps();
     bool getExist();
     int getSatisfaction();
+    bool ifHasTrip();
+    void setHasTrip(bool b);
     MaterialStatus getStatus();
     int getYearsOfExperiance();
     void setStatus(MaterialStatus status);
