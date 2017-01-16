@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
     //tcpClient.initialize();
     //setting variables
     char dummy, status;
+
     MaterialStatus materialStatus;
     int id, age, exp, vehicleId;
     cin >> id >> dummy >> age  >> dummy >>status >> dummy >> exp >> dummy >>vehicleId;
@@ -41,8 +42,8 @@ int main(int argc, char *argv[]) {
         }
     }
     Driver* driver = new Driver(id, age, exp, materialStatus, vehicleId);
-
     tcpClient.initialize();
+
     char buffer0[2000];
     tcpClient.reciveData(buffer0, sizeof(buffer0));
     string stMess0(buffer0);
@@ -77,7 +78,7 @@ int main(int argc, char *argv[]) {
         sleep(1);
         tcpClient.sendData("we got the cab!");
 
-    } else {
+    } else if(stCarType.at(0) = '0') {
         //set the driver's cab
         sleep(1);
         tcpClient.sendData("getting cab lux");

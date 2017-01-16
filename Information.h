@@ -16,7 +16,9 @@ private:
     int* numOfDrivers;
     map <Driver*, int*> clients;
     pthread_mutex_t trips_locker;
+    pthread_mutex_t clients_locker;
     int* connection;
+    bool finnish;
 public:
     Information();
     ~Information();
@@ -28,9 +30,13 @@ public:
     void addClient(Driver* d , int* num);
     void lockTrips();
     void unLockTrips();
+    void lockClients();
+    void unLockClients();
     void setConnection(int*);
     int* getConnection();
     int* getConnOfDriver();
+    void finnishSet(){finnish = true;}
+    bool finnishBool(){return finnish;}
 };
 
 
