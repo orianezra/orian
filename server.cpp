@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
                 int *num = new int(numOfDrivers);
                 in = new Information(tcp, texiC, num);
                 int status = pthread_create(&t1, NULL, createClientCon, (void *) in);
-               
-                pthread_join(t1, NULL);
+
+                //pthread_join(t1, NULL);
                 break;
             }
             case 2: {
@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
                         t = texiC->getListTrips().front();
                         texiC->getListTrips().pop_front();
                         texiC->getListTrips().push_back(t);
-                        if (time == t->getTimeOfTrip()) {
+                        if (time == t->getTimeOfTrip() && !d->ifHasTrip()) {
 
                             d->setTripInfo(t);
                             t->getWay().pop_front();
@@ -200,6 +200,7 @@ int main(int argc, char *argv[]) {
                             texiC->upData(d);
                             int thirdOpt = 3;
                             options.insert(std::pair<Driver *, int>(d, thirdOpt));
+                            //move it to somewhetre else
                             if (d->getTripInfo()->getWay().size() == 0) {
                                 d->setHasTrip(false);
                                 texiC->getListTrips().pop_back();
@@ -209,8 +210,8 @@ int main(int argc, char *argv[]) {
                         }
 
                     }
-                    texiC->getListDriver().push_back(d);
 
+                    texiC->getListDriver().push_back(d);
                 }
                 time++;
                 break;
@@ -242,7 +243,6 @@ void* createClientCon(void* in) {
             if (status) {
                 cout << "ERROR! ";
             }
-            //pthread_join(myThread, NULL);
             pthread_detach(myThread);
             info->setConnection(&conn);
         }
@@ -336,12 +336,9 @@ void* managerClient(void* in) {
                 info->getTcp()->reciveData(buffer0, sizeof(buffer0));
                 string stMessage(buffer0);
                 if (stMessage.compare("drive one step") == 0) {
-                    info->getTexiC()->upData(info->getTexiC()->getListDriver().front());
                     if (info->getTexiC()->getListDriver().front()->getTripInfo()->getWay().size() == 0) {
                         sleep(1);
                         info->getTcp()->sendData("end of trip");
-                        info->getTexiC()->getListTrips().pop_front();
-                        d->setHasTrip(false);
                     }
                 }
                 options.erase(d);
