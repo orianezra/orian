@@ -136,3 +136,7 @@ int Tcp::acceptt() {
 
     return this->descriptorCommunicateClient;
 }
+void Tcp::setClient(int conn){
+    this->descriptorCommunicateClient = conn;
+    
+}

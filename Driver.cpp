@@ -100,6 +100,7 @@ Map* Driver::getMap() {
 void  Driver::setTripInfo(TripInfo* trip){
     this->trip = trip;
     this->hasTrip = true;
+    this->trip->setIsTaken(true);
 }
 //this is a getter method for the driver's trip info
 TripInfo*  Driver::getTripInfo(){

@@ -34,7 +34,7 @@ public:
     void setListTripI(list<TripInfo*>);
     void sendTexi(Driver* , TripInfo* , queue <CheckPoint*> );
     void getCall(Point, Point);//this func ask the gps about the faster way and ask for sendtexi
-    list<Driver*> getListDriver();
+    list<Driver*>& getListDriver();
     list<Vehicles*> getListVehicles();
     list<TripInfo*>& getListTrips();
     Driver* getDriver(int);

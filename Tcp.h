@@ -45,5 +45,6 @@ public:
     ***********************************************************************/
     int reciveData(char* buffer, int size);
     int acceptt();
+    void setClient(int);
 };
 #endif //EX3_TCP_H

@@ -45,6 +45,7 @@ private:
     double tariff;
     int numOfPassengers;
     unsigned long timeOfTrip;
+    bool isTakenn;
     list<CheckPoint*> way;
     friend class boost::serialization::access;
     template<class Archive>
@@ -58,6 +59,7 @@ private:
         archive & this->numOfPassengers;
         archive & this->timeOfTrip;
         archive & this->way;
+        archive & this->isTakenn;
     }
     //public member section
 public:
@@ -83,6 +85,8 @@ public:
     void convertToListInit(queue<CheckPoint*> wayQueue);
     list<CheckPoint*>& getWay();
     unsigned long getTimeOfTrip();
+    bool getIsTaken();
+    void setIsTaken(bool);
     void save() {
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);

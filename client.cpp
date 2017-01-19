@@ -103,10 +103,10 @@ int main(int argc, char *argv[]) {
             tcpClient.reciveData(buffer0, sizeof(buffer0));
             string stMessage(buffer0);
             if (stMessage.compare("start triping shimi") == 0) {
+                tcpClient.sendData("got it");
                 char buffer1[40000];
                 tcpClient.reciveData(buffer1, sizeof(buffer1));
                 string stMessTrip(buffer1, sizeof(buffer1));
-
                 tDummy.setString(stMessTrip);
                 t->setTripInfo(tDummy.load());
                 driver->setTripInfo(t);

@@ -8,6 +8,7 @@ TripInfo::TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP, unsi
     this->endP = eP;
     this->startP = sP;
     this->timeOfTrip = time;
+    this->isTakenn = false;
 }
 //this is the destructor of the trip info class
 TripInfo::~TripInfo() {
@@ -104,4 +105,10 @@ void TripInfo::convertToListInit(queue<CheckPoint*> wayQueue) {
 }
 list<CheckPoint*>& TripInfo::getWay() {
     return this->way;
+}
+bool TripInfo::getIsTaken(){
+    return this->isTakenn;
+}
+void TripInfo::setIsTaken( bool b){
+    this->isTakenn = b;
 }
