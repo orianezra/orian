@@ -14,8 +14,7 @@ using namespace std;
 void* createClientCon(void*);
 void* managerClient(void*);
 void* calculateWay(void*);
-map <Driver*, int> options;
-map <Driver*, int> it;
+//pthread_t drivers[50];
 int main(int argc, char *argv[]) {
     Information *in;
     Tcp *tcp = new Tcp(1, atoi(argv[1]));
@@ -31,7 +30,6 @@ int main(int argc, char *argv[]) {
     pthread_t t1;
     Grid *g = new Grid(i, j);
     Map *m = new Map(g);
-
     TexiCenter *texiC = new TexiCenter();
 
     cin >> pOfAbs;
@@ -66,8 +64,9 @@ int main(int argc, char *argv[]) {
                 int *num = new int(numOfDrivers);
                 in = new Information(tcp, texiC, num);
                 int status = pthread_create(&t1, NULL, createClientCon, (void *) in);
-
                 //pthread_join(t1, NULL);
+                pthread_detach(t1);
+
                 break;
             }
             case 2: {
@@ -166,89 +165,85 @@ int main(int argc, char *argv[]) {
             case 6: {
             }
             case 9: {//need to get out
-                cout <<"yeahhh" << endl;
-                Driver * d;
+                cout << "yeahhh" << endl;
                 TripInfo *t;
+                int sizeLDriver = texiC->getListDriver().size();
                 //loop over the trips, check if its the time
-                int drivers = texiC->getListDriver().size();
-                int trips = texiC->getListTrips().size();
-                for (int j = 0; j < drivers; j++) {
-                   d = texiC->getListDriver().front();
+                for (int j = 0; j < sizeLDriver; j++) {
+                    Driver *d = texiC->getListDriver().front();
                     texiC->getListDriver().pop_front();
-                    for (int i = 0; i < trips; i++) {
-                        t = texiC->getListTrips().front();
-                        texiC->getListTrips().pop_front();
-                        texiC->getListTrips().push_back(t);
-                        if (time == t->getTimeOfTrip() && !d->ifHasTrip()) {
-
-                            d->setTripInfo(t);
-                            t->getWay().pop_front();
-                            texiC->upData(d);
-                            int firstOpt = 1;
-                            options.insert(std::pair<Driver *, int>(d, firstOpt));
-                            break;
-
-                        } else {
-                            //texiC->getListTrips().push_back(t);
-                        }
-                        if (time < t->getTimeOfTrip()) {
-                            int secondOpt = 2;
-                            options.insert(std::pair<Driver *, int>(d, secondOpt));
-                            break;
-
-                        } else if (d->ifHasTrip()) {
-                            texiC->upData(d);
-                            int thirdOpt = 3;
-                            options.insert(std::pair<Driver *, int>(d, thirdOpt));
-                            //move it to somewhetre else
-                            if (d->getTripInfo()->getWay().size() == 0) {
-                                d->setHasTrip(false);
-                                texiC->getListTrips().pop_back();
+                    if (!d->ifHasTrip()) {
+                        int sizeTList = texiC->getListTrips().size();
+                        for (int i = 0; i < sizeTList; i++) {
+                            t = texiC->getListTrips().front();
+                            texiC->getListTrips().pop_front();
+                            if (time == t->getTimeOfTrip()) {
+                                d->setTripInfo(t);
+                                d->setHasTrip(true);
+                                t->getWay().pop_front();
+                                texiC->upData(d);
+                                int firstOpt = 1;
+                                in->addOption(in->getConnOfDriver(d), firstOpt);
+                                //texiC->getListTrips().push_back(t);
+                                texiC->getListDriver().push_back(d);
+                                break;
+                            } else if (time < t->getTimeOfTrip()) {
+                                int secondOpt = 2;
+                                in->addOption(in->getConnOfDriver(d), secondOpt);
+                                texiC->getListTrips().push_back(t);
+                                texiC->getListDriver().push_back(d);
+                                break;
                             }
-                            break;
-                            in->finnishSet();
                         }
-
+                        continue;
+                    } else {
+                        int thirdOpt = 3;
+                        in->addOption(in->getConnOfDriver(d), thirdOpt);
+                        //texiC->getListTrips().push_back(t);
+                        texiC->getListDriver().push_back(d);
                     }
-
-                    texiC->getListDriver().push_back(d);
                 }
                 time++;
                 break;
             }
         }
-    } while (i != 7);
+    }
+    while (i != 7);
+    //pthread_join(t1, NULL);
     tcp->sendData("go home");
+    in->finnish();
     delete texiC;
     delete g;
     delete m;
     sleep(1);
+    //pthread_join(t1, NULL);
     tcp->~Tcp();
     return 0;
+
 }
 
 void* createClientCon(void* in) {
     Information *info = (Information *) in;
     int *numOf = info->getNumOfDrivers();
     int conn;
-    while (*numOf) {
+    pthread_t myThreads[*numOf];
+    for(int i = 0; i<*numOf;i++){
+
         conn = info->getTcp()->acceptt();
         if (conn < 0) {
             cout << "Connection not established!" << endl;
-
         } else {
-            pthread_t myThread;
-
-            int status = pthread_create(&myThread, NULL, managerClient, (void *) info);
+            cout << "get connection with: " << conn <<endl;
+            info->setConnection(conn);
+            int status = pthread_create(&myThreads[i], NULL, managerClient, (void *) info);
             if (status) {
                 cout << "ERROR! ";
             }
-            pthread_detach(myThread);
-            info->setConnection(&conn);
+            else{pthread_detach(myThreads[i]);}
         }
-        (*numOf)--;
     }
 }
+
 void* managerClient(void* in) {
     Information *info = (Information *) in;
 
@@ -263,7 +258,11 @@ void* managerClient(void* in) {
     Driver *d = new Driver();
     d->setDriver(dDummy.load());
     info->getTexiC()->setDrivers(d);
+
+    //info->lockClients();
     info->addClient(d, info->getConnection());
+    //info->unLockClients();
+
     sleep(1);
     info->getTcp()->sendData("thanks for sending shimi :)");
     str.clear();
@@ -286,7 +285,7 @@ void* managerClient(void* in) {
         char buffer1[1024];
         info->getTcp()->reciveData(buffer1, sizeof(buffer1));
         string stMess(buffer1);
-        cout << stMess << endl;//we got the cab!
+        cout << "Driver have cab" << endl;//we got the cab!
         stMess.clear();
 
     } else {
@@ -308,10 +307,13 @@ void* managerClient(void* in) {
         info->getTcp()->reciveData(buffer1, sizeof(buffer1));
         string stMess(buffer1);
         cout << stMess << endl;
-
     }
-    while(!info->finnishBool()) {
-        int option = options.find(d)->second;
+    info->lockClients();
+
+    while(!info->finnishbool()) {
+
+        int option = info->find(info->getConnOfDriver(d));
+        info->removeOption(info->getConnOfDriver(d));
 
         switch (option) {
             case 1: {
@@ -320,34 +322,36 @@ void* managerClient(void* in) {
                 d->getTripInfo()->save();
                 sleep(1);
                 info->getTcp()->sendData(d->getTripInfo()->serial_str);
-                options.erase(d);
+                cout << "we here 1" << endl;
                 break;
             }
             case 2: {
                 sleep(1);
                 info->getTcp()->sendData("you can`t drive :(");
-                options.erase(d);
+                cout << "we here 2"<<endl;
                 break;
             }
             case 3: {
                 sleep(1);
                 info->getTcp()->sendData("you can drive :)");
+                cout << "we here 3"<<endl;
                 char buffer0[2000];
                 info->getTcp()->reciveData(buffer0, sizeof(buffer0));
                 string stMessage(buffer0);
                 if (stMessage.compare("drive one step") == 0) {
+                    info->getTexiC()->upData(info->getTexiC()->getListDriver().front());
                     if (info->getTexiC()->getListDriver().front()->getTripInfo()->getWay().size() == 0) {
                         sleep(1);
                         info->getTcp()->sendData("end of trip");
+                        //info->getTexiC()->getListTrips().pop_front();
+                        d->setHasTrip(false);
                     }
                 }
-                options.erase(d);
                 break;
             }
-
         }
+        info->unLockClients();
     }
-
 }
 void* calculateWay(void* inf) {
     Information *info = (Information *) inf;
@@ -365,21 +369,12 @@ void* calculateWay(void* inf) {
 0
 3
 0,1,H,R
-2
-0,0,0,2,2,1,20,1
-1
-1
- */
-/*
-3 3
-0
-3
-0,1,H,R
 3
 1,1,H,R
 2
 0,0,0,2,2,1,20,1
 2
 1,0,0,1,1,1,20,4
+1
 1
  */
