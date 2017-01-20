@@ -6,6 +6,8 @@
 #include <map>
 #include <list>
 using namespace std;
+//this class's purpose is to manage an information object in order to pass it to threads
+//it contains the texi center, num of drivers and tcp object
 class Information {
 private:
     Tcp* tcp;
@@ -32,10 +34,8 @@ public:
     pthread_mutex_t* lockClients();
     void setConnection(int);
     int getConnection();
-    void finnish(){
-        finnishDrive = true;
-    }
-    bool finnishbool(){return finnishDrive;}
+    void finnish();
+    bool finnishbool();
     int getConnOfDriver(Driver *);
 };
 
