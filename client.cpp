@@ -6,14 +6,14 @@
 #include "Cab.h"
 #include "Driver.h"
 #include "Tcp.h"
+
 #include "MaterialStatus.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
     //initiallize udp for message getting
     Tcp tcpClient(0, atoi(argv[1]));
-    //tcpClient.initialize();
-    //setting variables
+
     char dummy, status;
 
     MaterialStatus materialStatus;
@@ -43,13 +43,10 @@ int main(int argc, char *argv[]) {
     }
     Driver* driver = new Driver(id, age, exp, materialStatus, vehicleId);
     tcpClient.initialize();
-
     char buffer0[2000];
     tcpClient.reciveData(buffer0, sizeof(buffer0));
     string stMess0(buffer0);
-    cout << stMess0 <<endl;//getting shimi
-
-
+    cout << stMess0 << endl;//getting shimi
 
 
     driver->save();

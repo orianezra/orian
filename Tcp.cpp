@@ -62,7 +62,7 @@ int Tcp::initialize() {
         struct sockaddr_in sin;
         memset(&sin, 0, sizeof(sin));
         sin.sin_family = AF_INET;
-        sin.sin_addr.s_addr = inet_addr((this->ip_address).c_str());
+        sin.sin_addr.s_addr = INADDR_ANY;
         sin.sin_port = htons(this->port_number);
         if (connect(this->socketDescriptor,
                     (struct sockaddr *) &sin, sizeof(sin)) < 0) {
@@ -125,10 +125,15 @@ int Tcp::reciveData(char* buffer, int size) {
 * The Function operation: 						                	   *
 ***********************************************************************/
 int Tcp::acceptt() {
-    struct sockaddr_in client_sin;
-    unsigned int addr_len = sizeof(client_sin);
+    //struct sockaddr_in sin;
+    //memset(&sin, 0, sizeof(sin));
+    //sin.sin_family = AF_INET;
+    //sin.sin_addr.s_addr = inet_addr((this->ip_address).c_str());
+    //sin.sin_port = htons(this->port_number);
+    //struct sockaddr_in client_sin;
+    //unsigned int addr_len = sizeof(sin);
     this->descriptorCommunicateClient = accept(this->socketDescriptor,
-                                               (struct sockaddr *) &client_sin, &addr_len);
+                                               NULL, NULL);
     if (this->descriptorCommunicateClient < 0) {
         //return an error represent error at this method
         return ERROR_ACCEPT;
@@ -139,5 +144,5 @@ int Tcp::acceptt() {
 //a set method to the client's connection
 void Tcp::setClient(int conn){
     this->descriptorCommunicateClient = conn;
-    
+
 }

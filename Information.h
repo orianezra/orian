@@ -17,8 +17,8 @@ private:
     pthread_mutex_t trips_locker;
     pthread_mutex_t client_locker;
     pthread_mutex_t driver_locker;
-    int connection;
-    bool finnishDrive = false;
+    list<int> connection;
+    bool finnishDrive;
 public:
     Information();
     ~Information();

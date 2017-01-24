@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
+#include <cstdlib>
 #include "Grid.h"
 #include "Map.h"
 #include "TexiCenter.h"
@@ -10,16 +11,17 @@
 #include "pthread.h"
 #include <boost/cast.hpp>
 #include <boost/serialization/list.hpp>
+
 using namespace std;
 //using namespace boost;
 void* createClientCon(void*);
 void* managerClient(void*);
 void* calculateWay(void*);
-
 map <int, int> options;
 int main(int argc, char *argv[]) {
     Information *in;
-    Tcp *tcp = new Tcp(1, atoi(argv[1]));
+
+    Tcp* tcp = new Tcp(1, atoi(argv[1]));
     tcp->initialize();
     int i, j, pOfAbs;
     char damy;
@@ -182,10 +184,7 @@ int main(int argc, char *argv[]) {
                             if (time == t->getTimeOfTrip()) {
                                 sleep(1);
                                 tcp->sendData("start triping shimi");
-                                char buffer0[2000];
-                                tcp->reciveData(buffer0, sizeof(buffer0));
-                                string stMessage(buffer0);
-                                cout << stMessage << endl;
+
                                 sleep(1);
                                 t->save();
                                 d->setTripInfo(t);
@@ -193,12 +192,12 @@ int main(int argc, char *argv[]) {
                                 d->setHasTrip(true);
                                 t->getWay().pop_front();
                                 texiC->upData(d);
-                                break;
+                                continue;
                             } else if (time < t->getTimeOfTrip()) {
                                 texiC->getListTrips().push_back(t);
                                 sleep(1);
                                 tcp->sendData("you can`t drive :(");
-                                break;
+                                //break;
                             }
                         }
                     } else {
@@ -209,7 +208,7 @@ int main(int argc, char *argv[]) {
                         tcp->reciveData(buffer0, sizeof(buffer0));
 
                         string stMessage(buffer0);
-
+                        //in->getTexiC()->upData(d);
                         if (stMessage.compare("drive one step") == 0) {
                             in->getTexiC()->upData(d);
                             if (d->getTripInfo()->getWay().size() == 0) {
@@ -228,7 +227,13 @@ int main(int argc, char *argv[]) {
         }
     }
     while (i != 7);
-    tcp->sendData("go home");
+    for (int i = 0; i < texiC->getListDriver().size(); i++){
+        Driver *d = texiC->getListDriver().front();
+        texiC->getListDriver().pop_front();
+        tcp->setClient(in->getConnOfDriver(d));
+        tcp->sendData("go home");
+        texiC->getListDriver().push_back(d);
+    }
     in->finnish();
     delete texiC;
     delete g;
@@ -237,7 +242,7 @@ int main(int argc, char *argv[]) {
     tcp->~Tcp();
     return 0;
 }
-
+//a function that created threads to handle the drivers (clients)
 void* createClientCon(void* in) {
     Information *info = (Information *) in;
     int *numOf = info->getNumOfDrivers();
@@ -254,15 +259,22 @@ void* createClientCon(void* in) {
             if (status) {
                 cout << "ERROR! ";
             }
-            else{pthread_detach(myThread);}
+            else{pthread_join(myThread, NULL);}
         }
     }
 }
+//a function for manage (ger and insert) a new client
 void* managerClient(void* in) {
     Information *info = (Information *) in;
+    pthread_mutex_lock(info->lockClients());
+    info->getTcp()->setClient(info->getConnection());
+    pthread_mutex_unlock(info->lockClients());
 
     sleep(1);
+
     info->getTcp()->sendData("getting shimi");
+
+
 
     Driver dDummy;
     char buffer[1024];
@@ -335,6 +347,7 @@ void* managerClient(void* in) {
     pthread_mutex_unlock(info->lockDriver());
 
 }
+// a function for the thread of the trip info's, for calculate the path
 void* calculateWay(void* inf) {
     Information *info = (Information *) inf;
     TripInfo* t = info->getTexiC()->getListTrips().back();

@@ -1,6 +1,7 @@
 #ifndef EX3_TCP_H
 #define EX3_TCP_H
 #include "Socket.h"
+#include <map>
 
 class Tcp: public Socket {
 private:
