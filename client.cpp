@@ -19,6 +19,9 @@ int main(int argc, char *argv[]) {
     MaterialStatus materialStatus;
     int id, age, exp, vehicleId;
     cin >> id >> dummy >> age  >> dummy >>status >> dummy >> exp >> dummy >>vehicleId;
+    if (id < 0 || age <0 || exp < 0 || vehicleId < 0){
+        exit(-1);
+    }
     switch(status){
         case 'S' : {
             materialStatus = MaterialStatus :: SINGLE;
@@ -37,8 +40,7 @@ int main(int argc, char *argv[]) {
             break;
         }
         default: {
-            exit(0);
-            break;
+            exit(-1);
         }
     }
     Driver* driver = new Driver(id, age, exp, materialStatus, vehicleId);

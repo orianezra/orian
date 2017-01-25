@@ -82,7 +82,13 @@ int main(int argc, char *argv[]) {
                 if ( startX <= 0 || startY <= 0) {
                     cout << "-1" << endl;
                 }
+                if (id < 0){
+                    cout << "-1" << endl;
+                }
                 if ( endX >= i || endY >= j) {
+                    cout << "-1" << endl;
+                }
+                if (timeOfTrip <= 0) {
                     cout << "-1" << endl;
                 }
                 tIDummy = new TripInfo(0, numOfPs, id, tariff,
@@ -96,6 +102,9 @@ int main(int argc, char *argv[]) {
             }
             case 3: {
                 cin >> id >> damy >> type >> damy >> ch >> damy >> ch2;
+                if (id < 0){
+                    cout << "-1" << endl;
+                }
                 switch (ch) {
                     case 'H': {
                         cMF = CarsManufactor::HONDA;
