@@ -48,11 +48,16 @@ pthread_mutex_t* Information::lockClients() {
 //a setter method for the connection
 void Information::setConnection(int c) {
     this->connection.push_back(c);
+
+     if (this->connection.size() > 1) {
+        this->connection.pop_front();
+    }
+
 }
 //a getter method for the connection
 int Information::getConnection(){
     return this->connection.front();
-    this->connection.pop_front();
+
 }
 //a getter method for the connection (driver specific)
 int Information::getConnOfDriver(Driver *d) {

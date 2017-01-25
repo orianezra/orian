@@ -27,6 +27,9 @@ int main(int argc, char *argv[]) {
     char damy;
     long time = 0;
     cin >> i >> j;
+    if ( i <= 0 || j <= 0) {
+        cout << "map dimentions are invalid" << endl;
+    }
     Grid *gDummy2;
     Driver dDummy;
     TripInfo *tIDummy;
