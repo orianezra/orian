@@ -79,6 +79,12 @@ int main(int argc, char *argv[]) {
                 unsigned long timeOfTrip;
                 cin >> id >> damy >> startX >> damy >> startY >> damy
                     >> endX >> damy >> endY >> damy >> numOfPs >> damy >> tariff >> damy >> timeOfTrip;
+                if ( startX <= 0 || startY <= 0) {
+                    cout << "trip start point is valid" << endl;
+                }
+                if ( endX >= i || endY >= j) {
+                    cout << "trip end point is not valid" << endl;
+                }
                 tIDummy = new TripInfo(0, numOfPs, id, tariff,
                                        new Point(startX, startY), new Point(endX, endY), timeOfTrip);
                 texiC->setTripI(tIDummy);
