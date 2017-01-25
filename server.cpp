@@ -258,8 +258,9 @@ void* createClientCon(void* in) {
             int status = pthread_create(&myThread, NULL, managerClient, (void *) info);
             if (status) {
                 cout << "ERROR! ";
+            } else {
+                pthread_join(myThread, NULL);
             }
-            else{pthread_join(myThread, NULL);}
         }
     }
 }

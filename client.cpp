@@ -12,8 +12,8 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     //initiallize udp for message getting
-    Tcp tcpClient(0, atoi(argv[1]));
-
+    Tcp tcpClient(0, atoi(argv[2]));
+    //tcpClient.initialize();
     char dummy, status;
 
     MaterialStatus materialStatus;
