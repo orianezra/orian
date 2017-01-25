@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
             break;
         }
         default: {
-            cout << "status not exist" << endl;
+            exit(0);
             break;
         }
     }

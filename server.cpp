@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     long time = 0;
     cin >> i >> j;
     if ( i <= 0 || j <= 0) {
-        cout << "map dimentions are invalid" << endl;
+        cout << "-1" << endl;
     }
     Grid *gDummy2;
     Driver dDummy;
@@ -80,10 +80,10 @@ int main(int argc, char *argv[]) {
                 cin >> id >> damy >> startX >> damy >> startY >> damy
                     >> endX >> damy >> endY >> damy >> numOfPs >> damy >> tariff >> damy >> timeOfTrip;
                 if ( startX <= 0 || startY <= 0) {
-                    cout << "trip start point is valid" << endl;
+                    cout << "-1" << endl;
                 }
                 if ( endX >= i || endY >= j) {
-                    cout << "trip end point is not valid" << endl;
+                    cout << "-1" << endl;
                 }
                 tIDummy = new TripInfo(0, numOfPs, id, tariff,
                                        new Point(startX, startY), new Point(endX, endY), timeOfTrip);
@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
                         break;
                     }
                     default: {
-                        cout << "type not exist" << endl;
+                        cout << "-1" << endl;
                         break;
                     }
                 }
@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
                         break;
                     }
                     default: {
-                        cout << "color not exist" << endl;
+                        cout << "-1" << endl;
                         break;
                     }
                 }
