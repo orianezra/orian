@@ -125,13 +125,7 @@ int Tcp::reciveData(char* buffer, int size) {
 * The Function operation: 						                	   *
 ***********************************************************************/
 int Tcp::acceptt() {
-    //struct sockaddr_in sin;
-    //memset(&sin, 0, sizeof(sin));
-    //sin.sin_family = AF_INET;
-    //sin.sin_addr.s_addr = inet_addr((this->ip_address).c_str());
-    //sin.sin_port = htons(this->port_number);
-    //struct sockaddr_in client_sin;
-    //unsigned int addr_len = sizeof(sin);
+
     this->descriptorCommunicateClient = accept(this->socketDescriptor,
                                                NULL, NULL);
     if (this->descriptorCommunicateClient < 0) {
