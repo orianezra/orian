@@ -72,16 +72,17 @@ int main(int argc, char *argv[]) {
                 in = new Information(tcp, texiC, num);
                 int status = pthread_create(&t1, NULL, createClientCon, (void *) in);
                 pthread_join(t1, NULL);
-                //pthread_detach(t1);
                 break;
             }
             case 2: {
-                unsigned long timeOfTrip;
+                int timeOfTrip;
                 cin >> id >> damy >> startX >> damy >> startY >> damy
                     >> endX >> damy >> endY >> damy >> numOfPs >> damy >> tariff >> damy >> timeOfTrip;
-                if ( startX <= 0 || startY <= 0) {
+
+                if ( startX < 0 || startY < 0) {
                     cout << "-1" << endl;
                 }
+
                 if (id < 0){
                     cout << "-1" << endl;
                 }
@@ -241,6 +242,10 @@ int main(int argc, char *argv[]) {
                 }
                 time++;
                 break;
+            }
+            default:{
+                break;
+                //cout << "-1" << endl;
             }
         }
     }
