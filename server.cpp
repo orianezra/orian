@@ -29,59 +29,77 @@ int main(int argc, char *argv[]) {
     Map *m;
     char damy;
     long time = 0;
-    bool checkingInput = true;
-    while (checkingInput) {
+    bool invalidInput = false;
+    do {
         string input;
         cin.clear();
         getline(cin, input);
         size_t found = input.find_first_not_of(" ");
         string inputFixedSpaces = input.substr(found);
         size_t findMiddle = inputFixedSpaces.find(' ');
+        if (findMiddle == -1) {
+            cout << "-1" << endl;
+            invalidInput = true;
+            continue;
+        }
         string xStr = inputFixedSpaces.substr(0, findMiddle).c_str();
         string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
         for (int i = 0,j = 0; i< xStr.size(), j < yStr.size(); i++ , j++){
             if (!isdigit(xStr.at(i)) || !isdigit(yStr.at(j))) {
                 cout << "-1" << endl;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                invalidInput = true;
                 break;
             }
+        }
+        if (invalidInput) {
+            continue;
         }
         x = atoi(xStr.c_str());
         y = atoi(yStr.c_str());
         if ( x <= 0 || y <= 0) {
             cout << "-1" << endl;
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            invalidInput = true;
             continue;
         } else {
             g = new Grid(x, y);
             m = new Map(g);
-            cin >> pOfAbs;
+            string inputObstacles;
+            cin.clear();
+            //cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getline(cin, inputObstacles);
+            for (int i = 0; i< inputObstacles.size(); i++){
+                if (!isdigit(inputObstacles.at(i))) {
+                    cout << "-1" << endl;
+                    invalidInput = true;
+                    continue;
+                }
+            }
+            pOfAbs = atoi(inputObstacles.c_str());
             if (pOfAbs < 0) {
                 cout << "-1" << endl;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                invalidInput = true;
                 continue;
             } else {
-                //adding here the char case
                 while (pOfAbs > 0) {
                     string inputObstacles;
                     getline(cin, inputObstacles);
                     size_t findMiddle = inputObstacles.find(',');
                     if (findMiddle == -1) {
                         cout << "-1" << endl;
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        break;
+                        invalidInput = true;
+                        continue;
                     }
                     string xStr = inputObstacles.substr(0, findMiddle);
-                    string yStr = inputObstacles.substr(findMiddle);
+                    string yStr = inputObstacles.substr(findMiddle + 1);
                     x = atoi(xStr.c_str());
                     y = atoi(yStr.c_str());
                     m->createO(Point(x, y));
                     pOfAbs--;
                 }
-                checkingInput = false;
+
             }
         }
-    }
+    } while (invalidInput);
     Grid *gDummy2;
     Driver dDummy;
     TripInfo *tIDummy;
