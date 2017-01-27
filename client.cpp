@@ -6,10 +6,11 @@
 #include "Cab.h"
 #include "Driver.h"
 #include "Tcp.h"
-
+#include <boost/algorithm/string.hpp>
+#include <vector>
 #include "MaterialStatus.h"
 using namespace std;
-
+using namespace boost;
 int main(int argc, char *argv[]) {
     //initiallize udp for message getting
     Tcp tcpClient(0, atoi(argv[2]));
@@ -18,11 +19,38 @@ int main(int argc, char *argv[]) {
 
     MaterialStatus materialStatus;
     int id, age, exp, vehicleId;
-    cin >> id >> dummy >> age  >> dummy >>status >> dummy >> exp >> dummy >>vehicleId;
-    if (id < 0 || age <0 || exp < 0 || vehicleId < 0){
-        exit(-1);
+    string input;
+    cin.clear();
+    getline(cin, input);
+    size_t findMiddle = input.find(',');
+    if (findMiddle == -1) {
+        exit(0);
     }
-
+    vector <string> vec;
+    boost::split(vec,input,boost::is_any_of(","));
+    if (vec.size() != 5) {
+        exit(0);
+    }
+    id = atoi(vec[0].c_str());
+    if (vec[0].find('.') != -1){
+        exit(0);
+    }
+    if (id < 0 || (vec[0].at(0) != '0' && id == 0) ) {
+        exit(0);
+    }
+    age = atoi(vec[1].c_str());
+    if (age < 0 || (vec[1].at(0) != '0' && age == 0)) {
+        exit(0);
+    }
+    exp = atoi(vec[3].c_str());
+    if (exp < 0 || (vec[3].at(0) != '0' && exp == 0)) {
+        exit(0);
+    }
+    vehicleId = atoi(vec[4].c_str());
+    if (vehicleId < 0 || (vec[4].at(0) != '0' && vehicleId == 0)) {
+        exit(0);
+    }
+    status = vec[2].at(0);
     switch(status){
         case 'S' : {
             materialStatus = MaterialStatus :: SINGLE;
@@ -41,7 +69,7 @@ int main(int argc, char *argv[]) {
             break;
         }
         default: {
-            exit(-1);
+            exit(0);
         }
     }
     Driver* driver = new Driver(id, age, exp, materialStatus, vehicleId);
