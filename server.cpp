@@ -8,12 +8,13 @@
 #include "TexiCenter.h"
 #include "Information.h"
 #include <mutex>
+#include <iostream>
+#include <string.h>
 #include "pthread.h"
 #include <boost/cast.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/serialization/list.hpp>
-
 using namespace std;
-//using namespace boost;
 void* createClientCon(void*);
 void* managerClient(void*);
 void* calculateWay(void*);
@@ -23,32 +24,72 @@ int main(int argc, char *argv[]) {
 
     Tcp* tcp = new Tcp(1, atoi(argv[1]));
     tcp->initialize();
-    int i, j, pOfAbs;
+    int x,y, i, pOfAbs;
+    Grid *g;
+    Map *m;
     char damy;
     long time = 0;
-    cin >> i >> j;
-    if ( i <= 0 || j <= 0) {
-        cout << "-1" << endl;
+    bool checkingInput = true;
+    while (checkingInput) {
+        string input;
+        cin.clear();
+        getline(cin, input);
+        size_t found = input.find_first_not_of(" ");
+        string inputFixedSpaces = input.substr(found);
+        size_t findMiddle = inputFixedSpaces.find(' ');
+        string xStr = inputFixedSpaces.substr(0, findMiddle).c_str();
+        string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
+        for (int i = 0,j = 0; i< xStr.size(), j < yStr.size(); i++ , j++){
+            if (!isdigit(xStr.at(i)) || !isdigit(yStr.at(j))) {
+                cout << "-1" << endl;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+        }
+        x = atoi(xStr.c_str());
+        y = atoi(yStr.c_str());
+        if ( x <= 0 || y <= 0) {
+            cout << "-1" << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        } else {
+            g = new Grid(x, y);
+            m = new Map(g);
+            cin >> pOfAbs;
+            if (pOfAbs < 0) {
+                cout << "-1" << endl;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            } else {
+                //adding here the char case
+                while (pOfAbs > 0) {
+                    string inputObstacles;
+                    getline(cin, inputObstacles);
+                    size_t findMiddle = inputObstacles.find(',');
+                    if (findMiddle == -1) {
+                        cout << "-1" << endl;
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
+                    string xStr = inputObstacles.substr(0, findMiddle);
+                    string yStr = inputObstacles.substr(findMiddle);
+                    x = atoi(xStr.c_str());
+                    y = atoi(yStr.c_str());
+                    m->createO(Point(x, y));
+                    pOfAbs--;
+                }
+                checkingInput = false;
+            }
+        }
     }
     Grid *gDummy2;
     Driver dDummy;
     TripInfo *tIDummy;
     pthread_t tTrip;
     pthread_t t1;
-    Grid *g = new Grid(i, j);
-    Map *m = new Map(g);
+
     TexiCenter *texiC = new TexiCenter();
 
-    cin >> pOfAbs;
-    if (pOfAbs > 0) {
-        int arr[2];
-        while (pOfAbs > 0) {
-            cin >> arr[0] >> damy >> arr[1];
-            m->createO(Point(arr[0], arr[1]));
-            pOfAbs--;
-
-        }
-    }
     texiC->setMap(m);
     do {
         int id, age, exp, vId, startX, startY, endX, endY, numOfPs, type;
@@ -86,7 +127,7 @@ int main(int argc, char *argv[]) {
                 if (id < 0){
                     cout << "-1" << endl;
                 }
-                if ( endX >= i || endY >= j) {
+                if ( endX >= m->getGrid()->getX() || endY >= m->getGrid()->getY()) {
                     cout << "-1" << endl;
                 }
                 if (timeOfTrip <= 0) {
@@ -180,7 +221,7 @@ int main(int argc, char *argv[]) {
                     int v = texiC->getDriver(id)->getLocation().getY_axis();
                     cout << "(" << z << "," << v << ")" << endl;
                 } else {
-                    cout << "driver does not exist in the system" << endl;
+                    cout << "-1" << endl;
                 }
                 break;
             }
@@ -211,6 +252,7 @@ int main(int argc, char *argv[]) {
                                 d->setHasTrip(true);
                                 t->getWay().pop_front();
                                 texiC->upData(d);
+                                texiC->getListDriver().push_back(d);
                                 continue;
                             } else if (time < t->getTimeOfTrip()) {
                                 texiC->getListTrips().push_back(t);
@@ -259,7 +301,7 @@ int main(int argc, char *argv[]) {
     }
     in->finnish();
     delete texiC;
-    delete g;
+    delete m->getGrid();
     delete m;
     sleep(1);
     tcp->~Tcp();

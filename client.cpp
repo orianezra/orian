@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     if (id < 0 || age <0 || exp < 0 || vehicleId < 0){
         exit(-1);
     }
-    //
+
     switch(status){
         case 'S' : {
             materialStatus = MaterialStatus :: SINGLE;
