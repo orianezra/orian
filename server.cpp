@@ -88,6 +88,11 @@ int main(int argc, char *argv[]) {
                     string yStr = inputObstacles.substr(findMiddle + 1);
                     x = atoi(xStr.c_str());
                     y = atoi(yStr.c_str());
+                    if ( (x == 0 && xStr.at(0) != 0) ||(y == 0 && yStr.at(0) != 0)) {
+                        cout << "-1" << endl;
+                        invalidInput = true;
+                        break;
+                    }
                     if (x >= m->getGrid()->getX() || y >= m->getGrid()->getY() || x < 0 || y < 0){
                         cout << "-1" << endl;
                         invalidInput = true;
