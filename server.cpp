@@ -45,25 +45,13 @@ int main(int argc, char *argv[]) {
         }
         string xStr = inputFixedSpaces.substr(0, findMiddle).c_str();
         string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
-        for (int i = 0; i< xStr.size(); i++ ){
-            if (!isdigit(xStr.at(i))) {
-                cout << "-1" << endl;
-                invalidInput = true;
-                break;
-            }
-        }
-        for (int j = 0; j< yStr.size(); j++ ){
-            if (!isdigit(yStr.at(j))) {
-                cout << "-1" << endl;
-                invalidInput = true;
-                break;
-            }
-        }
-        if (invalidInput) {
-            continue;
-        }
         x = atoi(xStr.c_str());
         y = atoi(yStr.c_str());
+        if ( (x == 0 && xStr.at(0) != 0) ||(y == 0 && yStr.at(0) != 0)) {
+            cout << "-1" << endl;
+            invalidInput = true;
+            continue;
+        }
         if ( x <= 0 || y <= 0) {
             cout << "-1" << endl;
             invalidInput = true;
@@ -75,17 +63,13 @@ int main(int argc, char *argv[]) {
             cin.clear();
             //cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getline(cin, inputObstacles);
-
-            for (int i = 0; i< inputObstacles.size(); i++){
-                if (!isdigit(inputObstacles.at(i))) {
-                    cout << "-1" << endl;
-                    invalidInput = true;
-                    break;
-                }
-            }if (invalidInput) {
+            pOfAbs = atoi(inputObstacles.c_str());
+            if (pOfAbs == 0 && inputObstacles.at(0) != 0) {
+                cout << "-1" << endl;
+                invalidInput = true;
                 continue;
             }
-            pOfAbs = atoi(inputObstacles.c_str());
+
             if (pOfAbs < 0) {
                 cout << "-1" << endl;
                 invalidInput = true;
