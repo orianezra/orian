@@ -14,6 +14,7 @@
 #include <boost/cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/serialization/list.hpp>
+#include <boost/algorithm/string.hpp>
 using namespace std;
 void* createClientCon(void*);
 void* managerClient(void*);
@@ -167,10 +168,24 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 3: {
-                cin >> id >> damy >> type >> damy >> ch >> damy >> ch2;
-                if (id < 0){
-                    cout << "-1" << endl;
+                string input;
+                cin.clear();
+                getline(cin, input);
+                size_t findMiddle = input.find(',');
+                if (findMiddle == -1) {
+                    exit(0);
                 }
+                vector <string> vec;
+                boost::split(vec,input,boost::is_any_of(","));
+                if (vec.size() != 4) {
+                    exit(0);
+                }
+                id = atoi(vec[0].c_str());
+                if (id < 0 || (vec[0].at(0) != '0' && id == 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }//to be continued
+
                 switch (ch) {
                     case 'H': {
                         cMF = CarsManufactor::HONDA;
