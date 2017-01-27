@@ -184,7 +184,7 @@ int main(int argc, char *argv[]) {
                 if (id < 0 || (vec[0].at(0) != '0' && id == 0) ) {
                     cout << "-1" << endl;
                     break;
-                }//to be continued
+                }//to be continued//
 
                 switch (ch) {
                     case 'H': {
