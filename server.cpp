@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
         x = atoi(xStr.c_str());
         y = atoi(yStr.c_str());
-        if ( (x == 0 && xStr.at(0) != 0) ||(y == 0 && yStr.at(0) != 0)) {
+        if ( (x == 0 && xStr.at(0) != '0') ||(y == 0 && yStr.at(0) != '0')) {
             cout << "-1" << endl;
             invalidInput = true;
             continue;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
             //cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getline(cin, inputObstacles);
             pOfAbs = atoi(inputObstacles.c_str());
-            if (pOfAbs == 0 && inputObstacles.at(0) != 0) {
+            if (pOfAbs == 0 && inputObstacles.at(0) != '0') {
                 cout << "-1" << endl;
                 invalidInput = true;
                 continue;
@@ -77,6 +77,7 @@ int main(int argc, char *argv[]) {
             } else {
                 while (pOfAbs > 0) {
                     string inputObstacles;
+                    cin.clear();
                     getline(cin, inputObstacles);
                     size_t findMiddle = inputObstacles.find(',');
                     if (findMiddle == -1) {
@@ -88,7 +89,7 @@ int main(int argc, char *argv[]) {
                     string yStr = inputObstacles.substr(findMiddle + 1);
                     x = atoi(xStr.c_str());
                     y = atoi(yStr.c_str());
-                    if ( (x == 0 && xStr.at(0) != 0) ||(y == 0 && yStr.at(0) != 0)) {
+                    if ( (x == 0 && xStr.at(0) != '0') ||(y == 0 && yStr.at(0) != '0')) {
                         cout << "-1" << endl;
                         invalidInput = true;
                         break;
@@ -248,8 +249,6 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 6: {
-            }
             case 9: {//need to get out
                 cout << "yeahhh" << endl;
                 TripInfo *t;
@@ -309,8 +308,13 @@ int main(int argc, char *argv[]) {
                 break;
             }
             default:{
+                if (i == 7) {
+                    break;
+                }
+                cout << "-1" << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
-                //cout << "-1" << endl;
             }
         }
     }
