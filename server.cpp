@@ -29,11 +29,12 @@ int main(int argc, char *argv[]) {
     Map *m;
     char damy;
     long time = 0;
-    bool invalidInput = false;
+    bool invalidInput;
     do {
         string input;
         cin.clear();
         getline(cin, input);
+        invalidInput = false;
         size_t found = input.find_first_not_of(" ");
         string inputFixedSpaces = input.substr(found);
         size_t findMiddle = inputFixedSpaces.find(' ');
@@ -44,8 +45,15 @@ int main(int argc, char *argv[]) {
         }
         string xStr = inputFixedSpaces.substr(0, findMiddle).c_str();
         string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
-        for (int i = 0,j = 0; i< xStr.size(), j < yStr.size(); i++ , j++){
-            if (!isdigit(xStr.at(i)) || !isdigit(yStr.at(j))) {
+        for (int i = 0; i< xStr.size(); i++ ){
+            if (!isdigit(xStr.at(i))) {
+                cout << "-1" << endl;
+                invalidInput = true;
+                break;
+            }
+        }
+        for (int j = 0; j< yStr.size(); j++ ){
+            if (!isdigit(yStr.at(j))) {
                 cout << "-1" << endl;
                 invalidInput = true;
                 break;
@@ -67,12 +75,15 @@ int main(int argc, char *argv[]) {
             cin.clear();
             //cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getline(cin, inputObstacles);
+
             for (int i = 0; i< inputObstacles.size(); i++){
                 if (!isdigit(inputObstacles.at(i))) {
                     cout << "-1" << endl;
                     invalidInput = true;
-                    continue;
+                    break;
                 }
+            }if (invalidInput) {
+                continue;
             }
             pOfAbs = atoi(inputObstacles.c_str());
             if (pOfAbs < 0) {
@@ -87,12 +98,17 @@ int main(int argc, char *argv[]) {
                     if (findMiddle == -1) {
                         cout << "-1" << endl;
                         invalidInput = true;
-                        continue;
+                        break;
                     }
                     string xStr = inputObstacles.substr(0, findMiddle);
                     string yStr = inputObstacles.substr(findMiddle + 1);
                     x = atoi(xStr.c_str());
                     y = atoi(yStr.c_str());
+                    if (x >= m->getGrid()->getX() || y >= m->getGrid()->getY() || x < 0 || y < 0){
+                        cout << "-1" << endl;
+                        invalidInput = true;
+                        break;
+                    }
                     m->createO(Point(x, y));
                     pOfAbs--;
                 }
@@ -317,9 +333,9 @@ int main(int argc, char *argv[]) {
         tcp->sendData("go home");
         texiC->getListDriver().push_back(d);
     }
-    in->finnish();
+    //in->finnish();
     delete texiC;
-    delete m->getGrid();
+    delete g;
     delete m;
     sleep(1);
     tcp->~Tcp();
