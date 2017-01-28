@@ -8,6 +8,8 @@
 #include "TexiCenter.h"
 #include "Information.h"
 #include <mutex>
+#include <cstdlib>
+#include "ThreadPool.h"
 #include <iostream>
 #include <string.h>
 #include "pthread.h"
@@ -127,6 +129,7 @@ int main(int argc, char *argv[]) {
         CarColors color;
 
         CarsManufactor cMF;
+        cin.clear();
         cin >> i;
         switch (i) {
             case 1: {
@@ -142,50 +145,94 @@ int main(int argc, char *argv[]) {
             }
             case 2: {
                 int timeOfTrip;
-                cin >> id >> damy >> startX >> damy >> startY >> damy
-                    >> endX >> damy >> endY >> damy >> numOfPs >> damy >> tariff >> damy >> timeOfTrip;
-
-                if ( startX < 0 || startY < 0) {
-                    cout << "-1" << endl;
-                }
-
-                if (id < 0){
-                    cout << "-1" << endl;
-                }
-                if ( endX >= m->getGrid()->getX() || endY >= m->getGrid()->getY()) {
-                    cout << "-1" << endl;
-                }
-                if (timeOfTrip <= 0) {
-                    cout << "-1" << endl;
-                }
-                tIDummy = new TripInfo(0, numOfPs, id, tariff,
-                                       new Point(startX, startY), new Point(endX, endY), timeOfTrip);
-                texiC->setTripI(tIDummy);
-                int *num = new int(texiC->getListTrips().size());
-                Information *inf = new Information(tcp, texiC, num);
-                int statusT = pthread_create(&tTrip, NULL, calculateWay, (void *) inf);
-                pthread_join(tTrip, NULL);
-                break;
-            }
-            case 3: {
                 string input;
                 cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getline(cin, input);
                 size_t findMiddle = input.find(',');
                 if (findMiddle == -1) {
-                    exit(0);
+                    cout << "-1" << endl;
+                    break;
                 }
                 vector <string> vec;
                 boost::split(vec,input,boost::is_any_of(","));
-                if (vec.size() != 4) {
-                    exit(0);
+                if (vec.size() != 8) {
+                    cout << "-1" << endl;
+                    break;
                 }
                 id = atoi(vec[0].c_str());
                 if (id < 0 || (vec[0].at(0) != '0' && id == 0) ) {
                     cout << "-1" << endl;
                     break;
-                }//to be continued//
+                }
+                startX = atoi(vec[1].c_str());
+                if (startX < 0 || (vec[1].at(0) != '0' && startX == 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                startY = atoi(vec[2].c_str());
+                if (startY < 0 || (vec[2].at(0) != '0' && startY== 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                if (startX >= texiC->getMap()->getGrid()->getX() ||
+                        startY >= texiC->getMap()->getGrid()->getY()) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                endX = atoi(vec[3].c_str());
+                if (endX < 0 || (vec[3].at(0) != '0' && endX == 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                endY = atoi(vec[4].c_str());
+                if (endY < 0 || (vec[4].at(0) != '0' && endY== 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                if (endX >= texiC->getMap()->getGrid()->getX() ||
+                    endY >= texiC->getMap()->getGrid()->getY()) {
+                    cout << "-1" << endl;
+                    break;
+                }
+               timeOfTrip = atoi(vec[7].c_str());
+                if (timeOfTrip <= 0 ) {
+                    cout << "-1" << endl;
+                    break;
+                }
 
+                tIDummy = new TripInfo(0, numOfPs, id, tariff,
+                                       new Point(startX, startY), new Point(endX, endY), timeOfTrip);
+                texiC->setTripI(tIDummy);
+                int *num = new int(texiC->getListTrips().size());
+                Information *inf = new Information(tcp, texiC, num);
+                ThreadPool *pool = new ThreadPool(5);
+                Task *task = new Task(calculateWay, inf);
+                pool->addTask(task);
+                break;
+            }
+            case 3: {
+                string input;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, input);
+                size_t findMiddle = input.find(',');
+                if (findMiddle == -1) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                vector <string> vec;
+                boost::split(vec,input,boost::is_any_of(","));
+                if (vec.size() != 4) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                id = atoi(vec[0].c_str());
+                if (id < 0 || (vec[0].at(0) != '0' && id == 0) ) {
+                    cout << "-1" << endl;
+                    break;
+                }
+                ch = vec[2].at(0);
                 switch (ch) {
                     case 'H': {
                         cMF = CarsManufactor::HONDA;
@@ -205,9 +252,10 @@ int main(int argc, char *argv[]) {
                     }
                     default: {
                         cout << "-1" << endl;
-                        break;
+                        continue;
                     }
                 }
+                ch2 = vec[3].at(0);
                 switch (ch2) {
                     case 'B': {
                         color = CarColors::BLUE;
@@ -231,8 +279,13 @@ int main(int argc, char *argv[]) {
                     }
                     default: {
                         cout << "-1" << endl;
-                        break;
+                        continue;
                     }
+                }
+                type = atoi(vec[1].c_str());
+                if (type < 0) {
+                    cout << "-1" << endl;
+                    break;
                 }
                 switch (type) {
                     case 1: {
@@ -247,7 +300,7 @@ int main(int argc, char *argv[]) {
                         break;
                     }
                     default: {
-                        cout << "cab not exist" << endl;
+                        cout << "-1" << endl;
                         break;
                     }
                 }
@@ -264,7 +317,7 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 9: {//need to get out
+            case 9: {
                 cout << "yeahhh" << endl;
                 TripInfo *t;
                 int sizeLDriver = texiC->getListDriver().size();
@@ -462,8 +515,12 @@ void* calculateWay(void* inf) {
     Gps *gps = new Gps(t->getStartPoint(), t->getEndPoint());
     Map *m = info->getTexiC()->getMap();
     queue<CheckPoint *> way = gps->start(m->getGrid());
-    t->convertToListInit(way);
-
+    //might change to 2 (?) start + end might be there
+    if (way.size() == 0) {
+        info->getTexiC()->getListTrips().pop_back();
+    } else {
+        t->convertToListInit(way);
+    }
 }
 /*
 3 3

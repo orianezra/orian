@@ -12,8 +12,6 @@ TripInfo::TripInfo(int mP, int nP, int rID, double t, Point* sP, Point* eP, unsi
 }
 //this is the destructor of the trip info class
 TripInfo::~TripInfo() {
-    delete this->endP;
-    delete this->startP;
 }
 //default constructor
 TripInfo::TripInfo() {
