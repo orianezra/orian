@@ -69,7 +69,7 @@ public:
     Map();
     ~Map();
     Grid* getGrid();
-    Grid* createO(list<Point>, Grid*);
+    Grid* createOb(list<Point>, Grid*);
     list<Point> getListOfO();
     void createO(Point);
     std::string serial_str;

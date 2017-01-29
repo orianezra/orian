@@ -17,6 +17,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/algorithm/string.hpp>
+#include "TheChecker.h"
 using namespace std;
 void* createClientCon(void*);
 void* managerClient(void*);
@@ -28,87 +29,9 @@ int main(int argc, char *argv[]) {
     Tcp* tcp = new Tcp(1, atoi(argv[1]));
     tcp->initialize();
     int x,y, i, pOfAbs;
-    Grid *g;
-    Map *m;
     char damy;
     long time = 0;
-    bool invalidInput;
-    do {
-        string input;
-        cin.clear();
-        getline(cin, input);
-        invalidInput = false;
-        size_t found = input.find_first_not_of(" ");
-        string inputFixedSpaces = input.substr(found);
-        size_t findMiddle = inputFixedSpaces.find(' ');
-        if (findMiddle == -1) {
-            cout << "-1" << endl;
-            invalidInput = true;
-            continue;
-        }
-        string xStr = inputFixedSpaces.substr(0, findMiddle).c_str();
-        string yStr = inputFixedSpaces.substr(findMiddle + 1).c_str();
-        x = atoi(xStr.c_str());
-        y = atoi(yStr.c_str());
-        if ( (x == 0 && xStr.at(0) != '0') ||(y == 0 && yStr.at(0) != '0')) {
-            cout << "-1" << endl;
-            invalidInput = true;
-            continue;
-        }
-        if ( x <= 0 || y <= 0) {
-            cout << "-1" << endl;
-            invalidInput = true;
-            continue;
-        } else {
-            g = new Grid(x, y);
-            m = new Map(g);
-            string inputObstacles;
-            cin.clear();
-            //cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            getline(cin, inputObstacles);
-            pOfAbs = atoi(inputObstacles.c_str());
-            if (pOfAbs == 0 && inputObstacles.at(0) != '0') {
-                cout << "-1" << endl;
-                invalidInput = true;
-                continue;
-            }
 
-            if (pOfAbs < 0) {
-                cout << "-1" << endl;
-                invalidInput = true;
-                continue;
-            } else {
-                while (pOfAbs > 0) {
-                    string inputObstacles;
-                    cin.clear();
-                    getline(cin, inputObstacles);
-                    size_t findMiddle = inputObstacles.find(',');
-                    if (findMiddle == -1) {
-                        cout << "-1" << endl;
-                        invalidInput = true;
-                        break;
-                    }
-                    string xStr = inputObstacles.substr(0, findMiddle);
-                    string yStr = inputObstacles.substr(findMiddle + 1);
-                    x = atoi(xStr.c_str());
-                    y = atoi(yStr.c_str());
-                    if ( (x == 0 && xStr.at(0) != '0') ||(y == 0 && yStr.at(0) != '0')) {
-                        cout << "-1" << endl;
-                        invalidInput = true;
-                        break;
-                    }
-                    if (x >= m->getGrid()->getX() || y >= m->getGrid()->getY() || x < 0 || y < 0){
-                        cout << "-1" << endl;
-                        invalidInput = true;
-                        break;
-                    }
-                    m->createO(Point(x, y));
-                    pOfAbs--;
-                }
-
-            }
-        }
-    } while (invalidInput);
     Grid *gDummy2;
     Driver dDummy;
     TripInfo *tIDummy;
@@ -116,8 +39,8 @@ int main(int argc, char *argv[]) {
     pthread_t t1;
 
     TexiCenter *texiC = new TexiCenter();
-
-    texiC->setMap(m);
+    TheChecker* check = new TheChecker();
+    texiC->setMap(check->createMap());
     do {
         int id, age, exp, vId, startX, startY, endX, endY, numOfPs, type;
         double tariff;
@@ -193,6 +116,9 @@ int main(int argc, char *argv[]) {
                 if (endX >= texiC->getMap()->getGrid()->getX() ||
                     endY >= texiC->getMap()->getGrid()->getY()) {
                     cout << "-1" << endl;
+                    break;
+                }
+                if (endX == startX && endY == startY){
                     break;
                 }
                timeOfTrip = atoi(vec[7].c_str());
@@ -394,10 +320,9 @@ int main(int argc, char *argv[]) {
         tcp->sendData("go home");
         texiC->getListDriver().push_back(d);
     }
-    //in->finnish();
-    delete texiC;
-    delete g;
-    delete m;
+    //delete texiC;
+    //delete g;
+    //delete m;
     sleep(1);
     tcp->~Tcp();
     return 0;
@@ -515,7 +440,6 @@ void* calculateWay(void* inf) {
     Gps *gps = new Gps(t->getStartPoint(), t->getEndPoint());
     Map *m = info->getTexiC()->getMap();
     queue<CheckPoint *> way = gps->start(m->getGrid());
-    //might change to 2 (?) start + end might be there
     if (way.size() == 0) {
         info->getTexiC()->getListTrips().pop_back();
     } else {
