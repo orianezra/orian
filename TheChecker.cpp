@@ -3,8 +3,11 @@
 //
 
 #include "TheChecker.h"
+//this is the default constructor of the checker class
 TheChecker::TheChecker(){}
+//this is the destructor of the checker class
 TheChecker::~TheChecker(){}
+//this method create a map according to the user inputs(and check if the input for map is valid)
 Map* TheChecker::createMap() {
     int x,y,pOfAbs;
     Grid* g;

@@ -5,7 +5,8 @@
 #ifndef EX3_THECHECKER_H
 #define EX3_THECHECKER_H
 #include "Map.h"
-
+//This is a class for the input validation checks.
+//this class contains methods that will check the input and create objects appropriately.
 class TheChecker {
 public:
     TheChecker();
